@@ -1,23 +1,63 @@
 <template>
   <div id="app">
-    <img src="./assets/logo.png">
-    <router-view/>
+    <AppHeader class="app-header" :collapsed="collapsed" @toggle-collapse-menu="toggleCollapseMenu"></AppHeader>
+    <div class="app-content">
+      <AppMenu class="app-menu" :collapsed="collapsed" :class="{ collapsed }"></AppMenu>
+      <div class="app-page-wrap">
+        <router-view class="app-content-page" />
+      </div>
+    </div>
   </div>
 </template>
 
 <script>
+import AppHeader from '@/components/common/app-header'
+import AppMenu from '@/components/common/app-menu'
 export default {
-  name: 'App'
+  name: 'App',
+  data () {
+    return {
+      collapsed: false
+    }
+  },
+  components: { AppHeader, AppMenu },
+  mounted () {
+    console.log(this.$route)
+  },
+  methods: {
+    toggleCollapseMenu () {
+      this.collapsed = !this.collapsed
+    }
+  }
 }
 </script>
 
-<style>
+<style scoped lang="less">
+@import "./styles/vars.less";
 #app {
-  font-family: 'Avenir', Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
+  width: 100%;
+  height: 100%;
+  .app-header {
+    height: @app-header-height;
+  }
+  .app-content {
+    height: calc( ~"100% - @{app-header-height}");
+    display: flex;
+    .app-menu {
+      flex: 0 0 @app-menu-width;
+      &.collapsed {
+        flex-basis: @collapsed-menu-width;
+        transition: none;
+      }
+    }
+    .app-page-wrap {
+      flex: 1 1 auto;
+      background: #F0F2F5;
+      padding: 20px;
+      .app-content-page {
+        background: #FFF;
+      }
+    }
+  }
 }
 </style>

@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <title>登录</title>
+    <style>
+      html,
+      body {
+        width: 100%;
+        height: 100%;
+        margin: 0;
+        padding: 0;
+        background: #f0f2f5 url(https://gw.alipayobjects.com/zos/rmsportal/TVYTbAXWheQpRcWDaDMu.svg) no-repeat center 110px;
+        background-size: 100%;
+        overflow: hidden;
+      }
+      .login-wrap {
+        width: 300px;
+        height: calc(100% - 170px);
+        margin: 0 auto;
+        padding: 170px 35px 0 35px;
+      }
+      .login-wrap input {
+        border: none;
+        padding: 0;
+        margin: 0;
+        outline-style: none;
+      }
+      .login-wrap button {
+        outline:none;
+      }
+      .login-main-title {
+        font-size: 26px;
+        text-align: center;
+        margin-bottom: 40px;
+      }
+      .login-user  {
+        height: 40px;
+        display: block;
+        font-size: 14px;
+        position: relative;
+      }
+      .login-user div {
+        position: absolute;
+        top: 10px;
+        left: 124px;
+      }
+      .login-user:after, .login-user:before {
+        background: #000;
+        content: "";
+        height: 1px;
+        position: absolute;
+        top: 50%;
+        width: 36%;
+      }
+      .login-user:before {
+        left: 0;
+      }
+      .login-user:after {
+        right: 0;
+      }
+      #login_form {
+        margin-top: 14px;
+        border-radius: 4px;
+      }
+      #login_account, #login_password {
+        display: inline-block;
+        border: 1px solid #BEBEBE;
+        width: 100%;
+        height: 43px;
+      }
+      #login_account {
+        margin-bottom: 20px;
+        padding-left: 30px;
+        box-sizing: border-box;
+        border-radius: 4px;
+      }
+      #login_password {
+        margin-bottom: 10px;
+        padding-left: 30px;
+        box-sizing: border-box;
+        border-radius: 4px;
+      }
+      .user-wrap {
+        position: relative;
+      }
+      .password-wrap {
+        position: relative;
+      }
+      .icon-user {
+        position: absolute;
+        display: inline-block;
+        width: 15px;
+        height: 16px;
+        top: 13px;
+        left: 10px;
+        background: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAPCAYAAADtc08vAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAAyZpVFh0WE1MOmNvbS5hZG9iZS54bXAAAAAAADw/eHBhY2tldCBiZWdpbj0i77u/IiBpZD0iVzVNME1wQ2VoaUh6cmVTek5UY3prYzlkIj8+IDx4OnhtcG1ldGEgeG1sbnM6eD0iYWRvYmU6bnM6bWV0YS8iIHg6eG1wdGs9IkFkb2JlIFhNUCBDb3JlIDUuNi1jMDY3IDc5LjE1Nzc0NywgMjAxNS8wMy8zMC0yMzo0MDo0MiAgICAgICAgIj4gPHJkZjpSREYgeG1sbnM6cmRmPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5LzAyLzIyLXJkZi1zeW50YXgtbnMjIj4gPHJkZjpEZXNjcmlwdGlvbiByZGY6YWJvdXQ9IiIgeG1sbnM6eG1wPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvIiB4bWxuczp4bXBNTT0iaHR0cDovL25zLmFkb2JlLmNvbS94YXAvMS4wL21tLyIgeG1sbnM6c3RSZWY9Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC9zVHlwZS9SZXNvdXJjZVJlZiMiIHhtcDpDcmVhdG9yVG9vbD0iQWRvYmUgUGhvdG9zaG9wIENDIDIwMTUgKFdpbmRvd3MpIiB4bXBNTTpJbnN0YW5jZUlEPSJ4bXAuaWlkOjg3ODZDQzM0RDgzNDExRTg4QTM2QkQ2MDk4NzJDNzA2IiB4bXBNTTpEb2N1bWVudElEPSJ4bXAuZGlkOjg3ODZDQzM1RDgzNDExRTg4QTM2QkQ2MDk4NzJDNzA2Ij4gPHhtcE1NOkRlcml2ZWRGcm9tIHN0UmVmOmluc3RhbmNlSUQ9InhtcC5paWQ6ODc4NkNDMzJEODM0MTFFODhBMzZCRDYwOTg3MkM3MDYiIHN0UmVmOmRvY3VtZW50SUQ9InhtcC5kaWQ6ODc4NkNDMzNEODM0MTFFODhBMzZCRDYwOTg3MkM3MDYiLz4gPC9yZGY6RGVzY3JpcHRpb24+IDwvcmRmOlJERj4gPC94OnhtcG1ldGE+IDw/eHBhY2tldCBlbmQ9InIiPz7nDDIMAAAAuklEQVR42mLs6OhgwAF6gTgUiLmB+BgQNwLxGXRFLDg0HwRiOyS+DxTrAfFlZIVMWDQHo2lGdxUDIQMcGHADXWIMOIvHgPvEGLAEiG/jMKCCGAP+ALEFEK8H4l9QsWtAHAjEh4iNhXdAHMRABEB3gTEQ7wDi/zjwfiC2wWVANDShuOOxEBRDh4E4A90Aa2jgEQumA7EHsgGrGEgHK4GYmQnqZCkyDOADpVqQAWEM5IMIkAFJFBgQCBBgALoWInY1VpTAAAAAAElFTkSuQmCC') no-repeat;
+      }
+      .icon-password {
+        position: absolute;
+        display: inline-block;
+        width: 15px;
+        height: 16px;
+        top: 13px;
+        left: 10px;
+        background: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAA8AAAAQCAYAAADJViUEAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAAyZpVFh0WE1MOmNvbS5hZG9iZS54bXAAAAAAADw/eHBhY2tldCBiZWdpbj0i77u/IiBpZD0iVzVNME1wQ2VoaUh6cmVTek5UY3prYzlkIj8+IDx4OnhtcG1ldGEgeG1sbnM6eD0iYWRvYmU6bnM6bWV0YS8iIHg6eG1wdGs9IkFkb2JlIFhNUCBDb3JlIDUuNi1jMDY3IDc5LjE1Nzc0NywgMjAxNS8wMy8zMC0yMzo0MDo0MiAgICAgICAgIj4gPHJkZjpSREYgeG1sbnM6cmRmPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5LzAyLzIyLXJkZi1zeW50YXgtbnMjIj4gPHJkZjpEZXNjcmlwdGlvbiByZGY6YWJvdXQ9IiIgeG1sbnM6eG1wPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvIiB4bWxuczp4bXBNTT0iaHR0cDovL25zLmFkb2JlLmNvbS94YXAvMS4wL21tLyIgeG1sbnM6c3RSZWY9Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC9zVHlwZS9SZXNvdXJjZVJlZiMiIHhtcDpDcmVhdG9yVG9vbD0iQWRvYmUgUGhvdG9zaG9wIENDIDIwMTUgKFdpbmRvd3MpIiB4bXBNTTpJbnN0YW5jZUlEPSJ4bXAuaWlkOkQ1RTlCNUY4RDgzNDExRThBNzQ4QjRGOEU3OTQxNjNFIiB4bXBNTTpEb2N1bWVudElEPSJ4bXAuZGlkOkQ1RTlCNUY5RDgzNDExRThBNzQ4QjRGOEU3OTQxNjNFIj4gPHhtcE1NOkRlcml2ZWRGcm9tIHN0UmVmOmluc3RhbmNlSUQ9InhtcC5paWQ6RDVFOUI1RjZEODM0MTFFOEE3NDhCNEY4RTc5NDE2M0UiIHN0UmVmOmRvY3VtZW50SUQ9InhtcC5kaWQ6RDVFOUI1RjdEODM0MTFFOEE3NDhCNEY4RTc5NDE2M0UiLz4gPC9yZGY6RGVzY3JpcHRpb24+IDwvcmRmOlJERj4gPC94OnhtcG1ldGE+IDw/eHBhY2tldCBlbmQ9InIiPz7KD4swAAAASklEQVR42mL8//8/AzLo7OxEFUAC5eXljCgCIM0w3NHR8R+Zj47R5YnWiE0dEwMFgCLNjCBnDIjNg1QzRqIYGs7Gl86HcFQBBBgAbHxlvejZZO8AAAAASUVORK5CYII=') no-repeat;
+      }
+      .error-message {
+        margin-top: 10px;
+        font-size: 14px;
+        text-align: center;
+        color: red;
+      }
+      #login-btn {
+        margin-top: 20px;
+        width: 100%;
+        height: 44px;
+        text-align: center;
+        font-size: 16px;
+        background-color: #1890ff;
+        border-color: #1890ff;
+        border: none;
+        border-radius: 4px;
+        color: #FFF;
+        cursor: pointer;
+      }
+    </style>
+  </head>
+  <body>
+    <div class=login-wrap>
+      <div class="login-main-title">AI+管理平台</div>
+      <div class="login-user"><div>用户登录</div></div>
+      <form id="login_form" role="form" action="">
+        <div class="user-wrap">
+          <input type="text" id="login_account">
+          <span class="icon-user"></span>
+        </div>
+        <div class="password-wrap">
+          <input type="password" id="login_password">
+          <span class="icon-password"></span>
+        </div>
+        <button type="submit" id="login-btn">登录</button>
+        <div class="error-message"></div>
+      </form>
+    </div>
+  </body>
+</html>

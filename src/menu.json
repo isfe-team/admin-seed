@@ -1,0 +1,72 @@
+{
+  "message": "操作成功",
+  "status": true,
+  "data": [
+    {
+      "id": "0",
+      "name": "Admin Seed",
+      "url": "",
+      "sort": null,
+      "childList": [
+        {
+          "id": "0-1",
+          "name": "蔬菜类",
+          "icon": "switcher",
+          "url": "vegetables",
+          "childList": [
+            {
+              "id": "0-1-1",
+              "name": "西兰花",
+              "url": "broccoli",
+              "sort": 1,
+              "childList": []
+            },
+            {
+              "id": "0-1-2",
+              "name": "玉米",
+              "url": "corn",
+              "sort": 2,
+              "childList": []
+            },
+            {
+              "id": "0-1-3",
+              "name": "茄子",
+              "url": "eggsplant",
+              "sort": 3,
+              "childList": []
+            }
+          ]
+        },
+        {
+          "id": "0-2",
+          "name": "水果类",
+          "icon": "dashboard",
+          "url": "fruit",
+          "childList": [
+            {
+              "id": "0-2-1",
+              "name": "苹果",
+              "url": "apple",
+              "sort": 1,
+              "childList": []
+            },
+            {
+              "id": "0-2-2",
+              "name": "香蕉",
+              "url": "banana",
+              "sort": 2,
+              "childList": []
+            },
+            {
+              "id": "0-2-3",
+              "name": "橘子",
+              "url": "orange",
+              "sort": 3,
+              "childList": []
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
