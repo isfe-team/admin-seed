@@ -1,7 +1,7 @@
 {
   "name": "admin-seed",
   "version": "1.0.0",
-  "description": "A Vue.js project",
+  "description": "Admin Seed",
   "author": "hxli",
   "private": true,
   "scripts": {
