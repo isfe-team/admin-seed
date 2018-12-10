@@ -9,14 +9,30 @@
     @click="handleSelect"
     theme="dark">
     <template v-for="menu in menus">
-      <ASubMenu :key="menu.url">
+      <AMenuItem v-if="menu.childList.length === 0" :key="menu.url">
+        <AIcon :type="menu.icon" />
+        <span class="menu-title">{{ menu.name }}</span>
+      </AMenuItem>
+      <ASubMenu :key="menu.url" v-else>
         <span slot="title" class="menu-title-wrapper">
           <AIcon :type="menu.icon" />
           <span class="menu-title">{{ menu.name }}</span>
         </span>
-        <AMenuItem v-for="subMenu in menu.childList" :key="subMenu.url">
-          {{ subMenu.name }}
-        </AMenuItem>
+        <template v-for="subMenu in menu.childList">
+          <AMenuItem v-if="subMenu.childList.length === 0" :key="subMenu.url">
+            <AIcon :type="subMenu.icon" />
+            <span class="menu-title">{{ subMenu.name }}</span>
+          </AMenuItem>
+          <ASubMenu :key="subMenu.url" v-else>
+            <span slot="title" class="menu-title-wrapper">
+              <AIcon :type="subMenu.icon" />
+              <span class="menu-title">{{ subMenu.name }}</span>
+            </span>
+            <AMenuItem v-for="grandMenu in subMenu.childList" :key="grandMenu.url">
+              {{ grandMenu.name }}
+            </AMenuItem>
+          </ASubMenu>
+        </template>
       </ASubMenu>
     </template>
   </AMenu>
@@ -47,6 +63,7 @@ export default {
   props: [ 'collapsed' ],
   methods: {
     handleSelect (data) {
+      console.log(data)
       const keypath = reverse(data.keyPath).join('::')
       this.$router.push({
         name: keypath
@@ -54,9 +71,9 @@ export default {
     },
     calcMenuRouter () {
       const routeArr = this.$route.name.split('::')
+      this.selectedKeys = [ routeArr[routeArr.length - 1] ]
       const [ firstRoute, SecondRoute ] = routeArr
-      this.selectedKeys = [ SecondRoute ]
-      this.defaultOpenKeys = [ firstRoute ]
+      this.defaultOpenKeys = SecondRoute ? [ SecondRoute, firstRoute ] : [ firstRoute ]
     }
   }
 }
