@@ -1,20 +1,23 @@
 <template>
   <!-- ant-design-vue 语言转换成中文 -->
   <ALocaleProvider :locale="zhCN">
-    <div id="app">
-      <AppHeader class="app-header" :collapsed="collapsed" @toggle-collapse-menu="toggleCollapseMenu"></AppHeader>
-      <div class="app-content">
-        <AppMenu class="app-menu" :collapsed="collapsed" :class="{ collapsed }"></AppMenu>
-        <div class="app-page-wrap">
-          <ABreadcrumb>
-            <template v-for="(route, index) in matchedRouteFragments">
-              <ABreadcrumbItem :key="index">{{route.meta.label}}</ABreadcrumbItem>
-            </template>
-          </ABreadcrumb>
-          <router-view class="app-content-page" />
+    <!-- 加全局loading状态 -->
+    <ASpin id="spin" :spinning="spinning">
+      <div id="app">
+        <AppHeader class="app-header" :collapsed="collapsed" @toggle-collapse-menu="toggleCollapseMenu"></AppHeader>
+        <div class="app-content">
+          <AppMenu class="app-menu" :collapsed="collapsed" :class="{ collapsed }"></AppMenu>
+          <div class="app-page-wrap">
+            <ABreadcrumb>
+              <template v-for="(route, index) in matchedRouteFragments">
+                <ABreadcrumbItem :key="index">{{route.meta.label}}</ABreadcrumbItem>
+              </template>
+            </ABreadcrumb>
+            <router-view class="app-content-page" />
+          </div>
         </div>
       </div>
-    </div>
+    </ASpin>
   </ALocaleProvider>
 </template>
 
@@ -28,13 +31,11 @@ export default {
   data () {
     return {
       collapsed: false,
+      spinning: false,
       zhCN
     }
   },
   components: { AppHeader, AppMenu },
-  mounted () {
-    console.log(this.$route)
-  },
   computed: {
     matchedRouteFragments () {
       return this.$route.matched

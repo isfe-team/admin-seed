@@ -50,9 +50,6 @@ axios.interceptors.request.use(function (config) {
   // 使用 `Object.assign` 或者 `spread operator` 防止失去引用
   // `console.log` 保留的是引用 会使用点击展开时的 对象的值
   log(`loadingReqs`, [ ...loadingReqs ])
-
-  console.log(config)
-
   if (noLoadingUrls.indexOf(config.url) !== -1) {
     log(`不展示 loading 咯`)
     return config
@@ -129,3 +126,5 @@ axios.interceptors.response.use(function (response) {
 const axiosPromiseWrapper = (action, url, data) => {
   return Promise.resolve(axios[action](url, data))
 }
+
+export const getTableInfo = (pageNo, pageSize) => axiosPromiseWrapper('get', `service?pageNo=${pageNo}&pageSize=${pageSize}`)
