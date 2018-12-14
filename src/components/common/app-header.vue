@@ -26,7 +26,12 @@ export default {
       this.$emit('toggle-collapse-menu')
     },
     logout () {
-      window.location.href = document.location.origin + '/login.html'
+      this.$confirm({
+        title: '是否退出系统',
+        onOk () {
+          window.location.href = document.location.origin + '/login.html'
+        }
+      })
     }
   }
 }

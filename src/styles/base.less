@@ -1,0 +1,56 @@
+html,
+body {
+  width: 100%;
+  height: 100%;
+}
+
+html {
+  box-sizing: border-box;
+  font-family: Microsoft YaHei, serif;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: inherit;
+}
+
+body {
+  /* 限定最小屏幕宽度 */
+  min-width: 1024px;
+  // min-height: 768px;  // 768px在笔记本上会添加纵向滚动条
+  overflow-x: auto;
+  overflow-y: auto;
+  margin: 0;
+  font-size: 12px;
+}
+
+textarea {
+  resize : none;
+}
+
+ul,
+ol {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+a {
+  text-decoration: none;
+  color: #337ab7;
+  outline: none;
+}
+
+/* 设置默认的滚动条样式 */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 10px;
+  border: 1px solid #ccc;
+  border-radius: 3px;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #ccc;
+  border-radius: 4px;
+}
