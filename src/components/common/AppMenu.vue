@@ -42,6 +42,7 @@
 import assign from 'lodash/assign'
 import reverse from 'lodash/reverse'
 import menu from '@/menu.json'
+
 export default {
   name: 'AppMenu',
   data () {
@@ -63,7 +64,6 @@ export default {
   props: [ 'collapsed' ],
   methods: {
     handleSelect (data) {
-      console.log(data)
       const keypath = reverse(data.keyPath).join('::')
       this.$router.push({
         name: keypath

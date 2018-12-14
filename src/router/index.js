@@ -1,15 +1,15 @@
 import Vue from 'vue'
 import Router from 'vue-router'
-import CommonWrapper from '@/components/common/common-wrapper'
+import CommonWrapper from '@/components/common/CommonWrapper'
 
-import Eggsplant from '@/components/vegetables/eggsplant'
-import Broccoli from '@/components/vegetables/broccoli'
-import Corn from '@/components/vegetables/corn'
-import EggsplantDatil from '@/components/vegetables/eggsplant-detail'
+import Eggsplant from '@/components/vegetables/Eggsplant'
+import Broccoli from '@/components/vegetables/Broccoli'
+import Corn from '@/components/vegetables/Corn'
+import EggsplantDatil from '@/components/vegetables/EggsplantDetail'
 
-import Apple from '@/components/fruit/apple'
-import Banana from '@/components/fruit/banana'
-import Orange from '@/components/fruit/orange'
+import Apple from '@/components/fruit/Apple'
+import Banana from '@/components/fruit/Banana'
+import Orange from '@/components/fruit/Orange'
 
 Vue.use(Router)
 

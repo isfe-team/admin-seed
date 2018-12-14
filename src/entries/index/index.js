@@ -1,7 +1,7 @@
 import Vue from 'vue'
+import Antd from 'ant-design-vue'
 import App from './App'
 import router from '@/router'
-import Antd from 'ant-design-vue'
 import store from '@/store'
 import '@/registerServiceWorker'
 import './index.less'

@@ -6,10 +6,10 @@ module.exports = {
   baseUrl: '/',
   // eslint-loader 是否在保存的时候检查
   lintOnSave: true,
-  // 配置多页应用
+  // 多页应用入口配置
   pages: {
     app: {
-      entry: 'src/entries/index/main.js',
+      entry: 'src/entries/index/index.js',
       template: 'src/entries/index/index.html',
       filename: 'index.html',
       title: 'seed-project',
@@ -26,6 +26,5 @@ module.exports = {
   filenameHashing: true,
   runtimeCompiler: false,
   transpileDependencies: [ ],
-
   integrity: false
 }

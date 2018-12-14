@@ -1,0 +1,39 @@
+/*!
+ * antdesign-vue global reset or some helper class | bqliu
+ */
+
+@import "./vars.less";
+
+// antd global loading style
+.global-loading-wrapper {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  // 看你怎么超过我 1 * 10^8 =.=
+  z-index: 1000000000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(255, 255, 255, 0.1);
+  filter: blur(0.5);
+  overflow: hidden;
+
+  cursor: progress;
+
+  .ant-spin-dot {
+    top: -10%;
+    
+    i {
+      opacity: 0.7;
+    }
+  }
+}
+
+// 增加 tooltip 全局样式，防止内容部分太高
+.ant-tooltip-inner {
+  max-height: @tooltip-max-height;
+  word-wrap: break-word;
+  overflow: auto;
+}
