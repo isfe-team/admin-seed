@@ -1,4 +1,5 @@
-import Vue from 'Vue'
+import Vue from 'vue'
+import isString from 'lodash/isString'
 import { message } from 'ant-design-vue'
 import Spin from 'ant-design-vue/lib/spin'
 
@@ -94,3 +95,15 @@ export const { fullScreenLoading, removeFullScreenLoading } = (function createFu
     removeFullScreenLoading
   }
 })()
+
+/**
+ * 时间处理，去除时分秒，'2018-05-01 10:00:00' => '2018-05-01'
+ * 用户自行保障数据格式正确性，如果不是 string，直接返回自身
+ * @param {string} timeString
+ */
+export const removeHMS = (timeString) => {
+  if (isString(timeString)) {
+    return timeString.split(' ')[0]
+  }
+  return timeString
+}

@@ -4,3 +4,38 @@
 @app-menu-width: 260px;
 @collapsed-menu-width: 80px;
 @tooltip-max-height: 100px;
+@border-color-base: #E2E2E2;
+@pagination-height: 64px;
+@padding-xs: 8px;
+@primary-color: #3D91F7;
+@primary-5: #69B1FF;
+@primary-7: #2A70D1;
+@error-color: #F5222D;
+@error-color-hover: #FF4D4F;
+@error-color-active: #CF1322;
+@disabled-color: fade(#000, 25%);
+
+.global-loading-wrapper {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 1000000000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(255, 255, 255, 0.1);
+  filter: blur(0.5);
+  overflow: hidden;
+
+  cursor: progress;
+
+  .ant-spin-dot {
+    top: -10%;
+    
+    i {
+      opacity: 0.7;
+    }
+  }
+}

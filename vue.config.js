@@ -1,12 +1,21 @@
+/*!
+ * see https://cli.vuejs.org/guide/
+ */
+
 module.exports = {
   devServer: {
     host: 'localhost',
-    port: 8081
+    port: 8081,
+    proxy: {
+      '/api': {
+        target: 'https://www.easy-mock.com/mock/5b7bce071f130e5b7fe8cd7d/antd-pro',
+        ws: false,
+        changeOrigin: true
+      }
+    }
   },
   baseUrl: '/',
-  // eslint-loader 是否在保存的时候检查
   lintOnSave: true,
-  // 多页应用入口配置
   pages: {
     app: {
       entry: 'src/entries/index/index.js',

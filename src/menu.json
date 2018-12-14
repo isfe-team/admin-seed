@@ -10,40 +10,40 @@
       "childList": [
         {
           "id": "0-1",
-          "name": "蔬菜类",
+          "name": "功能页",
           "icon": "switcher",
-          "url": "vegetables",
+          "url": "function-pages",
           "childList": [
             {
               "id": "0-1-1",
-              "name": "西兰花",
-              "url": "broccoli",
+              "name": "表格",
+              "url": "table",
               "sort": 1,
               "childList": []
             },
             {
               "id": "0-1-2",
-              "name": "玉米",
+              "name": "功能2",
               "url": "corn",
               "sort": 2,
               "childList": []
             },
             {
               "id": "0-1-3",
-              "name": "茄子",
+              "name": "功能3",
               "url": "eggsplant",
               "sort": 3,
               "childList": [
                 {
                   "id": "0-1-3-1",
-                  "name": "用处",
+                  "name": "功能3.1",
                   "url": "use",
                   "childList": [],
                   "sort": 1
                 },
                 {
                   "id": "0-1-3-2",
-                  "name": "简介",
+                  "name": "功能3.2",
                   "url": "detail",
                   "childList": [],
                   "sort": 2
@@ -53,39 +53,39 @@
           ]
         },
         {
-          "id": "0-2",
-          "name": "水果类",
+          "id": "0-3",
+          "name": "异常页",
           "icon": "dashboard",
-          "url": "fruit",
+          "url": "abnormal-pages",
           "childList": [
             {
-              "id": "0-2-1",
-              "name": "苹果",
-              "url": "apple",
+              "id": "0-3-1",
+              "name": "403",
+              "url": "not-author",
               "sort": 1,
               "childList": []
             },
             {
-              "id": "0-2-2",
-              "name": "香蕉",
-              "url": "banana",
+              "id": "0-3-2",
+              "name": "404",
+              "url": "not-found",
               "sort": 2,
               "childList": []
             },
             {
-              "id": "0-2-3",
-              "name": "橘子",
-              "url": "orange",
+              "id": "0-3-3",
+              "name": "500",
+              "url": "serve-abnormal",
               "sort": 3,
               "childList": []
             }
           ]
         },
         {
-          "id": "0-3",
-          "name": "零食",
+          "id": "0-4",
+          "name": "菜单页",
           "icon": "setting",
-          "url": "food",
+          "url": "menu-pages",
           "childList": []
         }
       ]

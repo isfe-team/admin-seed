@@ -1,6 +1,6 @@
 # seed-project
 
-Admin seed project.
+Admin seed project by @bqliu & @hxli.
 
 Use `vue`and `ant-design-vue`, and based on `@vue/cli` to build an admin seed project.
 

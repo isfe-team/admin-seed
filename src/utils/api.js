@@ -129,3 +129,5 @@ axiosInstance.interceptors.response.use(function (response) {
 export const axiosPromiseWrapper = (action, url, data) => {
   return Promise.resolve(axiosInstance[action](url, data))
 }
+
+export const getTableInfo = (pageNo, pageSize) => axiosPromiseWrapper('get', `service?pageNo=${pageNo}&pageSize=${pageSize}`)

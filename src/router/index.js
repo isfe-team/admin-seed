@@ -2,96 +2,96 @@ import Vue from 'vue'
 import Router from 'vue-router'
 import CommonWrapper from '@/components/common/CommonWrapper'
 
-import Eggsplant from '@/components/vegetables/Eggsplant'
-import Broccoli from '@/components/vegetables/Broccoli'
-import Corn from '@/components/vegetables/Corn'
-import EggsplantDatil from '@/components/vegetables/EggsplantDetail'
+import Eggsplant from '@/components/function_pages/Eggsplant'
+import Table from '@/components/function_pages/Table'
+import Corn from '@/components/function_pages/Corn'
+import EggsplantDatil from '@/components/function_pages/EggsplantDetail'
 
-import Apple from '@/components/fruit/Apple'
-import Banana from '@/components/fruit/Banana'
-import Orange from '@/components/fruit/Orange'
+import NotFound from '@/components/abnormal_pages/NotFound'
+import NoAuth from '@/components/abnormal_pages/NoAuth'
+import ServerError from '@/components/abnormal_pages/ServerError'
 
 Vue.use(Router)
 
 export const projectRouter = ({
   routes: [
     {
-      path: '/vegetables',
+      path: '/function-pages',
       name: '',
       component: CommonWrapper,
-      meta: { label: '蔬菜' },
+      meta: { label: '功能' },
       children: [
         {
           path: '/',
-          redirect: 'broccoli'
+          redirect: 'table'
         },
         {
-          path: 'broccoli',
-          name: 'vegetables::broccoli',
-          component: Broccoli,
-          meta: { label: '西兰花' }
+          path: 'table',
+          name: 'function-pages::table',
+          component: Table,
+          meta: { label: '表格' }
         },
         {
           path: 'corn',
-          name: 'vegetables::corn',
+          name: 'function-pages::corn',
           component: Corn,
-          meta: { label: '玉米' }
+          meta: { label: '功能2' }
         },
         {
           path: 'eggsplant',
-          name: 'vegetables::eggsplant',
+          name: 'function-pages::eggsplant',
           component: CommonWrapper,
-          meta: { label: '茄子' },
+          meta: { label: '功能3' },
           children: [
             {
               path: 'use',
-              name: 'vegetables::eggsplant::use',
+              name: 'function-pages::eggsplant::use',
               component: Eggsplant,
-              meta: { label: '用处' }
+              meta: { label: '功能3.1' }
             },
             {
               path: 'detail',
-              name: 'vegetables::eggsplant::detail',
+              name: 'function-pages::eggsplant::detail',
               component: EggsplantDatil,
-              meta: { label: '简介' }
+              meta: { label: '功能3.2' }
             }
           ]
         },
         {
           path: '*',
-          redirect: 'broccoli'
+          redirect: 'table'
         }
       ]
     },
     {
-      path: '/fruit',
+      path: '/abnormal-pages',
       name: '',
       component: CommonWrapper,
-      meta: { label: '水果' },
+      meta: { label: '异常页' },
       children: [
         {
-          path: 'apple',
-          name: 'fruit::apple',
-          component: Apple,
-          meta: { label: '苹果' }
+          path: 'not-author',
+          name: 'abnormal-pages::not-author',
+          component: NoAuth,
+          meta: { label: '403' }
         },
         {
-          path: 'banana',
-          name: 'fruit::banana',
-          component: Banana,
-          meta: { label: '香蕉' }
+          path: 'not-found',
+          name: 'abnormal-pages::not-found',
+          component: NotFound,
+          meta: { label: '404' }
         },
         {
-          path: 'orange',
-          name: 'fruit::orange',
-          component: Orange,
-          meta: { label: '橘子' }
+          path: 'serve-abnormal',
+          name: 'abnormal-pages::serve-abnormal',
+          component: ServerError,
+          meta: { label: '500' }
         }
       ]
     },
     {
       path: '*',
-      redirect: './vegetables'
+      redirect: './function-pages'
     }
   ]
 })
