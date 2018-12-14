@@ -1,7 +1,15 @@
 # seed-project
 
-## Project setup
-```
+Admin seed project.
+
+Use `vue`and `ant-design-vue`, and based on `vue/cli` to build an admin seed project.
+
+> Of course, in fact, this is also a template.
+
+## Build Setup
+
+``` bash
+# install dependencies
 npm install
 ```
 
@@ -68,3 +76,7 @@ See [Configuration Reference](https://cli.vuejs.org/config/).
 [] 完成结构讨论和调整
 [] 完成 `vue-cli` 升级
 [] 采用 `preset-env`，去除 promise-polyfill/babel-polyfill 等直接引入
+[] 集成 `rx-cache`
+[] 使用 `rx` 优化中心化存储 + `Resource` 资源利用，不使用 `vuex`
+[] 增加 `cli`
+[] 集成 `ts`
