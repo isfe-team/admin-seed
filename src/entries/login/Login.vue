@@ -25,7 +25,6 @@
 </template>
 
 <script>
-import { mapGetters } from 'vuex'
 export default {
   name: 'Login',
   data () {
@@ -33,18 +32,17 @@ export default {
       errorTip: ''
     }
   },
-  computed: {
-    ...mapGetters([ 'userInfo' ])
-  },
   methods: {
     login () {
+      function validate () {
+        return Promise.resolve()
+      }
+
       this.loginForm.validateFields((err, formData) => {
         if (!err) {
-          if (formData.userName !== this.userInfo.userName || formData.password !== this.userInfo.password) {
-            this.errorTip = `用户名或密码错误(${this.userInfo.userName}/${this.userInfo.password})`
-            return
-          }
-          window.location.href = document.location.origin
+          validate().then(() => {
+            location.href = document.location.origin
+          })
         }
       })
     }
