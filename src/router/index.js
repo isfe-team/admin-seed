@@ -11,6 +11,8 @@ import NotFound from '@/components/abnormal_pages/NotFound'
 import NoAuth from '@/components/abnormal_pages/NoAuth'
 import ServerError from '@/components/abnormal_pages/ServerError'
 
+import Overview from '@/components/overview'
+
 Vue.use(Router)
 
 export const projectRouter = ({
@@ -19,7 +21,7 @@ export const projectRouter = ({
       path: '/overview',
       name: 'overview',
       meta: { label: '概览' },
-      component: NotFound
+      component: Overview
     },
     {
       path: '/function-pages',
@@ -97,7 +99,7 @@ export const projectRouter = ({
     },
     {
       path: '*',
-      redirect: './function-pages'
+      redirect: './overview'
     }
   ]
 })
