@@ -11,64 +11,54 @@ Use `vue`and `ant-design-vue`, and based on `@vue/cli` to build an admin seed pr
 ## Build Setup
 
 ``` bash
-# install dependencies
 npm install
-```
-
-### Compiles and hot-reloads for development
-```
+## for dev
 npm run serve
-```
-
-### Compiles and minifies for production
-```
+## for build/release
 npm run build
-```
-
-### Run your tests
-```
+## for test
 npm run test
-```
-
-### Lints and fixes files
-```
+## for lint
 npm run lint
-```
-
-### Run your unit tests
-```
+## for unit test
 npm run test:unit
 ```
 
 ### Customize configuration
 See [Configuration Reference](https://cli.vuejs.org/config/).
 
-## Description
+## Directories
 
 ```
 - src
+	- store
+	- router
 	- entries
 		- login
 			- login.html
 			- login.js
 			- login.less
-			- login.vue
+			- Login.vue
 		- index
 			- index.html
 			- index.js
 			- index.less
-			- app.vue
-	- router
+			- App.vue
 	- components
+    - common
+    - trans
 	- assets
 		- fonts
 		- images
 	- styles
+    - base.less
 		- vars.less
+    - ant-design-vue.less
+    - icons
+    - index.less
 	- utils
 		- helpers
 		- constants
-	- store
 	- vendors
 ```
 

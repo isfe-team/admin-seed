@@ -63,6 +63,9 @@ export default {
 
   .app-layout-content {
     height: 100%;
+    // make it
+    overflow: hidden;
+    // or... min-height: 0;
   }
 
   .logo-wrapper {
