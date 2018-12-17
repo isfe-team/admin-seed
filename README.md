@@ -6,6 +6,8 @@ Use `vue`and `ant-design-vue`, and based on `@vue/cli` to build an admin seed pr
 
 > Of course, in fact, this is also a template.
 
+> Thank ymliu for cute icons.
+
 ## Build Setup
 
 ``` bash
@@ -81,3 +83,7 @@ See [Configuration Reference](https://cli.vuejs.org/config/).
 [] 优化中心化存储 + `Resource` 资源利用，不使用 `vuex`
 [] 增加 `admin-seed-cli`
 [] 集成 `ts`
+
+## NOTICE
+
+`ant-design-vue@1.2.0` 菜单收起会有问题。

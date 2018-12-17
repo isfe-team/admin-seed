@@ -90,7 +90,6 @@ export default {
       width: 100%;
       text-align: center;
       /* makes u happier */
-      margin-top: -10%;
       margin-bottom: 20px;
 
       img {

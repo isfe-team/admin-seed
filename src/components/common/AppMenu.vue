@@ -54,16 +54,30 @@ export default {
   data () {
     return {
       openKeys: [ ],
+      cachedOpenKeys: [ ],
       selectedKeys: [ ],
       menus: menu.data[0].childList
     }
   },
+  props: {
+    collapsed: {
+      type: Boolean
+    }
+  },
   watch: {
     $route: {
-      handler (currentRoute) {
+      handler () {
         this.calcMenuRoute()
       },
       immediate: true
+    },
+    collapsed (val) {
+      if (val) {
+        this.cachedOpenKeys = this.openKeys
+        this.openKeys = [ ]
+        return
+      }
+      this.openKeys = this.cachedOpenKeys
     }
   },
   computed: {
@@ -90,7 +104,13 @@ export default {
       const routes = this.$route.name.split('::')
       this.selectedKeys = [ routes[routes.length - 1] ]
       const [ firstRoute, secondRoute ] = routes
-      this.openKeys = secondRoute ? [ secondRoute, firstRoute ] : [ firstRoute ]
+      const openKeys = secondRoute ? [ secondRoute, firstRoute ] : [ firstRoute ]
+
+      if (this.collapsed) {
+        this.cachedOpenKeys = openKeys
+      } else {
+        this.openKeys = openKeys
+      }
     }
   }
 }

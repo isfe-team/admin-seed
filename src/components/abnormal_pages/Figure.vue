@@ -1,6 +1,6 @@
 <template>
   <div class="figure">
-    <img v-if="imageSrc" :src="imageSrc" :alt="imageAlt">
+    <slot />
     <div class="figure-message-wrapper">
       <div class="message">{{ message }}</div>
       <div class="description">{{ description }}</div>
@@ -13,8 +13,6 @@
 export default {
   name: 'Figure',
   props: {
-    imageSrc: { type: String, default: '' },
-    imageAlt: { type: String, default: '' },
     message: { type: String, default: '' },
     description: { type: String, default: '' }
   },

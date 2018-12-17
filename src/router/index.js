@@ -11,7 +11,7 @@ import NotFound from '@/components/abnormal_pages/NotFound'
 import NoAuth from '@/components/abnormal_pages/NoAuth'
 import ServerError from '@/components/abnormal_pages/ServerError'
 
-import Overview from '@/components/overview'
+import Overview from '@/components/Overview'
 
 Vue.use(Router)
 
@@ -78,19 +78,19 @@ export const projectRouter = ({
       meta: { label: '异常页' },
       children: [
         {
-          path: 'not-author',
+          path: '403',
           name: 'abnormal-pages::no-auth',
           component: NoAuth,
           meta: { label: '403' }
         },
         {
-          path: 'not-found',
+          path: '404',
           name: 'abnormal-pages::not-found',
           component: NotFound,
           meta: { label: '404' }
         },
         {
-          path: 'serve-error',
+          path: '500',
           name: 'abnormal-pages::serve-error',
           component: ServerError,
           meta: { label: '500' }
@@ -99,7 +99,7 @@ export const projectRouter = ({
     },
     {
       path: '*',
-      redirect: { name: 'abnormal-pages::not-found' }
+      redirect: 'overview' // { name: 'abnormal-pages::not-found' }
     }
   ]
 })

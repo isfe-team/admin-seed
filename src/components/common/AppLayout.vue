@@ -9,7 +9,7 @@
         <img src="@/assets/logo.png" alt="logo" class="logo">
         <h1 v-if="!collapsed">Admin Seed</h1>
       </div>
-      <AppMenu />
+      <AppMenu :collapsed="collapsed" />
     </ALayoutSider>
     <ALayout>
       <ALayoutHeader class="app-layout-header">

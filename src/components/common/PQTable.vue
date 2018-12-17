@@ -246,7 +246,6 @@ export default {
       // this.listData = [ ]
       return this.loadDataApi(this.pagination.currentPage, this.pagination.pageSize)
         .then((data) => {
-          console.log(data)
           this.pagination.totalRows = data.result.totalCount
           // 解决删除最后一页的最后一条数据时，没有触发change事件重新load的问题
           const maxPage = Math.ceil(data.result.totalCount / this.pagination.pageSize)
@@ -254,7 +253,6 @@ export default {
             return this.handleCurrentChange(maxPage)
           }
           const listData = this.transformListData(data)
-          console.log(listData, data)
           this.listData = listData
           this.$emit('loaded-data', { listData })
         }, (error) => {

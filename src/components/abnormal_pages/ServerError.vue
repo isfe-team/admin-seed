@@ -1,10 +1,11 @@
 <template>
   <Figure
     class="serve-error"
-    image-src="https://gw.alipayobjects.com/zos/rmsportal/RVRUAYdCGeYNBWoKiIwB.svg"
     message="500"
     description="抱歉，服务异常了"
-  />
+  >
+    <i class="icon icon-exception icon-exception-500"></i>
+  </Figure>
 </template>
 
 <script>
