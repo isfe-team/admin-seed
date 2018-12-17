@@ -18,10 +18,12 @@
   -
   - @todo
   - 增加 TextButton 和 AButton 控制
-  - 去除 eslint-disable v-if/v-for 等
+  - 去除 eslint-disable v-if/v-for、no-parsing-error 等
+  - [ref](https://github.com/vuejs/eslint-plugin-vue/issues/665#issuecomment-447738204)
 -->
 
 <!-- eslint-disable -->
+
 <template>
   <div class="pq-table-wrapper">
     <slot name="query"></slot>
@@ -50,6 +52,7 @@
       </template>
       <template slot-scope="text, record" slot="operation">
         <div class="button-wrapper">
+          <!-- eslint-disable-next-line vue/no-use-v-if-with-v-for -->
           <TextButton
             v-for="(operation, index) in noCollapsedOperations"
             v-if="typeof operation.exist === 'function' ? !!operation.exist(record) : true"
@@ -75,6 +78,7 @@
             <span>更多&nbsp;<AIcon type="down" /></span>
             <AMenu slot="overlay">
               <!-- 需要使用 @click -->
+              <!-- eslint-disable-next-line vue/no-use-v-if-with-v-for -->
               <AMenuItem
                 v-for="(operation, index) in collapsedOperations"
                 :key="index"

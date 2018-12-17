@@ -52,6 +52,10 @@ export default {
     height: 100%;
   }
 
+  .app-layout-sider {
+    box-shadow: 2px 0 6px #777;
+  }
+
   .app-layout-header {
     padding: 0;
     background: #FFF;

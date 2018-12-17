@@ -25,10 +25,10 @@ export const projectRouter = ({
       path: '/function-pages',
       name: '',
       component: CommonWrapper,
-      meta: { label: '功能' },
+      meta: { label: '功能页' },
       children: [
         {
-          path: '/',
+          path: '',
           redirect: 'table'
         },
         {
@@ -77,7 +77,7 @@ export const projectRouter = ({
       children: [
         {
           path: 'not-author',
-          name: 'abnormal-pages::not-author',
+          name: 'abnormal-pages::no-auth',
           component: NoAuth,
           meta: { label: '403' }
         },
@@ -88,8 +88,8 @@ export const projectRouter = ({
           meta: { label: '404' }
         },
         {
-          path: 'serve-abnormal',
-          name: 'abnormal-pages::serve-abnormal',
+          path: 'serve-error',
+          name: 'abnormal-pages::serve-error',
           component: ServerError,
           meta: { label: '500' }
         }
@@ -97,7 +97,7 @@ export const projectRouter = ({
     },
     {
       path: '*',
-      redirect: './function-pages'
+      redirect: { name: 'abnormal-pages::not-found' }
     }
   ]
 })

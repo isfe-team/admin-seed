@@ -1,32 +1,17 @@
 <template>
-  <div class="not-author">
-    <img src="https://gw.alipayobjects.com/zos/rmsportal/wZcnGqRDyhPOEYFcZDnb.svg" alt="">
-    <div class="pages-title">
-      <div>403</div>
-      <div>抱歉，没有访问权限</div>
-    </div>
-  </div>
+  <Figure
+    class="not-auth"
+    image-src="https://gw.alipayobjects.com/zos/rmsportal/wZcnGqRDyhPOEYFcZDnb.svg"
+    message="403"
+    description="抱歉，没有访问权限"
+  />
 </template>
 
 <script>
+import Figure from './Figure'
+
 export default {
-  name: 'NotFound',
-  data () {
-    return { }
-  }
+  name: 'NoAuth',
+  components: { Figure }
 }
 </script>
-
-<style scoped>
-  .not-author {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    padding-top: 100px;
-  }
-  .pages-title {
-    margin-left: 20px;
-    text-align: center;
-    font-size: 30px;
-  }
-</style>

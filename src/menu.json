@@ -68,7 +68,7 @@
             {
               "id": "0-3-1",
               "name": "403",
-              "url": "not-author",
+              "url": "no-auth",
               "sort": 1,
               "childList": []
             },
@@ -82,7 +82,7 @@
             {
               "id": "0-3-3",
               "name": "500",
-              "url": "serve-abnormal",
+              "url": "serve-error",
               "sort": 3,
               "childList": []
             }

@@ -1,13 +1,20 @@
+<!--
+ - 暂时使用的是 childList 为空，就认定是 MenuItem，但是这样的判断是不够的（假如集成权限配置）
+ - 可以参考 docs/FAQ.md 的做法
+ - @todo 层级处理改成递归（目前只支持三层），现在是由于之前多次改动，导致直接平铺处理的...
+ -->
+
 <template>
+  <!-- 注意得 @openChange 而不是 @open-change -->
   <AMenu
-    mode="inline"
-    :default-open-keys="defaultOpenKeys"
-    :selected-keys="selectedKeys"
-    :inlineCollapsed="collapsed"
     class="app-menu"
-    :inline-indent="26"
+    mode="inline"
+    :open-keys="openKeys"
+    :selected-keys="selectedKeys"
+    @openChange="handleMenuOpenChange"
     @click="handleSelect"
-    theme="dark">
+    theme="dark"
+  >
     <template v-for="menu in menus">
       <AMenuItem v-if="menu.childList.length === 0" :key="menu.url">
         <AIcon :type="menu.icon" />
@@ -47,21 +54,24 @@ export default {
   name: 'AppMenu',
   data () {
     return {
-      defaultOpenKeys: [ ],
+      openKeys: [ ],
       selectedKeys: [ ],
-      menus: assign({ }, menu.data[0].childList)
+      menus: menu.data[0].childList
     }
   },
   watch: {
-    $route (currentRoute) {
-      console.log(currentRoute, 'currentRoute')
-      this.calcMenuRouter()
+    $route: {
+      handler (currentRoute) {
+        this.calcMenuRoute()
+      },
+      immediate: true
     }
   },
-  beforeMount () {
-    this.calcMenuRouter()
+  computed: {
+    rootSubmenuKeys () {
+      return this.menus.map((x) => x.url)
+    }
   },
-  props: [ 'collapsed' ],
   methods: {
     handleSelect (data) {
       const keypath = reverse(data.keyPath).join('::')
@@ -69,11 +79,19 @@ export default {
         name: keypath
       })
     },
-    calcMenuRouter () {
-      const routeArr = this.$route.name.split('::')
-      this.selectedKeys = [ routeArr[routeArr.length - 1] ]
-      const [ firstRoute, SecondRoute ] = routeArr
-      this.defaultOpenKeys = SecondRoute ? [ SecondRoute, firstRoute ] : [ firstRoute ]
+    handleMenuOpenChange (openKeys) {
+      const latestOpenKey = openKeys.find((key) => this.openKeys.indexOf(key) === -1)
+      if (this.rootSubmenuKeys.indexOf(latestOpenKey) === -1) {
+        this.openKeys = openKeys
+      } else {
+        this.openKeys = latestOpenKey ? [ latestOpenKey ] : [ ]
+      }
+    },
+    calcMenuRoute () {
+      const routes = this.$route.name.split('::')
+      this.selectedKeys = [ routes[routes.length - 1] ]
+      const [ firstRoute, secondRoute ] = routes
+      this.openKeys = secondRoute ? [ secondRoute, firstRoute ] : [ firstRoute ]
     }
   }
 }
