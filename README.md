@@ -31,35 +31,35 @@ See [Configuration Reference](https://cli.vuejs.org/config/).
 
 ```
 - src
-	- store
-	- router
-	- entries
-		- login
-			- login.html
-			- login.js
-			- login.less
-			- Login.vue
-		- index
-			- index.html
-			- index.js
-			- index.less
-			- App.vue
-	- components
+  - store
+  - router
+  - entries
+    - login
+      - login.html
+      - login.js
+      - login.less
+      - Login.vue
+    - index
+      - index.html
+      - index.js
+      - index.less
+      - App.vue
+  - components
     - common
     - trans
-	- assets
-		- fonts
-		- images
-	- styles
+  - assets
+    - fonts
+    - images
+  - styles
     - base.less
-		- vars.less
+    - vars.less
     - ant-design-vue.less
     - icons
     - index.less
-	- utils
-		- helpers
-		- constants
-	- vendors
+  - utils
+    - helpers
+    - constants
+  - vendors
 ```
 
 ## TODOs
