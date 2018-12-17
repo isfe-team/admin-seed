@@ -16,6 +16,12 @@ Vue.use(Router)
 export const projectRouter = ({
   routes: [
     {
+      path: '/overview',
+      name: 'overview',
+      meta: { label: '概览' },
+      component: NotFound
+    },
+    {
       path: '/function-pages',
       name: '',
       component: CommonWrapper,
