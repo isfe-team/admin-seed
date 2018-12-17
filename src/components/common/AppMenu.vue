@@ -46,7 +46,6 @@
 </template>
 
 <script>
-import assign from 'lodash/assign'
 import reverse from 'lodash/reverse'
 import menu from '@/menu.json'
 
