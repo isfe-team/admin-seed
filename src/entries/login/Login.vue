@@ -56,7 +56,7 @@ export default {
       this.loginForm.validateFields((err, formData) => {
         if (!err) {
           validate().then(() => {
-            location.href = document.location.origin
+            location.href = './'
           }, (err) => {
             this.$notification.error({
               message: 'LOGIN ERROR',
