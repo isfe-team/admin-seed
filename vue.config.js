@@ -14,7 +14,7 @@ module.exports = {
       }
     }
   },
-  baseUrl: '/',
+  baseUrl: '/admin-seed/',
   lintOnSave: true,
   pages: {
     app: {
