@@ -21,7 +21,7 @@ export default {
       this.$confirm({
         title: '是否退出系统',
         onOk () {
-          window.location.href = document.location.origin + '/login.html'
+          window.location.href = './login.html'
         }
       })
     }
