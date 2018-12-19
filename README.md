@@ -71,7 +71,7 @@ See [Configuration Reference](https://cli.vuejs.org/config/).
 - [ ] 按需引入，见[babel-plugin-import](https://github.com/ant-design/babel-plugin-import)
 - [ ] 集成 `cache`
 - [ ] 优化中心化存储 + `Resource` 资源利用，不使用 `vuex`
-- [ ] 增加 `admin-seed-cli`
+- [x] 增加 `admin-seed-cli`
 - [ ] 集成 `ts`
 
 ## NOTICE
