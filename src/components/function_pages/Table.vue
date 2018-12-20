@@ -7,7 +7,8 @@
     :transform-list-data="transformListData"
     :initial-pagination="{ currentPage: +$route.query.p || 1 }"
     :columns="columns"
-    :query="query">
+    :query="query"
+    row-key="key">
   </PQTable>
 </template>
 
