@@ -68,7 +68,7 @@ See [Configuration Reference](https://cli.vuejs.org/config/).
 - [x] 完成结构讨论和调整
 - [x] 完成 `vue-cli` 升级
 - [x] 采用 `preset-env`，去除 promise-polyfill/babel-polyfill 等直接引入
-- [ ] 按需引入，见[babel-plugin-import](https://github.com/ant-design/babel-plugin-import)
+- [x] 按需引入，见[babel-plugin-import](https://github.com/ant-design/babel-plugin-import)
 - [ ] 集成 `cache`
 - [ ] 优化中心化存储 + `Resource` 资源利用，不使用 `vuex`
 - [x] 增加 `admin-seed-cli`
