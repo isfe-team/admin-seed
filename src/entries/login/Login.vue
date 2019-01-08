@@ -4,14 +4,13 @@
       <img src="@/assets/logo.png" alt="logo">
       <h1>Admin Seed</h1>
     </div>
-    <AForm @submit.prevent :auto-form-create="(form) => {this.loginForm = form}" class="login-form">
+    <AForm @submit.prevent :form="loginForm" class="login-form">
       <AFormItem
         required
         :label-col="{ span: 5 }"
         :wrapper-col="{ span: 19 }"
         label="用户名："
-        field-decorator-id="userName"
-        :field-decorator-options="{rules: [{ required: true, message: '请输入用户名' }]}"
+        v-decorator="['userName', {rules: [{ required: true, message: '请输入用户名' }]}]"
       >
         <AInput placeholder="admin">
           <AIcon slot="prefix" type="user" />
@@ -22,10 +21,9 @@
         :label-col="{ span: 5 }"
         :wrapper-col="{ span: 19 }"
         label="密码："
-        field-decorator-id="password"
-        :field-decorator-options="{rules: [{ required: true, message: '请输入密码' }]}"
+        v-decorator="['password', {rules: [{ required: true, message: '请输入密码' }]}]"
       >
-        <AInput type="password" placeholder="88888888">
+        <AInput type="password" autocomplete placeholder="88888888">
           <AIcon slot="prefix" type="lock" />
         </AInput>
       </AFormItem>
@@ -48,7 +46,7 @@ export default {
   name: 'Login',
   data () {
     return {
-      loginForm: null
+      loginForm: this.$form.createForm(this)
     }
   },
   methods: {

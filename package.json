@@ -10,7 +10,7 @@
     "test:unit": "vue-cli-service test:unit"
   },
   "dependencies": {
-    "ant-design-vue": "^1.1.10",
+    "ant-design-vue": "^1.2.5",
     "axios": "^0.18.0",
     "lodash": "^4.17.11",
     "normalize.css": "^8.0.1",
@@ -20,19 +20,19 @@
     "vuex": "^3.0.1"
   },
   "devDependencies": {
-    "@babel/preset-env": "^7.2.0",
-    "@vue/cli-plugin-babel": "^3.2.0",
-    "@vue/cli-plugin-eslint": "^3.2.0",
-    "@vue/cli-plugin-pwa": "^3.2.0",
-    "@vue/cli-plugin-unit-mocha": "^3.2.0",
-    "@vue/cli-service": "^3.2.0",
+    "@babel/preset-env": "^7.2.3",
+    "@vue/cli-plugin-babel": "^3.2.2",
+    "@vue/cli-plugin-eslint": "^3.2.2",
+    "@vue/cli-plugin-pwa": "^3.2.2",
+    "@vue/cli-plugin-unit-mocha": "^3.2.2",
+    "@vue/cli-service": "^3.2.3",
     "@vue/eslint-config-standard": "^4.0.0",
-    "@vue/test-utils": "^1.0.0-beta.27",
+    "@vue/test-utils": "^1.0.0-beta.28",
     "babel-eslint": "^10.0.1",
     "babel-plugin-import": "^1.11.0",
     "chai": "^4.1.2",
-    "eslint": "^5.10.0",
-    "eslint-plugin-vue": "^5.0.0-0",
+    "eslint": "^5.12.0",
+    "eslint-plugin-vue": "^5.1.0",
     "less": "^2.7.3",
     "less-loader": "^4.1.0",
     "vue-template-compiler": "^2.5.21"

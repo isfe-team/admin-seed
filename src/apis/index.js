@@ -112,6 +112,8 @@ axiosInstance.interceptors.response.use(function (response) {
       return Promise.reject({ type: 'forbidden', message: '您无权限访问该资源' })
     case 500:
       return Promise.reject({ message: '服务异常' })
+    case 502:
+      return Promise.reject({ message: '服务异常' })
     case 504:
       return Promise.reject({ message: '网络超时' })
     default:

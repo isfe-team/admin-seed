@@ -22,17 +22,17 @@
       </AMenuItem>
       <ASubMenu :key="menu.url" v-else>
         <span slot="title" class="menu-title-wrapper">
-          <AIcon :type="menu.icon" />
+          <AIcon v-if="menu.icon" :type="menu.icon" />
           <span class="menu-title">{{ menu.name }}</span>
         </span>
         <template v-for="subMenu in menu.childList">
           <AMenuItem v-if="subMenu.childList.length === 0" :key="subMenu.url">
-            <AIcon :type="subMenu.icon" />
+            <AIcon v-if="subMenu.icon" :type="subMenu.icon" />
             <span class="menu-title">{{ subMenu.name }}</span>
           </AMenuItem>
           <ASubMenu :key="subMenu.url" v-else>
             <span slot="title" class="menu-title-wrapper">
-              <AIcon :type="subMenu.icon" />
+              <AIcon v-if="subMenu.icon" :type="subMenu.icon" />
               <span class="menu-title">{{ subMenu.name }}</span>
             </span>
             <AMenuItem v-for="grandMenu in subMenu.childList" :key="grandMenu.url">

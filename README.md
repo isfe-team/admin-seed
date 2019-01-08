@@ -22,9 +22,12 @@ npm run test
 npm run lint
 ## for unit test
 npm run test:unit
+## publish
+git subtree push --prefix dist origin gh-pages
 ```
 
 ### Customize configuration
+
 See [Configuration Reference](https://cli.vuejs.org/config/).
 
 ## Directories
@@ -73,6 +76,8 @@ See [Configuration Reference](https://cli.vuejs.org/config/).
 - [ ] 优化中心化存储 + `Resource` 资源利用，不使用 `vuex`
 - [x] 增加 `admin-seed-cli`
 - [ ] 集成 `ts`
+- [ ] compatity
+- [ ] release log
 
 ## NOTICE
 
