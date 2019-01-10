@@ -32,7 +32,7 @@ See [Configuration Reference](https://cli.vuejs.org/config/).
 
 ## Compatibility
 
-We prefer to use `src/polyfill.js` to centrally manage polyfills. You can use `src/polyfill.js` to import polyfills as you need, you can uncomment or add what you want. For more informations, you can see `src/polyfill.js`.
+We prefer to use `src/polyfills.js` to centrally manage polyfills. You can use `src/polyfills.js` to import polyfills as you need, you can uncomment or add what you want. For more informations, you can see `src/polyfills.js`.
 
 ### Built-in Scripts' Compatibility
 
@@ -131,4 +131,4 @@ The major bundle is the 3rd-party lib - `ant-design-vue`, you can see [this issu
 
 ## NOTICE
 
-`ant-design-vue@1.2.0` 菜单收起会有问题，see 
+`ant-design-vue@1.2.0` 菜单收起会有问题，see [this issue](https://github.com/vueComponent/ant-design-vue/issues/338). 更新到 `1.2.4+` 即可。
