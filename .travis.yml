@@ -1,0 +1,35 @@
+language: node_js
+
+node_js:
+  - 10.14.2
+
+before_install: git fetch --depth=1000
+
+install:
+  - npm i
+
+cache: npm
+
+script:
+  - npm run lint
+  - npm run test:unit
+
+before_deploy: "echo 'deploying...'"
+
+# @see https://docs.travis-ci.com/user/deployment/pages/
+deploy:
+  -
+    provider: pages
+    local-dir: dist
+    github-token: $GITHUB_TOKEN  # Set in the settings page of your repository, as a secure variable
+    skip-cleanup: true
+    keep-history: true
+    on:
+      branch: master
+
+notifications:
+  email:
+    recipients:
+      - bqliu@iflytek.com
+
+after_deploy: "echo 'deployed.'"

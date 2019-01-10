@@ -22,7 +22,12 @@ npm run test
 npm run lint
 ## for unit test
 npm run test:unit
-## publish
+# use this to commit
+$ npm run commit
+# upgrade versions and tag
+$ npm version <param>
+$ git push origin --tag
+# publish
 git subtree push --prefix dist origin gh-pages
 ```
 
@@ -131,4 +136,4 @@ The major bundle is the 3rd-party lib - `ant-design-vue`, you can see [this issu
 
 ## NOTICE
 
-`ant-design-vue@1.2.0` 菜单收起会有问题，see [this issue](https://github.com/vueComponent/ant-design-vue/issues/338). 更新到 `1.2.4+` 即可。
+`ant-design-vue@1.2.0` 菜单收起会有问题，see [this issue](https://github.com/vueComponent/ant-design-vue/issues/338)。 更新到 `1.2.4+` 即可。
