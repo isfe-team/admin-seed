@@ -111,10 +111,14 @@ The major bundle is the 3rd-party lib - `ant-design-vue`, you can see [this issu
 - [x] release log
 - [x] [stylelint](https://github.com/stylelint/stylelint)
 
+### 0.4.0
+
+- [ ] 集成 ci 和 hooks
+- [ ] 优化内部所有内置脚本
+
 ### 1.0
 
 - [ ] 优化内部所有内置组件
-- [ ] 优化内部所有内置脚本
 - [ ] 增加基础库测试
 - [ ] `admin-seed-cli` 增加配置，使用不同的 seed project 源，进一步支持大家 fork 这个项目，并使用自己的版本
 
