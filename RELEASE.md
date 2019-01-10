@@ -8,6 +8,7 @@ Feat:
 - Compatibility: 增加默认的 `polyfill` 模块占位
 - 增加 RELEASE log
 - 集成 [stylelint](https://github.com/stylelint/stylelint)
+- 集成 ci 和 hooks
 
 ## 0.2.0
 

@@ -1,13 +1,13 @@
-import { expect } from 'chai'
-import { shallowMount } from '@vue/test-utils'
-import HelloWorld from '@/components/HelloWorld.vue'
+// import { expect } from 'chai'
+// import { shallowMount } from '@vue/test-utils'
+// import Login from '@/entries/login/Login.vue'
 
-describe('HelloWorld.vue', () => {
-  it('renders props.msg when passed', () => {
-    const msg = 'new message'
-    const wrapper = shallowMount(HelloWorld, {
-      propsData: { msg }
-    })
-    expect(wrapper.text()).to.include(msg)
-  })
-})
+// describe('Login.vue', () => {
+//   it('is a vue instance', () => {
+//     const wrapper = shallowMount(Login, {
+//       propsData: { }
+//     })
+//     /* eslint-disable no-unused-expressions */
+//     expect(wrapper.isVueInstance()).to.be.true
+//   })
+// })

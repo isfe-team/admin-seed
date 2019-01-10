@@ -39,6 +39,8 @@ See [Configuration Reference](https://cli.vuejs.org/config/).
 
 We prefer to use `src/polyfills.js` to centrally manage polyfills. You can use `src/polyfills.js` to import polyfills as you need, you can uncomment or add what you want. For more informations, you can see `src/polyfills.js`.
 
+For `vue-cli`, you can see [this](https://cli.vuejs.org/zh/guide/browser-compatibility.html#usebuiltins-usage).
+
 ### Built-in Scripts' Compatibility
 
 > For some other infomations, you can see [this](https://angular.io/guide/browser-support) :).
@@ -115,10 +117,10 @@ The major bundle is the 3rd-party lib - `ant-design-vue`, you can see [this issu
 - [x] Compatibility 增加默认的 `polyfill` 模块占位
 - [x] release log
 - [x] [stylelint](https://github.com/stylelint/stylelint)
+- [x] 集成 ci 和 hooks
 
 ### 0.4.0
 
-- [ ] 集成 ci 和 hooks
 - [ ] 优化内部所有内置脚本
 
 ### 1.0

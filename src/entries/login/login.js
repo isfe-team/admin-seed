@@ -1,3 +1,4 @@
+import '@/polyfills'
 import Vue from 'vue'
 import Login from './Login.vue'
 import '@/components/registerAntDesignVueComponents'

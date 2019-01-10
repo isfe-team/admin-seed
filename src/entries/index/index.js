@@ -1,3 +1,4 @@
+import '@/polyfills'
 import Vue from 'vue'
 import '@/components/registerAntDesignVueComponents'
 import App from './App'
