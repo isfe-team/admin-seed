@@ -30,6 +30,32 @@ git subtree push --prefix dist origin gh-pages
 
 See [Configuration Reference](https://cli.vuejs.org/config/).
 
+## Compatibility
+
+We prefer to use `src/polyfill.js` to centrally manage polyfills. You can use `src/polyfill.js` to import polyfills as you need, you can uncomment or add what you want. For more informations, you can see `src/polyfill.js`.
+
+### Built-in Scripts' Compatibility
+
+> For some other infomations, you can see [this](https://angular.io/guide/browser-support) :).
+
+#### classlist
+
+In `utils/helpers`, we use `classList`. You can see [compatibility](https://caniuse.com/#search=classList). If you want to use it in `IE10-`, you can use `setAttribute` or [classList polyfill](https://github.com/eligrey/classList.js). For polyfill via npm, you can see [classlist-polyfill](https://www.npmjs.com/package/classlist-polyfill) or [classlist.js](https://www.npmjs.com/package/classlist.js).
+
+#### Promise
+
+We use `axios` as AJAX client, it based on `Promise`. See [caniuse](https://caniuse.com/#search=promise) and [polyfill](https://www.npmjs.com/package/promise-polyfill).
+
+Btw, [babel-polyfill](https://www.npmjs.com/package/@babel/polyfill) includes a promise polyfill.
+
+### Third-party Compatibility
+
+See [Compatibility of `ant-design-vue`](https://vuecomponent.github.io/ant-design-vue/docs/vue/getting-started/#Compatibility).
+
+## Optimizations
+
+The major bundle is the 3rd-party lib - `ant-design-vue`, you can see [this issue](https://github.com/vueComponent/ant-design-vue/issues/325) for more informations. Btw, the `admin-seed` use `src/components/registerServiceWorker.js` to centrally manage the `ant-design-vue` components.
+
 ## Directories
 
 ```
@@ -65,20 +91,40 @@ See [Configuration Reference](https://cli.vuejs.org/config/).
   - vendors
 ```
 
-## TODOs
+## Roadmap
+
+### 0.1.0
 
 - [x] 完成初始版本
 - [x] 完成结构讨论和调整
 - [x] 完成 `vue-cli` 升级
 - [x] 采用 `preset-env`，去除 promise-polyfill/babel-polyfill 等直接引入
+
+### 0.2.0
+
 - [x] 按需引入，见[babel-plugin-import](https://github.com/ant-design/babel-plugin-import)
-- [ ] 集成 `cache`
-- [ ] 优化中心化存储 + `Resource` 资源利用，不使用 `vuex`
-- [x] 增加 `admin-seed-cli`
-- [ ] 集成 `ts`
-- [ ] compatity
-- [ ] release log
+- [x] 增加 `admin-seed-cli`，使用 `@isfe/admin-seed` 源
+
+### 0.3.0
+
+- [x] Compatibility 增加默认的 `polyfill` 模块占位
+- [x] release log
+- [x] [stylelint](https://github.com/stylelint/stylelint)
+
+### 1.0
+
+- [ ] 优化内部所有内置组件
+- [ ] 优化内部所有内置脚本
+- [ ] 增加基础库测试
+- [ ] `admin-seed-cli` 增加配置，使用不同的 seed project 源，进一步支持大家 fork 这个项目，并使用自己的版本
+
+### 2.0
+
+- [ ] 使用类组件
+- [ ] 迁移到 `ts`
+- [ ] `admin-seed-cli` 增加配置，使用 `ts` or `js` 版本
+- [ ] 开发数据层，优化中心化存储 + `Resource` 资源利用，不使用 `vuex`，集成 `cache`
 
 ## NOTICE
 
-`ant-design-vue@1.2.0` 菜单收起会有问题。
+`ant-design-vue@1.2.0` 菜单收起会有问题，see 

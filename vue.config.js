@@ -2,6 +2,9 @@
  * see https://cli.vuejs.org/guide/
  */
 
+const path = require('path')
+const StyleLintPlugin = require('stylelint-webpack-plugin')
+
 module.exports = {
   devServer: {
     host: 'localhost',
@@ -31,6 +34,18 @@ module.exports = {
       title: 'login',
       chunks: ['chunk-vendors', 'chunk-common', 'login']
     }
+  },
+  configureWebpack: {
+    plugins: [
+      // see https://github.com/webpack-contrib/stylelint-webpack-plugin
+      new StyleLintPlugin({
+        context: path.resolve(__dirname, 'src'),
+        // not working: '**/*.l?(e|c)ss'
+        // for `.vue` support, see https://stylelint.io/CHANGELOG/#830
+        files: [ '**/*.less', '**/*.css', '**/*.vue' ],
+        failOnError: process.env.NODE_ENV === 'production'
+      })
+    ]
   },
   filenameHashing: true,
   runtimeCompiler: false,

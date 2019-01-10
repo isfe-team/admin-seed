@@ -1,3 +1,8 @@
+/*!
+ * Import what components you need, use [babel-plugin-import](https://github.com/ant-design/babel-plugin-import)
+ * bqliu
+ */
+
 import Vue from 'vue'
 import {
   // Badge,
