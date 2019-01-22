@@ -13,7 +13,7 @@
 </template>
 
 <script>
-import { getTableInfo } from '@/apis/tableInfo'
+import { getTableInfo } from '@/apis/services/table'
 import PQTable from '@/components/common/PQTable'
 export default {
   name: 'Broccoli',

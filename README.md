@@ -59,6 +59,14 @@ Btw, [babel-polyfill](https://www.npmjs.com/package/@babel/polyfill) includes a 
 
 See [Compatibility of `ant-design-vue`](https://vuecomponent.github.io/ant-design-vue/docs/vue/getting-started/#Compatibility).
 
+## Mock
+
+For mock, you have two ways to achive it. One is use `@/apis/configs.js` for inner supports. The 2nd way is to add a prefix like `_mock` in your urls when you define your services, e.g. `req('_mock/user')`.
+
+Then you should use devServer to proxy all these requests to another mock server.
+
+Of course, I recommend a mock server to do this rather than native mock files.
+
 ## Optimizations
 
 The major bundle is the 3rd-party lib - `ant-design-vue`, you can see [this issue](https://github.com/vueComponent/ant-design-vue/issues/325) for more informations. Btw, the `admin-seed` use `src/components/registerServiceWorker.js` to centrally manage the `ant-design-vue` components.
@@ -121,19 +129,32 @@ The major bundle is the 3rd-party lib - `ant-design-vue`, you can see [this issu
 
 ### 0.4.0
 
-- [ ] 优化内部所有内置脚本
-- [ ] 集成 Mock
+- [x] 迁移 api config
+- [x] 集成 Mock
+- [x] 优化内部所有内置脚本
+- [x] 优化 vsc 路径映射，参考 https://www.typescriptlang.org/docs/handbook/module-resolution.html 和 https://stackoverflow.com/questions/47181037/vscode-intellisense-does-not-work-with-webpack-alias
+- [x] 集成 [NProgress](https://github.com/rstacruz/nprogress)
+- [x] 拆分路由配置 + [code-split](https://webpack.js.org/guides/code-splitting/)
 
-### 1.0
+### 0.5.0
 
 - [ ] 优化内部所有内置组件
+- [ ] 区分容器和展示组件
+
+### 1.0.0
+
 - [ ] 增加基础库测试
 - [ ] `admin-seed-cli` 增加配置，使用不同的 seed project 源，进一步支持大家 fork 这个项目，并使用自己的版本
 
+### 1.1.0
+
+- [ ] 集成 rx
+- [ ] 考虑非 global loading
+
 ### 2.0
 
-- [ ] 使用类组件
 - [ ] 迁移到 `ts`
+- [ ] 整体使用类组件
 - [ ] `admin-seed-cli` 增加配置，使用 `ts` or `js` 版本
 - [ ] 开发数据层，优化中心化存储 + `Resource` 资源利用，不使用 `vuex`，集成 `cache`
 

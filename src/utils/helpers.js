@@ -18,10 +18,17 @@ export const getErrorMessage = (error, defaultMessage = '') => {
   return defaultMessage
 }
 
-/** 简单的错误提示，基于 `message.error` */
-export const showErrorTip = (...args) => message.error(getErrorMessage.apply(null, args))
+/**
+ * 简单的错误提示，基于 `message.error`
+ * @param {{message: string, [key: string]: any} error
+ * @param {string} defaultMessage, default `''`
+ */
+export const showErrorTip = (error, defaultMessage) => message.error(getErrorMessage(error, defaultMessage))
 
-/** 简单的成功提示，基于 `meesage.success` */
+/**
+ * 简单的成功提示，基于 `meesage.success`
+ * @param {string} tip
+ */
 export const showSuccessTip = (tip) => message.success(tip)
 
 /** 简单的 log，基于 `console.log`，开发环境才会出现 */

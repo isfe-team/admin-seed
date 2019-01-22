@@ -2,7 +2,7 @@
   <ALocaleProvider :locale="zhCN">
     <!-- 加全局loading状态，暂时无用，因为这个遮不住所有的 -->
     <ASpin id="spin" :spinning="spinning">
-      <AppLayout id="app">
+      <AppLayout id="app" v-if="inited">
         <div class="app-content-wrapper">
           <ABreadcrumb class="app-breadcrumb">
             <template v-for="(route, index) in matchedRouteFragments">
@@ -19,13 +19,18 @@
 <script>
 import AppLayout from '@/components/common/AppLayout'
 import zhCN from 'ant-design-vue/lib/locale-provider/zh_CN'
+import { mapActions } from 'vuex'
+import { getUserInfo } from '@/apis/services/user'
+import { showErrorTip } from '@/utils/helpers'
 import 'moment/locale/zh-cn'
+
 export default {
   name: 'App',
   data () {
     return {
       spinning: false,
-      zhCN
+      zhCN,
+      inited: false
     }
   },
   components: { AppLayout },
@@ -33,6 +38,17 @@ export default {
     matchedRouteFragments () {
       return this.$route.matched
     }
+  },
+  methods: {
+    ...mapActions(['setUserInfo'])
+  },
+  beforeMount () {
+    getUserInfo().then((user) => {
+      this.setUserInfo(user)
+      this.inited = true
+    }, () => {
+      showErrorTip('获取用户信息失败')
+    })
   }
 }
 </script>

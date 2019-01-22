@@ -5,10 +5,7 @@ Vue.use(Vuex)
 
 export default new Vuex.Store({
   state: {
-    userInfo: {
-      userName: 'admin',
-      password: '88888888'
-    }
+    userInfo: null
   },
   mutations: {
     SET_USER_INFO (state, o) {
@@ -19,8 +16,5 @@ export default new Vuex.Store({
     setUserInfo ({ commit }, o) {
       commit('SET_USER_INFO', o)
     }
-  },
-  getters: {
-    userInfo: state => state.userInfo
   }
 })

@@ -1,41 +1,27 @@
 /*!
- * 请求相关处理，基于 [axios](https://github.com/axios/axios)
+ * 请求相关处理，基于 [axios](https://github.com/axios/axios) | bqliu
  */
 
 /* eslint prefer-promise-reject-errors: "off" */
 
 import axios from 'axios'
 import findIndex from 'lodash/findIndex'
+import cloneDeep from 'lodash/cloneDeep'
+import { inArray, generateUID, fullScreenLoading, removeFullScreenLoading } from '@/utils/helpers'
+import apiConfig from './config'
 
-import {
-  log,
-  inArray,
-  generateUID,
-  fullScreenLoading,
-  removeFullScreenLoading
-} from '@/utils/helpers'
-
-// 根据实际情况自定义
-const CONTEXT_PATH = '/api'
-
-// 独立的 zone，不污染
-// 默认配置，根据情况自定义
-const axiosInstance = axios.create({
-  baseURL: process.env.NODE_ENV === 'development' ? CONTEXT_PATH : '',
-  withCredentials: true,
-  headers: { 'X-Requested-With': 'XMLHttpRequest' },
-  timeout: 5 * 1000 // 5s
-})
-
-// global spin 最多等待的时间
-const MAX_WAITING_TIME = 0 // unit: ms
 let fullScreenLoadingTimer = null
-let currentRequestCount = 0
+let currentRequestCount = 0 // 当前正在发的请求数目
+const loadingReqs = [ ] // 当前所有正在发的请求，维护玩的
 
-// 不想 mask 的接口
-// e.g. [ '/ctx/persons' ]
-const noLoadingUrls = [ ]
-const loadingReqs = [ ]
+// 独立的 zone，不污染，根据情况自定义默认配置
+// @see https://github.com/axios/axios#creating-an-instance
+const axiosInstance = axios.create({
+  baseURL: apiConfig.baseURL,
+  withCredentials: apiConfig.withCredentials,
+  headers: apiConfig.headers,
+  timeout: apiConfig.timeout // 5s
+})
 
 function addLoadingReq (req) {
   const inLoadingReq = inArray(loadingReqs, req, (xs, y) => xs.some((x) => x._reqId === y._reqId))
@@ -54,34 +40,21 @@ axiosInstance.interceptors.request.use(function (config) {
   config._reqId = generateUID('req_')
   addLoadingReq(config)
   currentRequestCount += 1
-  // log(`开始发请求啦，当前共有${currentRequestCount}个`)
-  // 使用 `Object.assign` 或者 `spread operator` 防止失去引用
-  // `console.log` 保留的是引用 会使用点击展开时的 对象的值
-  // log(`loadingReqs`, [ ...loadingReqs ])
 
-  log('request config', config)
-
-  if (noLoadingUrls.indexOf(config.url) !== -1) {
-    // log(`不展示 loading 咯`)
+  if (apiConfig.noLoadingUrls.indexOf(config.url) !== -1) {
     return config
   }
   if (!fullScreenLoadingTimer) {
-    fullScreenLoadingTimer = setTimeout(
-      () => fullScreenLoading(),
-      MAX_WAITING_TIME
-    )
+    fullScreenLoadingTimer = setTimeout(() => fullScreenLoading(), apiConfig.maxWaitingTime)
   }
   return config
 }, function (error) {
-  // log(`req error`, error)
-  // 防止 error 的产生，不太确定 error 是否含有 config 信息，直接置空
-  loadingReqs.length = 0
-  fin()
+  finalize()
   return Promise.reject(error)
 })
 
 // finalize
-const fin = function () {
+const finalize = function () {
   currentRequestCount -= 1
   // log(`请求结束啦，当前还剩${currentRequestCount}个`)
   if (currentRequestCount === 0) {
@@ -94,31 +67,20 @@ const fin = function () {
 // 响应处理
 axiosInstance.interceptors.response.use(function (response) {
   removeLoadingReq(response.config)
-  fin()
+  finalize()
   if (!response.data) {
     return Promise.reject(new Error('服务异常'))
   }
   return response.data
 }, function (error) {
-  fin()
-  switch (error.request.status) {
-    case 0:
-      return Promise.reject({ message: '服务异常' })
-    case 404:
-      return Promise.reject({ message: '接口服务不存在' })
-  }
-  switch (error.response.status) {
-    case 403:
-      return Promise.reject({ type: 'forbidden', message: '您无权限访问该资源' })
-    case 500:
-      return Promise.reject({ message: '服务异常' })
-    case 502:
-      return Promise.reject({ message: '服务异常' })
-    case 504:
-      return Promise.reject({ message: '网络超时' })
-    default:
-      return Promise.reject({ message: '未知 Status Code' })
-  }
+  removeLoadingReq(error.config)
+  finalize()
+
+  const e = apiConfig.errorMap.request[error.request.status] ||
+            apiConfig.errorMap.response[error.response.status] ||
+            apiConfig.errorMap.common
+
+  return Promise.reject(cloneDeep(e))
 })
 
 /**

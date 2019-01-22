@@ -1,18 +1,28 @@
 <template>
   <div class="app-header">
-    <AIcon v-if="!collapsed" type="menu-fold" class="icon" @click="collapse" />
-    <AIcon v-if="collapsed" type="menu-unfold" class="icon" @click="collapse" />
-    <AIcon type="logout" class="icon" @click="logout" />
+    <div>
+      <AIcon v-if="!collapsed" type="menu-fold" class="app-header-icon" @click="collapse" />
+      <AIcon v-if="collapsed" type="menu-unfold" class="app-header-icon" @click="collapse" />
+    </div>
+    <div>
+      <span class="app-header-user-info" v-if="userInfo">Hi, {{userInfo.name}}</span>
+      <AIcon type="logout" class="app-header-icon" @click="logout" />
+    </div>
   </div>
 </template>
 
 <script>
+import { mapState } from 'vuex'
+
 export default {
   name: 'AppHeader',
   data () {
     return { }
   },
   props: [ 'collapsed' ],
+  computed: {
+    ...mapState(['userInfo'])
+  },
   methods: {
     collapse () {
       this.$emit('toggle-collapse-menu')
@@ -32,7 +42,9 @@ export default {
 <style scoped lang="less">
   @import "~@/styles/vars.less";
 
-  .app-header {
+  @component-prefix: app-header;
+
+  .@{component-prefix} {
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -40,10 +52,15 @@ export default {
     height: 100%;
     padding: 0 20px;
 
-    .icon {
+    .@{component-prefix}-icon {
       text-align: center;
       font-size: 20px;
       cursor: pointer;
+    }
+
+    .@{component-prefix}-user-info {
+      font-size: 16px;
+      margin-right: 10px;
     }
   }
 </style>
