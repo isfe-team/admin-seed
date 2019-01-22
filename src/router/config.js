@@ -1,5 +1,4 @@
 import CommonWrapper from '@/components/common/CommonWrapper'
-
 import NotFound from '@/components/abnormal_pages/NotFound'
 import NoAuth from '@/components/abnormal_pages/NoAuth'
 import ServerError from '@/components/abnormal_pages/ServerError'
@@ -25,13 +24,13 @@ export default {
         {
           path: 'table',
           name: 'function-pages::table',
-          component: import(/* webpackChunkName: 'function_components' */ '@/components/function_pages/Table'),
+          component: () => import(/* webpackChunkName: 'function_components' */ '@/components/function_pages/Table'),
           meta: { label: '表格' }
         },
         {
           path: 'corn',
           name: 'function-pages::corn',
-          component: import(/* webpackChunkName: 'function_components' */ '@/components/function_pages/Corn'),
+          component: () => import(/* webpackChunkName: 'function_components' */ '@/components/function_pages/Corn'),
           meta: { label: '功能2' }
         },
         {
@@ -43,13 +42,13 @@ export default {
             {
               path: 'use',
               name: 'function-pages::eggsplant::use',
-              component: import(/* webpackChunkName: 'function_components' */ '@/components/function_pages/Eggsplant'),
+              component: () => import(/* webpackChunkName: 'function_components' */ '@/components/function_pages/Eggsplant'),
               meta: { label: '功能3.1' }
             },
             {
               path: 'detail',
               name: 'function-pages::eggsplant::detail',
-              component: import(/* webpackChunkName: 'function_components' */ '@/components/function_pages/EggsplantDetail'),
+              component: () => import(/* webpackChunkName: 'function_components' */ '@/components/function_pages/EggsplantDetail'),
               meta: { label: '功能3.2' }
             }
           ]
