@@ -158,7 +158,9 @@ export default {
     // 不需要 type 限制
     query: { default () { return '' } },
     // 加载完数据之后，对数据的转换逻辑
-    transformListData: { type: Function, default () { return identity } },
+    transformListData: { type: Function, default: identity },
+    getDataTotalCount: { type: Function, default (data) { return data.data } },
+    resultData: { type: Object, default () { return { } } },
     // 操作栏的名字，默认 "操作"
     operationLabel: { type: String, default: '操作' },
     // 操作列表，可以指定 collapsed 让这个操作在 "更多" 里面
@@ -215,6 +217,15 @@ export default {
         this.pagination.currentPage = 1
       }
       this.loadData()
+    },
+    resultData () {
+      if (!this.loadedInitialData) {
+        return
+      }
+      if (this.pagination.currentPage !== 1) {
+        this.pagination.currentPage = 1
+      }
+      this.loadData()
     }
   },
   methods: {
@@ -244,11 +255,12 @@ export default {
     // 根据分页信息和query要求加载列表数据
     loadData () {
       // this.listData = [ ]
-      return this.loadDataApi(this.pagination.currentPage, this.pagination.pageSize)
+      return this.loadDataApi(this.pagination.currentPage, this.pagination.pageSize, this.resultData)
         .then((data) => {
-          this.pagination.totalRows = data.result.totalCount
+          const totalCount = this.getDataTotalCount(data)
+          this.pagination.totalRows = totalCount
           // 解决删除最后一页的最后一条数据时，没有触发change事件重新load的问题
-          const maxPage = Math.ceil(data.result.totalCount / this.pagination.pageSize)
+          const maxPage = Math.ceil(totalCount / this.pagination.pageSize)
           if (maxPage > 0 && maxPage < this.pagination.currentPage) {
             return this.handleCurrentChange(maxPage)
           }

@@ -28,6 +28,12 @@ export default {
           meta: { label: '表格' }
         },
         {
+          path: 'sync-table',
+          name: 'function-pages::sync-table',
+          component: () => import(/* webpackChunkName: 'function_components' */ '@/components/function_pages/SyncTable'),
+          meta: { label: '固定数据表格' }
+        },
+        {
           path: 'corn',
           name: 'function-pages::corn',
           component: () => import(/* webpackChunkName: 'function_components' */ '@/components/function_pages/Corn'),

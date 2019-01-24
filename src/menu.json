@@ -29,6 +29,13 @@
               "childList": []
             },
             {
+              "id": "0-2-1",
+              "name": "固定数据表格",
+              "url": "sync-table",
+              "sort": 4,
+              "childList": []
+            },
+            {
               "id": "0-2-2",
               "name": "功能2",
               "url": "corn",
