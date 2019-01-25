@@ -160,4 +160,18 @@ The major bundle is the 3rd-party lib - `ant-design-vue`, you can see [this issu
 
 ## NOTICE
 
+### favicon
+
+在 `vue-config.js` 文件中增加 `pwa` 配置，具体配置见[官网](https://github.com/vuejs/vue-cli/tree/dev/packages/@vue/cli-plugin-pwa#readme)。
+
+### 项目名相关
+
+需要将 `package.json` 和 `public/manifest.json` 的 `name` 和 `short_name` 配置为自己的项目名。
+
+### vsc 集成
+
+为了解决 vsc 的 `eslint` 报错，见[官网](https://vuejs.github.io/eslint-plugin-vue/user-guide/#editor-integrations)。
+
+### ant-design-vue 相关
+
 `ant-design-vue@1.2.0` 菜单收起会有问题，see [this issue](https://github.com/vueComponent/ant-design-vue/issues/338)。 更新到 `1.2.4+` 即可。

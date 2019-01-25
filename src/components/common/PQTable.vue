@@ -22,8 +22,6 @@
   - [ref](https://github.com/vuejs/eslint-plugin-vue/issues/665#issuecomment-447738204)
 -->
 
-<!-- eslint-disable -->
-
 <template>
   <div class="pq-table-wrapper">
     <slot name="query"></slot>
@@ -52,7 +50,6 @@
       </template>
       <template slot-scope="text, record" slot="operation">
         <div class="button-wrapper">
-          <!-- eslint-disable-next-line vue/no-use-v-if-with-v-for -->
           <TextButton
             v-for="(operation, index) in noCollapsedOperations"
             v-if="typeof operation.exist === 'function' ? !!operation.exist(record) : true"
@@ -159,8 +156,7 @@ export default {
     query: { default () { return '' } },
     // 加载完数据之后，对数据的转换逻辑
     transformListData: { type: Function, default: identity },
-    getDataTotalCount: { type: Function, default (data) { return data.data } },
-    resultData: { type: Object, default () { return { } } },
+    getDataTotalCount: { type: Function, default (data) { return data.result.totalCount } },
     // 操作栏的名字，默认 "操作"
     operationLabel: { type: String, default: '操作' },
     // 操作列表，可以指定 collapsed 让这个操作在 "更多" 里面
@@ -217,15 +213,6 @@ export default {
         this.pagination.currentPage = 1
       }
       this.loadData()
-    },
-    resultData () {
-      if (!this.loadedInitialData) {
-        return
-      }
-      if (this.pagination.currentPage !== 1) {
-        this.pagination.currentPage = 1
-      }
-      this.loadData()
     }
   },
   methods: {
@@ -255,7 +242,7 @@ export default {
     // 根据分页信息和query要求加载列表数据
     loadData () {
       // this.listData = [ ]
-      return this.loadDataApi(this.pagination.currentPage, this.pagination.pageSize, this.resultData)
+      return this.loadDataApi(this.pagination.currentPage, this.pagination.pageSize)
         .then((data) => {
           const totalCount = this.getDataTotalCount(data)
           this.pagination.totalRows = totalCount

@@ -101,6 +101,9 @@ export default {
       }
     },
     calcMenuRoute () {
+      if (!this.$route.name) {
+        return
+      }
       const routes = this.$route.name.split('::')
       this.selectedKeys = [ routes[routes.length - 1] ]
       const [ firstRoute, secondRoute ] = routes

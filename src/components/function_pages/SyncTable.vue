@@ -11,7 +11,6 @@
       :initial-pagination="{ currentPage: +$route.query.p || 1 }"
       :columns="columns"
       :query="query"
-      :result-data="resultData"
       row-key="key">
     </PQTable>
   </div>
@@ -35,13 +34,9 @@ export default {
   name: 'Broccoli',
   components: { PQTable: PQTable },
   data () {
-    const getTableInfo = (pageNo, pageSize, query) => {
-      return Promise.resolve(query)
-    }
     return {
       query: { },
-      resultData: clone(defaultInfo) || { },
-      getTableInfo,
+      resultData: defaultInfo,
       operations: [
         { type: 'edit', label: '编辑' },
         { type: 'delete', label: '删除' }
@@ -56,6 +51,9 @@ export default {
   methods: {
     transformListData (xs) {
       return xs.result.data
+    },
+    getTableInfo (pageNo, pageSize) {
+      return Promise.resolve(clone(this.resultData))
     },
     changeTable () {
       if (this.resultData.message === 1) {
@@ -75,6 +73,7 @@ export default {
       } else {
         this.resultData = clone(defaultInfo)
       }
+      this.$refs.table.loadData()
     },
     getDataTotalCount (xs) {
       return xs.result.totalCount
