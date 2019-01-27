@@ -1,6 +1,5 @@
 <!--
-  -
-  - 用于分页组件，能和 table 搭配使用，见 PQTable
+  - 基于 `APagination`，用于分页组件，能和 table 搭配使用，见 PQTable
   -
   - props 见下面 props 注释
   -
@@ -17,7 +16,7 @@
       :page-size="pageSize"
       :total="total"
       @change="handleCurrentChange"
-      class="pages"
+      class="pagination-pages"
     />
   </div>
 </template>
@@ -64,9 +63,9 @@ export default {
   .pagination {
     display: flex;
     width: 100%;
-    justify-content: center;
+    justify-content: flex-end;
     align-items: center;
-    .pages {
+    &-pages {
       margin-left: 10px;
     }
   }

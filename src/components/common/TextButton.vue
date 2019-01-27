@@ -40,57 +40,57 @@ export default {
 </script>
 
 <style scoped lang="less">
-@import "~@/styles/vars.less";
+  @import "~@/styles/vars.less";
 
-.x-text-button {
-  position: relative;
-  line-height: 1.5;
-  display: inline-block;
-  font-weight: 400;
-  text-align: center;
-  touch-action: manipulation;
-  background-color: transparent;
-  background-image: none;
-  white-space: nowrap;
-  padding: 0;
-  font-size: 14px;
-  height: 32px;
-  transition: all 0.3s cubic-bezier(0.645, 0.045, 0.355, 1);
-  color: @primary-color;
-  cursor: pointer;
-  border: none;
-  outline: none;
-
-  &:not([disabled]):hover {
-    color: @primary-5;
-  }
-
-  &:not([disabled]):active {
-    color: @primary-7;
-    transition: none;
-  }
-
-  &.danger {
-    color: @error-color;
+  .x-text-button {
+    position: relative;
+    line-height: 1.5;
+    display: inline-block;
+    font-weight: 400;
+    text-align: center;
+    touch-action: manipulation;
+    background-color: transparent;
+    background-image: none;
+    white-space: nowrap;
+    padding: 0;
+    font-size: 14px;
+    height: 32px;
+    transition: all 0.3s cubic-bezier(0.645, 0.045, 0.355, 1);
+    color: @primary-color;
+    cursor: pointer;
+    border: none;
+    outline: none;
 
     &:not([disabled]):hover {
-      color: @error-color-hover;
+      color: @primary-5;
     }
 
     &:not([disabled]):active {
-      color: @error-color-active;
+      color: @primary-7;
       transition: none;
     }
-  }
 
-  &.disabled,
-  &[disabled] {
-    color: @disabled-color;
-    cursor: not-allowed;
+    &.danger {
+      color: @error-color;
 
-    > * {
-      pointer-events: none;
+      &:not([disabled]):hover {
+        color: @error-color-hover;
+      }
+
+      &:not([disabled]):active {
+        color: @error-color-active;
+        transition: none;
+      }
+    }
+
+    &.disabled,
+    &[disabled] {
+      color: @disabled-color;
+      cursor: not-allowed;
+
+      > * {
+        pointer-events: none;
+      }
     }
   }
-}
 </style>

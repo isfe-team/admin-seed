@@ -1,17 +1,17 @@
 <template>
-  <div class="wrapper">
+  <div class="router-wrapper">
     <router-view />
   </div>
 </template>
 
 <script>
 export default {
-  name: 'CommonWrapper'
+  name: 'SimpleRouterWrapper'
 }
 </script>
 
 <style scoped lang="less">
-  .wrapper {
+  .router-wrapper {
     width: 100%;
     height: 100%;
   }

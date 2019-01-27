@@ -23,10 +23,10 @@
 -->
 
 <template>
-  <div class="pq-table-wrapper">
+  <div class="pq-table">
     <slot name="query"></slot>
     <ATable
-      class="pq-table"
+      class="pq-table-core"
       :class="{ 'table-layout-fixed': layoutFixed, 'table-single-line-mode': singleLineMode, 'stick-header': stickHeader }"
       :data-source="listData"
       :columns="columns"
@@ -60,7 +60,7 @@
             @click="emitOperation(operation, record)">
             {{ operation.label }}
           </TextButton>
-         <!--  <AButton
+         <!-- <AButton
             type="primary"
             size="small"
             v-for="(operation, index) in noCollapsedOperations"
@@ -293,13 +293,13 @@ export default {
 <style scoped lang="less">
   @import '~@/styles/vars.less';
 
-  .pq-table-wrapper {
+  .pq-table {
     width: 100%;
     height: 100%;
     display: flex;
     flex-direction: column;
 
-    .pq-table {
+    &-core {
       flex: 1 1 auto;
       /* 最简单的办法，不然子级高度 100% 失效 */
       height: 100%;
@@ -336,20 +336,22 @@ export default {
         overflow: hidden;
         text-overflow: ellipsis;
       }
-
-      .pq-table-tooltip {
-        // display: inline-block; 用了的话 stickHeader 且子表格会有问题
-        // 不然会出乎你的意料，会跑到很后面去，如果很宽的话
-        max-width: 100%;
-        overflow: hidden;
-        text-overflow: ellipsis;
-        white-space: nowrap;
-        vertical-align: middle;
-      }
     }
-    /deep/ .ant-table-row-expand-icon + .pq-table-tooltip {
+
+    &-tooltip {
+      // display: inline-block; 用了的话 stickHeader 且子表格会有问题
+      // 不然会出乎你的意料，会跑到很后面去，如果很宽的话
+      max-width: 100%;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+      vertical-align: middle;
+    }
+
+    /deep/ .ant-table-row-expand-icon + &-tooltip {
       vertical-align: bottom;
     }
+
     .pq-pagination {
       flex: 0 0 @pagination-height;
       padding: 0 @padding-xs;

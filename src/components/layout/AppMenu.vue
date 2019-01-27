@@ -120,7 +120,7 @@ export default {
 </script>
 
 <style scoped>
-  .menu {
+  .app-menu {
     width: 100%;
     height: 100%;
   }

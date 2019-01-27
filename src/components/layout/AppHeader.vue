@@ -1,3 +1,7 @@
+<!--
+ - header content of app | bqliu
+ -->
+
 <template>
   <div class="app-header">
     <div>
@@ -12,17 +16,12 @@
 </template>
 
 <script>
-import { mapState } from 'vuex'
-
 export default {
   name: 'AppHeader',
   data () {
     return { }
   },
-  props: [ 'collapsed' ],
-  computed: {
-    ...mapState(['userInfo'])
-  },
+  props: [ 'collapsed', 'userInfo' ],
   methods: {
     collapse () {
       this.$emit('toggle-collapse-menu')
@@ -52,13 +51,13 @@ export default {
     height: 100%;
     padding: 0 20px;
 
-    .@{component-prefix}-icon {
+    &-icon {
       text-align: center;
       font-size: 20px;
       cursor: pointer;
     }
 
-    .@{component-prefix}-user-info {
+    &-user-info {
       font-size: 16px;
       margin-right: 10px;
     }

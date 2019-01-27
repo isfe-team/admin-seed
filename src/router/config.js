@@ -1,4 +1,4 @@
-import CommonWrapper from '@/components/common/CommonWrapper'
+import SimpleRouterWrapper from '@/components/common/SimpleRouterWrapper'
 import NotFound from '@/components/abnormal_pages/NotFound'
 import NoAuth from '@/components/abnormal_pages/NoAuth'
 import ServerError from '@/components/abnormal_pages/ServerError'
@@ -14,7 +14,7 @@ export default {
     {
       path: '/function-pages',
       name: '',
-      component: CommonWrapper,
+      component: SimpleRouterWrapper,
       meta: { label: '功能页' },
       children: [
         {
@@ -42,7 +42,7 @@ export default {
         {
           path: 'eggsplant',
           name: 'function-pages::eggsplant',
-          component: CommonWrapper,
+          component: SimpleRouterWrapper,
           meta: { label: '功能3' },
           children: [
             {
@@ -68,7 +68,7 @@ export default {
     {
       path: '/abnormal-pages',
       name: '',
-      component: CommonWrapper,
+      component: SimpleRouterWrapper,
       meta: { label: '异常页' },
       children: [
         {

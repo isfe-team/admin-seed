@@ -17,7 +17,7 @@
 </template>
 
 <script>
-import AppLayout from '@/components/common/AppLayout'
+import AppLayout from '@/components/layout/AppLayout'
 import zhCN from 'ant-design-vue/lib/locale-provider/zh_CN'
 import { mapActions } from 'vuex'
 import { getUserInfo } from '@/apis/services/user'

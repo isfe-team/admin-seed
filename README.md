@@ -138,8 +138,8 @@ The major bundle is the 3rd-party lib - `ant-design-vue`, you can see [this issu
 
 ### 0.5.0
 
-- [ ] 优化内部所有内置组件
-- [ ] 区分容器和展示组件
+- [x] 优化内部所有内置组件
+- [x] 区分容器和展示组件
 
 ### 1.0.0
 
