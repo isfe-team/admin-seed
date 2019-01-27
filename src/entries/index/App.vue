@@ -1,18 +1,18 @@
 <template>
   <ALocaleProvider :locale="zhCN">
     <!-- 加全局loading状态，暂时无用，因为这个遮不住所有的 -->
-    <ASpin id="spin" :spinning="spinning">
-      <AppLayout id="app" v-if="inited">
-        <div class="app-content-wrapper">
-          <ABreadcrumb class="app-breadcrumb">
-            <template v-for="(route, index) in matchedRouteFragments">
-              <ABreadcrumbItem :key="index">{{route.meta.label}}</ABreadcrumbItem>
-            </template>
-          </ABreadcrumb>
+    <AppLayout id="app" v-if="inited">
+      <div class="app-content-wrapper">
+        <ABreadcrumb class="app-breadcrumb">
+          <template v-for="(route, index) in matchedRouteFragments">
+            <ABreadcrumbItem :key="index">{{route.meta.label}}</ABreadcrumbItem>
+          </template>
+        </ABreadcrumb>
+        <ASpin id="spin" :spinning="spinning" tip="Loading...">
           <router-view class="app-page" />
-        </div>
-      </AppLayout>
-    </ASpin>
+        </ASpin>
+      </div>
+    </AppLayout>
   </ALocaleProvider>
 </template>
 

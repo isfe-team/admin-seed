@@ -23,7 +23,13 @@ export const getErrorMessage = (error, defaultMessage = '') => {
  * @param {{message: string, [key: string]: any} error
  * @param {string} defaultMessage, default `''`
  */
-export const showErrorTip = (error, defaultMessage) => message.error(getErrorMessage(error, defaultMessage))
+export const showErrorTip = (error, defaultMessage) => {
+  // 请求取消时无需提示
+  if (error && error.constructor.prototype.__CANCEL__) {
+    return
+  }
+  message.error(getErrorMessage(error, defaultMessage))
+}
 
 /**
  * 简单的成功提示，基于 `meesage.success`

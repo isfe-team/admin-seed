@@ -4,7 +4,7 @@
     <PQTable
       ref="table"
       class="resource-management-table"
-      :load-data-api="getTableInfo"
+      :load-data-api="getRoleTable"
       :operations="operations"
       :transform-list-data="transformListData"
       :get-data-total-count="getDataTotalCount"
@@ -19,6 +19,7 @@
 <script>
 import clone from 'lodash/clone'
 import PQTable from '@/components/common/PQTable'
+import { getRoleTable } from '@/apis/services/table'
 
 const defaultInfo = {
   message: 1,
@@ -37,6 +38,7 @@ export default {
     return {
       query: { },
       resultData: defaultInfo,
+      getRoleTable,
       operations: [
         { type: 'edit', label: '编辑' },
         { type: 'delete', label: '删除' }
@@ -52,9 +54,9 @@ export default {
     transformListData (xs) {
       return xs.result.data
     },
-    getTableInfo (pageNo, pageSize) {
-      return Promise.resolve(clone(this.resultData))
-    },
+    // getTableInfo (pageNo, pageSize) {
+    //   return Promise.resolve(clone(this.resultData))
+    // },
     changeTable () {
       if (this.resultData.message === 1) {
         this.resultData = {

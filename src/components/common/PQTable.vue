@@ -110,7 +110,7 @@ import cloneDeep from 'lodash/cloneDeep'
 import identity from 'lodash/identity'
 import Pagination from '@/components/common/Pagination'
 import TextButton from '@/components/common/TextButton'
-import { showErrorTip, removeHMS } from '@/utils/helpers'
+import { showSuccessTip, showErrorTip, removeHMS } from '@/utils/helpers'
 
 /* constants，默认的页面大小 */
 const DEFAULT_PAGE_SIZES = [ 10, 20, 50, 100 ]
@@ -253,10 +253,12 @@ export default {
           }
           const listData = this.transformListData(data)
           this.listData = listData
+          showSuccessTip('获取列表数据成功')
           this.$emit('loaded-data', { listData })
         }, (error) => {
           this.listData = [ ]
           this.resetPagination()
+          console.log(error)
           showErrorTip(error, '查询列表数据失败')
         })
     },

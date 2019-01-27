@@ -7,8 +7,12 @@
 import axios from 'axios'
 import findIndex from 'lodash/findIndex'
 import cloneDeep from 'lodash/cloneDeep'
-import { inArray, generateUID, fullScreenLoading, removeFullScreenLoading } from '@/utils/helpers'
+import { inArray, generateUID, removeFullScreenLoading } from '@/utils/helpers'
 import apiConfig from './config'
+
+export let axiosArr = [ ]
+
+const notClearAxios = [ 'service' ]
 
 let fullScreenLoadingTimer = null
 let currentRequestCount = 0 // 当前正在发的请求数目
@@ -31,22 +35,29 @@ function addLoadingReq (req) {
 }
 
 function removeLoadingReq (req) {
-  const index = findIndex(loadingReqs, (x) => x._reqId === req._reqId)
-  loadingReqs.splice(index, 1)
+  if (req) {
+    const index = findIndex(loadingReqs, (x) => x._reqId === req._reqId)
+    loadingReqs.splice(index, 1)
+  }
 }
 
 // 请求前拦截器配置
 axiosInstance.interceptors.request.use(function (config) {
   config._reqId = generateUID('req_')
+  if (notClearAxios.indexOf(config.url.split('?')[0]) !== -1) {
+    config.cancelToken = new axios.CancelToken(cancel => {
+      axiosArr.push(cancel)
+    })
+  }
   addLoadingReq(config)
   currentRequestCount += 1
 
   if (apiConfig.noLoadingUrls.indexOf(config.url) !== -1) {
     return config
   }
-  if (!fullScreenLoadingTimer) {
-    fullScreenLoadingTimer = setTimeout(() => fullScreenLoading(), apiConfig.maxWaitingTime)
-  }
+  // if (!fullScreenLoadingTimer) {
+  //   fullScreenLoadingTimer = setTimeout(() => fullScreenLoading(), apiConfig.maxWaitingTime)
+  // }
   return config
 }, function (error) {
   finalize()
@@ -75,7 +86,9 @@ axiosInstance.interceptors.response.use(function (response) {
 }, function (error) {
   removeLoadingReq(error.config)
   finalize()
-
+  if (error.constructor.prototype.__CANCEL__) {
+    return Promise.reject(error)
+  }
   const e = apiConfig.errorMap.request[error.request.status] ||
             apiConfig.errorMap.response[error.response.status] ||
             apiConfig.errorMap.common
