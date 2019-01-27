@@ -1,4 +1,4 @@
-# seed-project
+# Admin Seed
 
 Admin seed project by @bqliu & @hxli.
 
@@ -27,7 +27,7 @@ $ npm run commit
 # upgrade versions and tag
 $ npm version <param>
 $ git push origin --tag
-# publish
+# publish to gh-pages [Deprecated]
 git subtree push --prefix dist origin gh-pages
 ```
 

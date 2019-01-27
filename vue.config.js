@@ -17,7 +17,10 @@ module.exports = {
       }
     }
   },
-  baseUrl: '/admin-seed/',
+  // baseUrl: '/admin-seed/',
+  // `baseUrl` deprecated, use `publicPath` instead
+  // @see also https://github.com/vuejs/vue-cli/blob/dev/CHANGELOG.md#features-1
+  publicPath: '/admin-seed/',
   lintOnSave: true,
   pages: {
     app: {

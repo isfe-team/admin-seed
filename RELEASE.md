@@ -1,6 +1,22 @@
 # RELEASE LOG
 
+## 0.5.0
+
+`01/27/2019`
+
+Break Changes:
+- `vue.config.js` 中使用 `publicPath` 代替 `baseUrl`，见[更新日志](https://github.com/vuejs/vue-cli/blob/dev/CHANGELOG.md#features-1)
+
+Feat:
+- 优化内部所有内置组件
+- 区分容器和展示组件，主要是 `AppHeader`
+- 单独拆分 layout 目录，使得 `components/common` 更纯
+
+Chore:
+- 更新所有依赖
+
 ## 0.4.2
+
 `01/25/2019`
 
 Feat:

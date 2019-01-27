@@ -5,6 +5,7 @@ node_js:
 
 before_install: git fetch --depth=1000
 
+# npm i --registry=https://registry.npm.taobao.org
 install:
   - npm i
 
@@ -14,7 +15,8 @@ script:
   - npm run lint
   - npm run test:unit
 
-before_deploy: "echo 'deploying...'"
+before_deploy:
+  - echo "deploying..."
 
 # @see https://docs.travis-ci.com/user/deployment/pages/
 deploy:
@@ -32,4 +34,5 @@ notifications:
     recipients:
       - bqliu@iflytek.com
 
-after_deploy: "echo 'deployed.'"
+after_deploy:
+  - echo "deployed."
