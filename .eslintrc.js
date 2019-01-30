@@ -11,7 +11,7 @@ module.exports = {
     'no-console': process.env.NODE_ENV === 'production' ? 'error' : 'off',
     'vue/no-parsing-error': 'off',
     'vue/no-use-v-if-with-v-for': 'off',
-    "no-unused-expressions": 'off'
+    'no-unused-expressions': 'off'
   },
   parserOptions: {
     parser: 'babel-eslint'
