@@ -8,65 +8,62 @@ describe('#getErrorMessage', () => {
     })
   })
 
-  describe('firstParam is notExist', () => {
-    const firstParam = null
-    const secondParam = '111'
-    it('should return secondParam', () => {
-      expect(getErrorMessage(firstParam, secondParam)).to.equal(secondParam)
+  describe('error is not exist', () => {
+    const error = null
+    const defaultValue = '0'
+    it('should return defaut value', () => {
+      expect(getErrorMessage(error, defaultValue)).to.equal(defaultValue)
     })
   })
 
-  describe('firstParam is object and has a key is message', () => {
-    const param = { message: '111', value: '222' }
-    const defaultParam = 'message'
-    it('should return a string', () => {
-      expect(getErrorMessage(param, defaultParam)).to.be.a('string')
-    })
-
-    it('should return messagekey\'s value', () => {
-      expect(getErrorMessage(param, defaultParam)).to.equal(param.message)
+  describe('error is object and has message', () => {
+    const error = { message: '111' }
+    const defaultValue = 'default'
+    const MESSAGE = 'message'
+    const newError = new Error(MESSAGE)
+    it('should return message', () => {
+      expect(getErrorMessage(error, defaultValue)).to.equal(error.message)
+      expect(getErrorMessage(newError, defaultValue)).to.equal(MESSAGE)
     })
   })
 })
 
 describe('#generateUID', () => {
+  const testResult = generateUID()
   describe('no input', () => {
     it('should return string and not empty', () => {
-      expect(generateUID()).to.be.a('string')
-      expect(generateUID()).to.have.lengthOf.at.least(1)
+      expect(testResult).to.be.a('string')
+      expect(testResult).to.have.lengthOf.at.least(1)
     })
 
     it('shouldn\'t return the same value with multiple calls', () => {
-      const orginalValue = generateUID()
-      expect(generateUID()).to.not.equal(orginalValue)
+      const lastUID = generateUID()
+      let testFlag = false
+      for (let i = 0; i < 1000; i++) {
+        if (generateUID() === lastUID) {
+          testFlag = false
+        }
+        testFlag = true
+      }
+      expect(testFlag).to.be.true
     })
   })
 })
 
 describe('#removeHMS', () => {
-  describe('no input', () => {
-    it('should return undefined', () => {
-      expect(removeHMS()).to.be.a('undefined')
-    })
-  })
-
-  describe('typeof param is not string', () => {
+  describe('input is not string', () => {
     const param = [111, undefined, null, new Date(), new RegExp(), [111, 222], { a: 1 }]
     it('should return itself', () => {
       const testResult = param.every((x) => removeHMS(x) === x)
-      expect(testResult).to.equal(true)
+      expect(testResult).to.be.true
     })
   })
 
-  describe('typeof param is string', () => {
-    const param = '111 222 333'
-    it('should return string', () => {
-      expect(removeHMS(param)).to.be.a('string')
-    })
-
+  describe('input is string', () => {
+    const timeString = '111 222 333'
     it('should return value is the first of split space ', () => {
-      expect(removeHMS(param)).to.equal(param.split(' ')[0])
-      expect(removeHMS(param)).not.to.include(' ')
+      expect(removeHMS(timeString)).to.be.a('string')
+      expect(removeHMS(timeString)).to.equal(timeString.split(' ')[0])
     })
   })
 })
@@ -89,7 +86,7 @@ describe('#inArray', () => {
     const secondParam = 1
     const threeParam = (xs, y) => xs.every((x) => x % y === 0)
     it('should return boolean', () => {
-      expect(inArray(firstParam, secondParam, (xs, y) => xs.every((x) => x % y === 0))).to.be.a('boolean')
+      expect(inArray(firstParam, secondParam, threeParam)).to.be.a('boolean')
     })
 
     it('should return value equal threeParam\'s result', () => {
