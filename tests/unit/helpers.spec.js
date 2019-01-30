@@ -1,4 +1,5 @@
 import { expect } from 'chai'
+import range from 'lodash/range'
 import { getErrorMessage, inArray, generateUID, removeHMS } from '../../src/utils/helpers'
 
 describe('#getErrorMessage', () => {
@@ -17,13 +18,11 @@ describe('#getErrorMessage', () => {
   })
 
   describe('error is object and has message', () => {
-    const error = { message: '111' }
     const defaultValue = 'default'
     const MESSAGE = 'message'
-    const newError = new Error(MESSAGE)
     it('should return message', () => {
-      expect(getErrorMessage(error, defaultValue)).to.equal(error.message)
-      expect(getErrorMessage(newError, defaultValue)).to.equal(MESSAGE)
+      expect(getErrorMessage({ message: MESSAGE }, defaultValue)).to.equal(MESSAGE)
+      expect(getErrorMessage(new Error(MESSAGE), defaultValue)).to.equal(MESSAGE)
     })
   })
 })
@@ -37,15 +36,12 @@ describe('#generateUID', () => {
     })
 
     it('shouldn\'t return the same value with multiple calls', () => {
-      const lastUID = generateUID()
-      let testFlag = false
-      for (let i = 0; i < 1000; i++) {
-        if (generateUID() === lastUID) {
-          testFlag = false
-        }
-        testFlag = true
-      }
-      expect(testFlag).to.be.true
+      const uids = range(0, 10000).map(() => generateUID())
+      const deduped = [ ...new Set(uids) ]
+
+      const noDuped = uids.length === deduped.length
+
+      expect(noDuped).to.be.true
     })
   })
 })
@@ -62,35 +58,30 @@ describe('#removeHMS', () => {
   describe('input is string', () => {
     const timeString = '111 222 333'
     it('should return value is the first of split space ', () => {
-      expect(removeHMS(timeString)).to.be.a('string')
-      expect(removeHMS(timeString)).to.equal(timeString.split(' ')[0])
+      expect(removeHMS(timeString)).to.equal('111')
     })
   })
 })
 
 describe('#inArray', () => {
-  describe('secondParam is any and belong to array and threeParam is not exist', () => {
-    const firstParam = ['你好', 'jintian', 3]
-    const secondParam = '你好'
+  describe('item is any and belong to array and pred is not exist', () => {
+    const xs = ['你好', 'jintian', 3]
+    const x = '你好'
     it('firstParam is include secondParam', () => {
-      expect(firstParam).to.include(secondParam)
+      expect(xs).to.include(x)
     })
 
     it('should return true', () => {
-      expect(inArray(firstParam, secondParam)).to.equal(true)
+      expect(inArray(xs, x)).to.equal(true)
     })
   })
 
-  describe('threeParam is exist', () => {
-    const firstParam = [2, 4, 6]
-    const secondParam = 1
-    const threeParam = (xs, y) => xs.every((x) => x % y === 0)
-    it('should return boolean', () => {
-      expect(inArray(firstParam, secondParam, threeParam)).to.be.a('boolean')
-    })
-
-    it('should return value equal threeParam\'s result', () => {
-      expect(inArray(firstParam, secondParam, threeParam)).to.equal(threeParam(firstParam, secondParam))
+  describe('pred is exist', () => {
+    const xs = [ { uid: 1 }, { uid: 2 }, { uid: 4 } ]
+    const x = { uid: 1 }
+    const pred = (xs, y) => xs.some((x) => x.uid === y.uid)
+    it('should return true if exist', () => {
+      expect(inArray(xs, x, pred)).to.be.true
     })
   })
 })
