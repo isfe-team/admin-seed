@@ -145,7 +145,7 @@ The major bundle is the 3rd-party lib - `ant-design-vue`, you can see [this issu
 
 ### 1.0.0
 
-- [ ] 增加基础库测试
+- [x] 增加基础库测试
 - [ ] 内置组件使用类组件
 - [ ] `admin-seed-cli` 增加配置，使用不同的 seed project 源，进一步支持大家 fork 这个项目，并使用自己的版本
 
