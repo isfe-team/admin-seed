@@ -1,6 +1,6 @@
 import '@/polyfills'
 import Vue from 'vue'
-import Login from './Login.vue'
+import Login from './App'
 import '@/components/registerAntDesignVueComponents'
 import './login.less'
 

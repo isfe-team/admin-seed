@@ -35,6 +35,8 @@ git subtree push --prefix dist origin gh-pages
 
 See [Configuration Reference](https://cli.vuejs.org/config/).
 
+> For vsc users, if you use decorators in scf files, you need to add a `jsconfig.json` or `tsconfig.json` file, and config `experimentalDecorators`. If you installed vetur, you should turn off `vetur.validation.script`.
+
 ## Compatibility
 
 We prefer to use `src/polyfills.js` to centrally manage polyfills. You can use `src/polyfills.js` to import polyfills as you need, you can uncomment or add what you want. For more informations, you can see `src/polyfills.js`.
@@ -144,17 +146,14 @@ The major bundle is the 3rd-party lib - `ant-design-vue`, you can see [this issu
 ### 1.0.0
 
 - [ ] 增加基础库测试
+- [ ] 内置组件使用类组件
 - [ ] `admin-seed-cli` 增加配置，使用不同的 seed project 源，进一步支持大家 fork 这个项目，并使用自己的版本
 
-### 1.1.0
-
-- [ ] 集成 rx
-- [ ] 考虑非 global loading
-
-### 2.0
+### 2.0.0
 
 - [ ] 迁移到 `ts`
-- [ ] 整体使用类组件
+- [ ] 集成 `rx`
+- [ ] 考虑按需遮罩
 - [ ] `admin-seed-cli` 增加配置，使用 `ts` or `js` 版本
 - [ ] 开发数据层，优化中心化存储 + `Resource` 资源利用，不使用 `vuex`，集成 `cache`
 

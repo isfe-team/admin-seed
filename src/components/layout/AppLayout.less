@@ -1,0 +1,49 @@
+
+@import "~@/styles/vars.less";
+
+.app-layout {
+  height: 100%;
+
+  &-sider {
+    box-shadow: 2px 0 6px #777;
+  }
+
+  &-logo-wrapper {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: @layout-header-height;
+    line-height: @layout-header-height;
+    white-space: nowrap;
+    background-color: lighten(@layout-sider-background, 5%);
+
+    img {
+      width: 32px;
+      height: 32px;
+    }
+
+    h1 {
+      margin-left: 12px;
+      margin-bottom: 0;
+      font-size: 20px;
+      color: #FFF;
+    }
+  }
+
+  &-menu {
+    max-height: calc(~"100% - @{layout-header-height}");
+    overflow: auto;
+  }
+
+  &-header {
+    padding: 0;
+    background: #FFF;
+  }
+
+  &-content {
+    height: 100%;
+    // make it
+    overflow: hidden;
+    // or... min-height: 0;
+  }
+}
