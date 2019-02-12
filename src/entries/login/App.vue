@@ -37,7 +37,7 @@ const LoginForm = {
   },
   mounted () {
     // To disabled submit button at the beginning.
-    this.form.validateFields((err) => { /* Ignore */ })
+    this.form.validateFields(() => { /* Ignore */ })
   },
   render () {
     const { getFieldDecorator, getFieldsError, getFieldError, isFieldTouched } = this.form
