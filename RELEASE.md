@@ -1,10 +1,30 @@
 # RELEASE LOG
 
+## 1.0.0-rc1
+
+`02/12/2019`
+
+Fix:
+- 登录页面校验异常状态问题
+
+## 1.0.0-rc0
+
+`02/12/2019`
+
+Breaking Changes:
+- 使用 class component 重构几乎所有组件，并推荐采用该模式，原因：1、面向未来，2、更好的脚本体验
+
+Feat:
+- 增加基础 `utils/helpers` 的自动化测试
+
+Fix:
+- 登录页面之前 `v-decorators` 使用错误
+
 ## 0.5.0
 
 `01/27/2019`
 
-Break Changes:
+Breaking Changes:
 - `vue.config.js` 中使用 `publicPath` 代替 `baseUrl`，见[更新日志](https://github.com/vuejs/vue-cli/blob/dev/CHANGELOG.md#features-1)
 
 Feat:

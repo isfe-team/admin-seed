@@ -1,6 +1,7 @@
 <script>
 /*!
  * 使用 Form.create 来做的，但是不支持类组件，很尴尬
+ * @see https://ant.design/components/form-cn/#components-form-demo-normal-login
  */
 
 import { Form, Input, Button, Icon } from 'ant-design-vue'
@@ -22,7 +23,7 @@ const LoginForm = {
     login (evt) {
       evt.preventDefault()
       new Promise((resolve, reject) => {
-        this.loginForm.validateFields((err, formData) => {
+        this.form.validateFields((err, formData) => {
           if (!err) {
             return resolve(mockLogin())
           }
@@ -34,8 +35,11 @@ const LoginForm = {
       )
     }
   },
+  mounted () {
+    // To disabled submit button at the beginning.
+    this.form.validateFields((err) => { /* Ignore */ })
+  },
   render () {
-    window.x = this
     const { getFieldDecorator, getFieldsError, getFieldError, isFieldTouched } = this.form
 
     const userNameError = isFieldTouched('userName') && getFieldError('userName')
@@ -50,25 +54,27 @@ const LoginForm = {
         <Form onSubmit={this.login} class="login-form">
           <Form.Item
             validateStatus={userNameError ? 'error' : ''}
+            help={userNameError || ''}
             labelCol={{ span: 5 }}
             wrapperCol={{ span: 19 }}
             label="用户名："
           >
             {
               getFieldDecorator('userName', { rules: [{ required: true, message: '请输入用户名' }] })(
-                <Input placeholder="admin"><Icon slot="prefix" type="user" /></Input>
+                <Input placeholder="请输入用户名"><Icon slot="prefix" type="user" /></Input>
               )
             }
           </Form.Item>
           <Form.Item
             validateStatus={passwordError ? 'error' : ''}
+            help={passwordError || ''}
             labelCol={{ span: 5 }}
             wrapperCol={{ span: 19 }}
             label="密码："
           >
             {
               getFieldDecorator('password', { rules: [{ required: true, message: '请输入密码' }] })(
-                <Input type="password" autocomplete placeholder="88888888">
+                <Input type="password" autocomplete placeholder="请输入密码">
                   <Icon slot="prefix" type="lock" />
                 </Input>
               )
