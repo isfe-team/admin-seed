@@ -2,7 +2,7 @@ import Vue from 'vue'
 import { Component } from 'vue-property-decorator'
 
 const Core = {
-  render () { return <div>内嵌组件</div> }
+  render () { return <div>内嵌组件（Nested Component）</div> }
 }
 
 @Component()

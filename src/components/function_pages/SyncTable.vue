@@ -4,15 +4,15 @@
     <PQTable
       ref="table"
       class="resource-management-table"
-      :load-data-api="getTableInfo"
+      rowKey="key"
+      :loadDataApi="getTableInfo"
       :operations="operations"
-      :transform-list-data="transformListData"
-      :get-data-total-count="getDataTotalCount"
-      :initial-pagination="{ currentPage: +$route.query.p || 1 }"
+      :transformListData="transformListData"
+      :getDataTotalCount="getDataTotalCount"
+      :initialPagination="{ currentPage: +$route.query.p || 1 }"
       :columns="columns"
       :query="query"
-      row-key="key">
-    </PQTable>
+    />
   </div>
 </template>
 
@@ -20,7 +20,7 @@
 import clone from 'lodash/clone'
 import PQTable from '@/components/common/PQTable'
 
-const defaultInfo = {
+const MOCK_LIST_DATA = {
   message: 1,
   result: {
     totalCount: 10,
@@ -31,12 +31,12 @@ const defaultInfo = {
   }
 }
 export default {
-  name: 'Broccoli',
+  name: 'SyncTable',
   components: { PQTable: PQTable },
   data () {
     return {
       query: { },
-      resultData: defaultInfo,
+      resultData: MOCK_LIST_DATA,
       operations: [
         { type: 'edit', label: '编辑' },
         { type: 'delete', label: '删除' }
@@ -71,7 +71,7 @@ export default {
           }
         }
       } else {
-        this.resultData = clone(defaultInfo)
+        this.resultData = clone(MOCK_LIST_DATA)
       }
       this.$refs.table.loadData()
     },

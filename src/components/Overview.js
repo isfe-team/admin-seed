@@ -23,7 +23,6 @@ class Overview extends Vue {
         </Card>
         <Card title="满足的大致需求">
           <p>从登录到具体业务开发到退出</p>
-          <p>菜单暂时只适用于一级、二级、三级</p>
           <p>基于路由进行页面跳转</p>
         </Card>
       </div>

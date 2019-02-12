@@ -1,0 +1,90 @@
+@import "~@/styles/vars.less";
+
+.pq-table {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+
+    .pq-table-core {
+        flex: 1 1 auto;
+        /* 最简单的办法，不然子级高度 100% 失效 */
+        height: 100%;
+        overflow: auto;
+        border-top: 1px solid @border-color-base;
+
+        &.table-layout-fixed /deep/ table {
+            table-layout: fixed;
+        }
+
+        // 不然 不能换行
+        &.stick-header /deep/ table {
+            width: 100%;
+        }
+
+        // 给高度，不然 scroll: y 设置成相对的高度 不行
+        &.stick-header {
+            /deep/ .ant-spin-nested-loading,
+            /deep/ .ant-spin-container,
+            /deep/ .ant-table,
+            /deep/ .ant-table-content,
+            /deep/ .ant-table-scroll {
+                height: 100%;
+            }
+        }
+
+        /deep/ .ant-table-body > table > .ant-table-tbody > tr td,
+        /deep/ .ant-table-body > table > .ant-table-tbody > tr th {
+            padding: 10px 8px;
+        }
+
+        /deep/ .ant-table-body > table > .ant-table-tbody > tr td {
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+
+        .pq-table-tooltip {
+            // display: inline-block; 用了的话 stickHeader 且子表格会有问题
+            // 不然会出乎你的意料，会跑到很后面去，如果很宽的话
+            max-width: 100%;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+            vertical-align: middle;
+        }
+    }
+
+    /deep/ .ant-table-row-expand-icon + .pq-table-tooltip {
+        vertical-align: bottom;
+    }
+
+    .pq-table-pagination {
+        flex: 0 0 @pagination-height;
+        padding: 0 @padding-xs;
+    }
+
+    .pq-table-button-wrapper {
+        // remove extra space
+        font-size: 0;
+    }
+
+    .pq-table-operation-item {
+        margin-right: 10px;
+        font-size: 14px;
+
+        &:last-child {
+        margin-right: 0
+        }
+    }
+
+    .pq-table-operations-more {
+        color: @primary-color;
+    }
+}
+
+@media screen and (max-width: 1400px) {
+    .pq-table /deep/ table {
+        font-size: 12px;
+    }
+}

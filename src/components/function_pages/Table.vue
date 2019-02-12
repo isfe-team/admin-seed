@@ -1,22 +1,24 @@
+<!-- 仍然可以采用 jsx 模式 -->
 <template>
   <PQTable
     ref="table"
     class="resource-management-table"
-    :load-data-api="getTableInfo"
+    rowKey="key"
+    :loadDataApi="getTableInfo"
     :operations="operations"
-    :transform-list-data="transformListData"
-    :initial-pagination="{ currentPage: +$route.query.p || 1 }"
+    :transformListData="transformListData"
+    :initialPagination="{ currentPage: +$route.query.p || 1 }"
     :columns="columns"
     :query="query"
-    row-key="key">
-  </PQTable>
+    @operation="handleOperation"
+  />
 </template>
 
 <script>
 import { getTableInfo } from '@/apis/services/table'
 import PQTable from '@/components/common/PQTable'
 export default {
-  name: 'Broccoli',
+  name: 'Table',
   components: { PQTable: PQTable },
   data () {
     return {
@@ -27,7 +29,7 @@ export default {
         { type: 'delete', label: '删除' }
       ],
       columns: [
-        { title: '规则编号', dataIndex: 'no' },
+        { title: '规则编号', dataIndex: 'no', scopedSlots: { customRender: 'ellipsis-with-tooltip' } },
         { title: '描述', dataIndex: 'description' },
         { title: '服务调用次数', dataIndex: 'callNo', needTotal: true, customRender: (text) => text + ' 次' },
         { title: '状态', dataIndex: 'status', needTotal: true },
@@ -39,6 +41,9 @@ export default {
   methods: {
     transformListData (xs) {
       return xs.result.data
+    },
+    handleOperation ({ type }) {
+      this.$message.info(`type: ${type}`)
     }
   }
 }

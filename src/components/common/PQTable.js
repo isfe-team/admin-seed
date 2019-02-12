@@ -2,6 +2,7 @@
  * 一个基于 ATable 通用的包含表格以及可选包含分页的表格组件
  * 可以基于该组件做各种定制（比如 XList），也可单独使用
  * @see http://tangjinzhou.gitee.io/ant-design-vue/components/table-cn
+ * @see https://stackoverflow.com/questions/43702591/how-to-use-template-scope-in-vue-jsx
  *
  * @example
  * <PQTable :query="query" @load-data-api="api" :columns="columns"><Query /></PQTable>
@@ -18,10 +19,7 @@
  *
  * @todo
  * - 增加 TextButton 和 AButton 控制
- * - 去除 eslint-disable v-if/v-for、no-parsing-error 等 [ref](https://github.com/vuejs/eslint-plugin-vue/issues/665#issuecomment-447738204)
  */
-
-/* eslint-disable */
 
 import Vue from 'vue'
 import { Component, Prop, Watch, Emit } from 'vue-property-decorator'
@@ -29,11 +27,12 @@ import assign from 'lodash/assign'
 import clone from 'lodash/clone'
 import cloneDeep from 'lodash/cloneDeep'
 import identity from 'lodash/identity'
+import isFunction from 'lodash/isFunction'
 import { Table, Tooltip } from 'ant-design-vue'
 import Pagination from '@/components/common/Pagination'
 import TextButton from '@/components/common/TextButton'
 import { showErrorTip, removeHMS } from '@/utils/helpers'
-import { isFunction } from 'util';
+import './PQTable.less'
 
 /* constants，默认的页面大小 */
 const DEFAULT_PAGE_SIZES = [ '10', '20', '50', '100' ]
@@ -108,7 +107,7 @@ class PQTable extends Vue {
     return this.collapsedOperations.length > 0
   }
 
-  noCollapsedOperations () {
+  get noCollapsedOperations () {
     return this.operations.filter((x) => !x.collapsed)
   }
 
@@ -223,18 +222,51 @@ class PQTable extends Vue {
     }
     let TablePagination = null
 
-    const VNodeRenderer = (vnode) => vnode
-    const CommonTextRendererGenerator = (component, titleHandler, textHandler) => (text, record, index) => <component title={titleHandler(text)}>{textHandler(text)}</component>
-    const TimeWithoutHmsRenderer = CommonTextRendererGenerator(<span></span>, identity, identity)
-    // (text) => <span title={text}>{removeHMS(text)}</span>
-    const TimeWithoutHmsTooltipRenderer = CommonTextRendererGenerator(Tooltip, identity, removeHMS)
-    const EllipsisWithTitleRenderer = TimeWithoutHmsRenderer
-    const EllipsisWithTooltipRenderer = CommonTextRendererGenerator(Tooltip, identity, identity)
+    function toBoolean (fnOrBoolean, ...args) {
+      if (isFunction(fnOrBoolean)) {
+        return !!fnOrBoolean.apply(this, args)
+      }
+      return !!fnOrBoolean
+    }
+
     const OperationsRenderer = (text, record, index) => {
-      const noCollapsedOperations = this.noCollapsedOperations.filter((x) => isFunction(x.exist) ? !!x.exist(record) : true)
-      const Buttons = noCollapsedOperations.map((operation) => {
-        return
+      const noCollapsedOperations = this.noCollapsedOperations.filter((x) => isFunction(x.exist) ? toBoolean(x.exist, record, index) : true)
+      const Buttons = noCollapsedOperations.map((operation, index) => {
+        const disabled = toBoolean(operation.disabled)
+        const danger = toBoolean(operation.danger)
+        return (
+          <TextButton
+            key={index}
+            class='pq-table-operation-item'
+            disabled={disabled}
+            danger={danger}
+            onClick={this.emitOperation.bind(this, operation, record)}
+          >{operation.label}</TextButton>
+        )
       })
+
+      if (!this.hasCollapsedOperation || !this.showCollapsedOperation) {
+        return Buttons
+      }
+
+      const Overlay = this.collapsedOperations.filter((operation) => toBoolean(operation.exist))
+        .map((operation) => {
+          const disabled = toBoolean(operation.disabled)
+          return (
+            <Menu.MenuItem key={index} disabled={disabled} onClick={this.emitOperation.bind(this, operation, record)}>
+              {operation.label}
+            </Menu.MenuItem>
+          )
+        })
+
+      const Dropdown = (
+        <Dropdown class='pq-table-operation-item pq-table-operations-more pointer' trigger={['click']}>
+          <span>更多&nbsp;<AIcon type="down" /></span>
+          <Menu slot='overlay'>{Overlay}</Menu>
+        </Dropdown>
+      )
+
+      return [Buttons, Dropdown]
     }
 
     if (this.withPagination && this.loadedInitialData) {
@@ -246,78 +278,40 @@ class PQTable extends Vue {
           total={this.pagination.totalRows}
           pageSize={this.pagination.pageSize}
           pageSizes={this.pagination.pageSizes}
-          class="pq-pagination"
+          class="pq-table-pagination"
         />
       )
     }
+
+    const scopedSlots = {
+      // default is useless
+      default: () => null,
+      component: (text, record, index) => null,
+      'time-without-hms': (text) => <Tooltip placement='topLeft' class='pq-table-tooltip' title={text}>{removeHMS(text)}</Tooltip>,
+      'ellipsis-with-title': (text) => <span title={text}>{text}</span>,
+      'ellipsis-with-tooltip': (text) => <Tooltip placement='topLeft' class='pq-table-tooltip' title={text}>{text}</Tooltip>,
+      'operation': (text, record, index) => <OperationsRenderer text={text} record={record} index={index} />
+    }
     return (
-      <div>1</div>
-      // <div class="pq-table">
-      //   {this.$slots.query}
-      //   <ATable
-      //     class={tableClass}
-      //     dataSource={this.listData}
-      //     columns={this.columns}
-      //     pagination={false}
-      //     rowKey={this.rowKey}
-      //     size="middle"
-      //     onChange={this.handelChangeTable}
-      //     scroll={stickHeader ? { y: 'calc(100% - 46px)' } : false}
-      //     {...{props: this.$attrs}}
-      //   >
-      //     <template slot-scope="text, record, index" slot="component"></template>
-      //     <template slot-scope="text" slot="time-without-hms">
-      //       <Tooltip placement="topLeft" class="pq-table-tooltip" title={text}>{removeHMS(text)}</Tooltip>
-      //     </template>
-      //     <template slot-scope="text" slot="ellipsis-with-title">
-      //       <span :title="text">{{ text }}</span>
-      //     </template>
-      //     <template slot-scope="text" slot="ellipsis-with-tooltip">
-      //       <ATooltip placement="topLeft" class="pq-table-tooltip" :title="text">{{ text }}</ATooltip>
-      //     </template>
-      //     <template slot-scope="text, record" slot="operation">
-      //       <div class="button-wrapper">
-      //         <TextButton
-      //           v-for="(operation, index) in noCollapsedOperations"
-      //           v-if="typeof operation.exist === 'function' ? !!operation.exist(record) : true"
-      //           :disabled="typeof operation.disabled === 'function' ? !!operation.disabled(record) : !!operation.disabled"
-      //           :danger="typeof operation.danger === 'function' ? !!operation.danger(record) : !!operation.danger"
-      //           :key="index"
-      //           class="pq-operation-item"
-      //           @click="emitOperation(operation, record)">
-      //           {{ operation.label }}
-      //         </TextButton>
-      //       <!-- <AButton
-      //           type="primary"
-      //           size="small"
-      //           v-for="(operation, index) in noCollapsedOperations"
-      //           v-if="typeof operation.exist === 'function' ? !!operation.exist(record) : true"
-      //           :disabled="typeof operation.disabled === 'function' ? !!operation.disabled(record) : !!operation.disabled"
-      //           :key="index"
-      //           class="pq-operation-item"
-      //           @click="emitOperation(operation, record)">
-      //           {{ operation.label }}
-      //         </AButton> -->
-      //         <ADropdown v-if="hasCollapsedOperation && showCollapsedOperation" class="pq-operation-item pq-operations-more pointer" :trigger="['click']">
-      //           <span>更多&nbsp;<AIcon type="down" /></span>
-      //           <AMenu slot="overlay">
-      //             <!-- 需要使用 @click -->
-      //             <!-- eslint-disable-next-line vue/no-use-v-if-with-v-for -->
-      //             <AMenuItem
-      //               v-for="(operation, index) in collapsedOperations"
-      //               :key="index"
-      //               v-if="typeof operation.exist === 'function' ? !!operation.exist(record) : true"
-      //               :disabled="typeof operation.disabled === 'function' ? !!operation.disabled(record) : !!operation.disabled"
-      //               @click="emitOperation(operation, record)">
-      //               {{ operation.label }}
-      //             </AMenuItem>
-      //           </AMenu>
-      //         </ADropdown>
-      //       </div>
-      //     </template>
-      //   </ATable>
-      //   {TablePagination}
-      // </div>
+      <div class="pq-table">
+        {this.$slots.query}
+        <Table
+          class={tableClass}
+          dataSource={this.listData}
+          columns={this.columns}
+          pagination={false}
+          rowKey={this.rowKey}
+          size="middle"
+          onChange={this.handelChangeTable}
+          scroll={this.stickHeader ? { y: 'calc(100% - 46px)' } : false}
+          {...{ props: this.$attrs }}
+          scopedSlots={scopedSlots}
+        >
+        </Table>
+        {TablePagination}
+      </div>
     )
   }
 }
+
+export default PQTable

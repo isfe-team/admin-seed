@@ -3,8 +3,9 @@
  * 使用 Form.create 来做的，但是不支持类组件，很尴尬
  */
 
-import { getErrorMessage } from '@/utils/helpers'
 import { Form, Input, Button, Icon } from 'ant-design-vue'
+import { getErrorMessage } from '@/utils/helpers'
+import logo from '@/assets/logo.png'
 import './App.less'
 
 /* mock validation */
@@ -43,7 +44,7 @@ const LoginForm = {
     return (
       <div id="login">
         <div class="login-logo-wrapper">
-          <img src="@/assets/logo.png" alt="logo" />
+          <img src={logo} alt="logo" />
           <h1>Admin Seed</h1>
         </div>
         <Form onSubmit={this.login} class="login-form">
