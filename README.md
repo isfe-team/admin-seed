@@ -11,23 +11,22 @@ Use `vue`and `ant-design-vue`, and based on `@vue/cli` to build an admin seed pr
 ## Build Setup
 
 ``` bash
+## install dependencies
 npm install
 ## for dev
 npm run serve
 ## for build/release
 npm run build
-## for test
-npm run test
 ## for lint
 npm run lint
 ## for unit test
 npm run test:unit
-# use this to commit
+## use this to commit
 $ npm run commit
-# upgrade versions and tag
+## upgrade versions and tag
 $ npm version <param>
 $ git push origin --tag
-# publish to gh-pages [Deprecated]
+## publish to gh-pages [Deprecated]
 git subtree push --prefix dist origin gh-pages
 ```
 
@@ -77,34 +76,30 @@ The major bundle is the 3rd-party lib - `ant-design-vue`, you can see [this issu
 
 ```
 - src
-  - store
-  - router
-  - entries
-    - login
-      - login.html
-      - login.js
-      - login.less
-      - Login.vue
-    - index
-      - index.html
-      - index.js
-      - index.less
-      - App.vue
+  - apis
+  - assets
   - components
     - common
-    - trans
-  - assets
-    - fonts
-    - images
+    - layout
+    - other_trans_components
+    - registerAntDesignVueComponents.js
+  - entries
+    - login
+    - index
+  - router
+  - store
   - styles
     - base.less
     - vars.less
-    - ant-design-vue.less
+    - antDesignVue.less
     - icons
     - index.less
   - utils
     - helpers
     - constants
+  - menu.json
+  - polyfills.js
+  - registerServiceWorker.js
   - vendors
 ```
 
@@ -147,7 +142,8 @@ The major bundle is the 3rd-party lib - `ant-design-vue`, you can see [this issu
 
 - [x] 增加基础库测试
 - [x] 内置组件使用类组件
-- [ ] `admin-seed-cli` 增加配置，使用不同的 seed project 源，进一步支持大家 fork 这个项目，并使用自己的版本
+- [x] `admin-seed-cli` 增加配置，使用不同的 seed project 源，进一步支持大家 fork 这个项目，并使用自己的版本
+- [x] 支持导航模式配置（横向、纵向）以及 stickHeader（横向）
 
 ### 2.0.0
 

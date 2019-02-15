@@ -8,15 +8,15 @@ import Vue from 'vue'
 import reverse from 'lodash/reverse'
 import { Component, Prop, Watch } from 'vue-property-decorator'
 import { Menu, Icon } from 'ant-design-vue'
-import menuResponseData from '@/menu.json'
 
 @Component()
 class AppMenu extends Vue {
   openKeys = [ ]
   cachedOpenKeys = [ ]
   selectedKeys = [ ]
-  menus = menuResponseData.data[0].childList
 
+  @Prop({ type: Array, default: [ ] }) menus
+  @Prop({ type: String, default: 'inline' }) mode
   @Prop(Boolean) collapsed
 
   get rootSubmenuKeys () {
@@ -96,7 +96,7 @@ class AppMenu extends Vue {
     return (
       <Menu
         class="app-menu"
-        mode="inline"
+        mode={this.mode}
         theme="dark"
         openKeys={this.openKeys}
         selectedKeys={this.selectedKeys}

@@ -1,4 +1,3 @@
-
 @import "~@/styles/vars.less";
 
 .app-layout {
@@ -35,15 +34,75 @@
     overflow: auto;
   }
 
-  &-header {
-    padding: 0;
-    background: #FFF;
+  &-collapse-control {
+    font-size: 20px;
+    cursor: pointer;
   }
 
+  &-horizontal-logo {
+    width: 40px;
+  }
+
+  &-header {
+    padding: 0;
+  }
+  
   &-content {
     height: 100%;
     // make it
     overflow: hidden;
     // or... min-height: 0;
+  }
+  
+  &.app-layout-vertical {
+    .app-header {
+      background: #FFF;
+    }
+  }
+
+  &.app-layout-horizontal {
+    .app-layout-header-core,
+    .app-layout-content {
+      max-width: 1200px;
+      min-width: 1200px;
+      margin: auto;
+    }
+
+    &.app-layout-header-stick {
+      overflow: auto;
+
+      .app-layout-header {
+        box-shadow: 2px 0 6px #777;
+      }
+
+      .app-layout-content {
+        margin-top: @app-header-height;
+        height: auto;
+        overflow: initial;
+      }
+    }
+
+    .app-layout-header {
+      color: #FFF;
+    }
+  
+    .app-layout-menu {
+      flex: 1;
+      margin: 0 20px;
+      max-height: 100%;
+      line-height: @app-header-height;
+    }
+
+    .app-layout-title {
+      margin: 0;
+      font-size: 20px;
+      color: #FFF;
+      font-weight: 400;
+    }
+
+    .app-layout-horizontal-logo {
+      width: 40px;
+      margin-right: 6px;
+    }
   }
 }

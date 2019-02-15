@@ -14,7 +14,7 @@ class AppHeaderContainer extends Vue {
   @State userInfo
 
   render () {
-    return <AppHeader userInfo={this.userInfo} {...{ props: this.$attrs }} {...{ on: this.$listeners } } />
+    return <AppHeader userInfo={this.userInfo} {...{ props: this.$attrs }} {...{ on: this.$listeners } }>{this.$slots.default}</AppHeader>
   }
 }
 

@@ -1,5 +1,15 @@
 # RELEASE LOG
 
+## 1.0.0-rc2
+
+`02/15/2019`
+
+Feat:
+- 增加 horizontal 模式以及 stickHeader 模式
+
+Refactor:
+- 菜单数据和 `AppMenu` 组件耦合，现在迁移到 `App` 组件中
+
 ## 1.0.0-rc1
 
 `02/12/2019`

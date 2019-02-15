@@ -8,12 +8,17 @@ import zhCN from 'ant-design-vue/lib/locale-provider/zh_CN'
 import AppLayout from '@/components/layout/AppLayout'
 import { getUserInfo } from '@/apis/services/user'
 import { showErrorTip } from '@/utils/helpers'
+import menuResponseData from '@/menu.json'
 import './App.less'
+
+const menus = menuResponseData.data[0].childList
 
 @Component()
 class App extends Vue {
   spinning = false
   inited = false
+  horizontal = true
+  stickHeader = false
 
   get matchedRouteFragments () {
     return this.$route.matched
@@ -36,7 +41,7 @@ class App extends Vue {
       <LocaleProvider locale={zhCN}>
         <Spin id="spin" spinning={this.spinning}>
           {
-            !this.inited ? null : (<AppLayout id="app">
+            !this.inited ? null : (<AppLayout id="app" horizontal={this.horizontal} stickHeader={this.stickHeader} menus={menus}>
               <div class="app-content-wrapper">
                 <Breadcrumb class="app-breadcrumb">
                   {

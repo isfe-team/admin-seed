@@ -8,7 +8,6 @@ import './AppHeader.less'
 
 @Component()
 class AppHeader extends Vue {
-  @Prop(Boolean) collapsed
   @Prop([ Object, null ]) userInfo
 
   @Emit('toggleCollapseMenu')
@@ -25,11 +24,11 @@ class AppHeader extends Vue {
 
   render () {
     return (
-      <div class="app-header">
-        <AIcon type={this.collapsed ? 'menu-fold' : 'menu-unfold'} class="app-header-icon" onClick={this.collapse} />
-        <div>
-          { this.userInfo ? <span class="app-header-user-info">Hi, {this.userInfo.name}</span> : null }
-          <AIcon type="logout" class="app-header-icon" onClick={this.logout} />
+      <div class='app-header'>
+        {this.$slots.default}
+        <div class='app-header-operations'>
+          { this.userInfo ? <span class='app-header-user-info'>Hi, {this.userInfo.name}</span> : null }
+          <AIcon type='logout' class='app-header-icon' onClick={this.logout} />
         </div>
       </div>
     )
