@@ -1,7 +1,7 @@
 /*!
  * 一个基于 ATable 通用的包含表格以及可选包含分页的表格组件
  * 可以基于该组件做各种定制（比如 XList），也可单独使用
- * @see http://tangjinzhou.gitee.io/ant-design-vue/components/table-cn
+ * @see http://vue.ant.design/components/table-cn
  * @see https://stackoverflow.com/questions/43702591/how-to-use-template-scope-in-vue-jsx
  *
  * @example
@@ -13,8 +13,8 @@
  * default 默认插槽 用于插入 query 部分
  *
  * events
- * @emits {loaded-data} loadData 完成时触发，返回转换后的列表数据
- * @emits {pagination-update} pagination 相关参数变化后触发（size-change 和 current-change），返回当前分页信息
+ * @emits {loadedData} loadData 完成时触发，返回转换后的列表数据
+ * @emits {paginationUpdate} pagination 相关参数变化后触发（size-change 和 current-change），返回当前分页信息
  * @emits {operation} 某个操作点击时触发，返回操作类型和当前 record
  *
  * @todo
@@ -64,7 +64,7 @@ class PQTable extends Vue {
   // 是否带分页
   @Prop({ type: Boolean, default: true }) withPagination
   // 表格的列数据
-  // @see http://tangjinzhou.gitee.io/ant-design-vue/components/table-cn/#API
+  // @see http://vue.ant.design/components/table-cn/#API
   // 可以增加 { scopedSlots: { customRender: 'ellipsis-with-title' } } 以及指定 width，实现 ellipsis + title 效果
   @Prop({ type: Array, default () { return [ ] } }) columns
   // 是否在 mount 之后就加载数据
@@ -88,10 +88,10 @@ class PQTable extends Vue {
   // 是否是单行模式，如果字数太多，变成单行，出现 ...
   // 加上 ellipsis-with-title，能支持出现 title
   @Prop({ type: Boolean, default: true }) singleLineMode
-  // rowKey，默认 id. @see http://tangjinzhou.gitee.io/ant-design-vue/components/table-cn/#API
+  // rowKey，默认 id. @see http://vue.ant.design/components/table-cn/#API
   @Prop({ type: [ String, Function ], default: 'id' }) rowKey
   // 是否支持可选择
-  // @see https://tangjinzhou.gitee.io/ant-design-vue/components/table-cn/#rowSelection
+  // @see https://vue.ant.design/components/table-cn/#rowSelection
   // @notice 暂时还没集成
   @Prop({ type: [ Object, null ], default: null }) rowSelection
   // 固定表头，y 方向可滚动
@@ -132,7 +132,7 @@ class PQTable extends Vue {
     this.loadData()
   }
 
-  @Emit('table-change')
+  @Emit('tableChange')
   handelChangeTable (pagination, filters, sorter) {
     return sorter
   }
@@ -159,7 +159,7 @@ class PQTable extends Vue {
   }
 
   // 根据分页信息和query要求加载列表数据
-  @Emit('loaded-data')
+  @Emit('loadedData')
   loadData () {
     // this.listData = [ ]
     return this.loadDataApi(this.pagination.currentPage, this.pagination.pageSize)
@@ -196,7 +196,7 @@ class PQTable extends Vue {
 
   paginationUpdate () {
     // use `cloneDeep` to prevent change
-    this.$emit('pagination-update', this.getPagination())
+    this.$emit('paginationUpdate', this.getPagination())
     this.loadData()
   }
 
@@ -229,7 +229,9 @@ class PQTable extends Vue {
       return !!fnOrBoolean
     }
 
-    const OperationsRenderer = (text, record, index) => {
+    // functional components, createElement is auto injected
+    const OperationsRenderer = (/* createElement injected */context) => {
+      const { record, index } = context
       const noCollapsedOperations = this.noCollapsedOperations.filter((x) => isFunction(x.exist) ? toBoolean(x.exist, record, index) : true)
       const Buttons = noCollapsedOperations.map((operation, index) => {
         const disabled = toBoolean(operation.disabled)
@@ -283,15 +285,17 @@ class PQTable extends Vue {
       )
     }
 
-    const scopedSlots = {
+    // 维护用户自定义的 scopedSlots
+    const scopedSlots = assign({
       // default is useless
       default: () => null,
       component: (text, record, index) => null,
-      'time-without-hms': (text) => <Tooltip placement='topLeft' class='pq-table-tooltip' title={text}>{removeHMS(text)}</Tooltip>,
+      // 非 top 情况下，比如 topLeft 会在数据比较少时出现错位
+      'time-without-hms': (text) => <Tooltip placement='top' class='pq-table-tooltip' title={text}>{removeHMS(text)}</Tooltip>,
       'ellipsis-with-title': (text) => <span title={text}>{text}</span>,
-      'ellipsis-with-tooltip': (text) => <Tooltip placement='topLeft' class='pq-table-tooltip' title={text}>{text}</Tooltip>,
+      'ellipsis-with-tooltip': (text) => <Tooltip placement='top' class='pq-table-tooltip' title={text}>{text}</Tooltip>,
       'operation': (text, record, index) => <OperationsRenderer text={text} record={record} index={index} />
-    }
+    }, this.$scopedSlots)
     return (
       <div class="pq-table">
         {this.$slots.query}
@@ -303,7 +307,7 @@ class PQTable extends Vue {
           rowKey={this.rowKey}
           size="middle"
           onChange={this.handelChangeTable}
-          scroll={this.stickHeader ? { y: 'calc(100% - 46px)' } : false}
+          scroll={this.stickHeader ? { y: 'calc(100% - 46px)' } : { }}
           {...{ props: this.$attrs }}
           scopedSlots={scopedSlots}
         >

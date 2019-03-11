@@ -3,8 +3,8 @@
  * props 见下面 props 注释
  *
  * events
- * @emits {current-change} currentPage 改变时会触发，返回当前页
- * @emits {size-change} pageSize 改变时会触发，返回当前每页条数
+ * @emits {currentChange} currentPage 改变时会触发，返回当前页
+ * @emits {sizeChange} pageSize 改变时会触发，返回当前每页条数
  *
  * @TODOS optimize 最大页数小于当前页数，导致的两次 load（增加验证，但是感觉意义不大）
  */

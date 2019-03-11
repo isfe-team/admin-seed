@@ -15,7 +15,7 @@ class AppHeader extends Vue {
 
   logout () {
     this.$confirm({
-      title: '是否退出系统',
+      title: '是否退出系统？',
       onOk () {
         window.location.href = './login.html'
       }
