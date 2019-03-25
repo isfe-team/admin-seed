@@ -76,9 +76,14 @@ axiosInstance.interceptors.response.use(function (response) {
   removeLoadingReq(error.config)
   finalize()
 
-  const e = apiConfig.errorMap.request[error.request.status] ||
-            apiConfig.errorMap.response[error.response.status] ||
-            apiConfig.errorMap.common
+  let e = apiConfig.errorMap.request[error.request.status]
+  // 如果 timeout 或者其它可能，`request.status` 可能为0
+  if (!e && error.response) {
+    e = apiConfig.errorMap.response[error.response.status]
+  }
+  if (!e) {
+    e = apiConfig.errorMap.common
+  }
 
   return Promise.reject(cloneDeep(e))
 })

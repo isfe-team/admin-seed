@@ -34,7 +34,7 @@ export const showSuccessTip = (tip) => message.success(tip)
 /** 简单的 log，基于 `console.log`，开发环境才会出现 */
 export const log = function () {
   if (process.env.NODE_ENV === 'development') {
-    return console.log.apply(console, arguments)
+    console.log.apply(console, arguments)
   }
 }
 

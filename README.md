@@ -144,7 +144,13 @@ The major bundle is the 3rd-party lib - `ant-design-vue`, you can see [this issu
 - [x] 内置组件使用类组件
 - [x] `admin-seed-cli` 增加配置，使用不同的 seed project 源，进一步支持大家 fork 这个项目，并使用自己的版本
 - [x] 支持导航模式配置（横向、纵向）以及 stickHeader（横向）
+
+### 1.1.0
+
 - [ ] 增加 theme 配置，主要是横向模式的 light，做到 App 里面配置 prop (使用Provide/Inject，开发 ConfigProvider 组件)
+- [ ] 优化 PQTable 在同步数据的自动更新
+- [ ] 暴露 PQTable list data
+- [ ] 增强 PQTable 增加已选择项
 
 ### 2.0.0
 

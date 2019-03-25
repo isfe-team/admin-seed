@@ -133,7 +133,7 @@ class PQTable extends Vue {
   }
 
   @Emit('tableChange')
-  handelChangeTable (pagination, filters, sorter) {
+  handleChangeTable (pagination, filters, sorter) {
     return sorter
   }
 
@@ -178,6 +178,7 @@ class PQTable extends Vue {
         this.listData = [ ]
         this.resetPagination()
         showErrorTip(error, '查询列表数据失败')
+        return Promise.reject(error)
       })
   }
 
@@ -306,7 +307,7 @@ class PQTable extends Vue {
           pagination={false}
           rowKey={this.rowKey}
           size="middle"
-          onChange={this.handelChangeTable}
+          onChange={this.handleChangeTable}
           scroll={this.stickHeader ? { y: 'calc(100% - 46px)' } : { }}
           {...{ props: this.$attrs }}
           scopedSlots={scopedSlots}

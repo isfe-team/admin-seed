@@ -14,10 +14,10 @@ import { Component, Emit, Watch, Prop } from 'vue-property-decorator'
 
 const paginationStyle = {
   display: 'flex',
-  'justify-content': 'flex-end',
-  'align-items': 'center'
+  justifyContent: 'flex-end',
+  alignItems: 'center'
 }
-const paginationPagesStyle = { 'margin-right': '10px' }
+const paginationPagesStyle = { marginRight: '10px' }
 
 @Component()
 class Pagination extends Vue {

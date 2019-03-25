@@ -18,7 +18,7 @@ class Figure extends Vue {
         {this.$slots.default}
         <div class="figure-message-wrapper">
           <div class="message">{this.message}</div>
-          <div class="description">{this.description}}</div>
+          <div class="description">{this.description}</div>
           <Button type="primary" onClick={this.toMain}>回到首页</Button>
         </div>
       </div>

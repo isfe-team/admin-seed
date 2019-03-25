@@ -17,7 +17,7 @@ const menus = menuResponseData.data[0].childList
 class App extends Vue {
   spinning = false
   inited = false
-  horizontal = true
+  horizontal = false
   stickHeader = false
 
   get matchedRouteFragments () {
