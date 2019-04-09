@@ -1,11 +1,19 @@
 # RELEASE LOG
 
+## 1.0.0
+
+`04/09/2019`
+
+Fix:
+- 修复 Logo 在 collpased 切换时的动画不流畅问题
+- 修复 NProgress 的 spinner 和 logout 覆盖的问题
+
 ## 1.0.0-rc3
 
 `02/15/2019`
 
 Fix:
-- Fix PQTable 中操作栏问题，原先操作中无法获取 record 参数
+- 修复 PQTable 中操作栏问题，原先操作中无法获取 record 参数
 - 修正了部分注释和样式
 
 ## 1.0.0-rc2

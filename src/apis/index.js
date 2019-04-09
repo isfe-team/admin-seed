@@ -7,8 +7,11 @@
 import axios from 'axios'
 import findIndex from 'lodash/findIndex'
 import cloneDeep from 'lodash/cloneDeep'
+import pathToRegExp from 'path-to-regexp'
 import { inArray, generateUID, fullScreenLoading, removeFullScreenLoading } from '@/utils/helpers'
 import apiConfig from './config'
+
+const noLoadingUrlRegs = apiConfig.noLoadingUrls.map((url) => pathToRegExp(url))
 
 let fullScreenLoadingTimer = null
 let currentRequestCount = 0 // 当前正在发的请求数目
@@ -41,7 +44,8 @@ axiosInstance.interceptors.request.use(function (config) {
   addLoadingReq(config)
   currentRequestCount += 1
 
-  if (apiConfig.noLoadingUrls.indexOf(config.url) !== -1) {
+  const noLoading = noLoadingUrlRegs.some((reg) => reg.exec(config.url) !== null)
+  if (noLoading) {
     return config
   }
   if (!fullScreenLoadingTimer) {

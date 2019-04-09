@@ -10,7 +10,8 @@ const COMMON_SERVER_ERROR = { message: '服务异常' }
 export default {
   CONTEXT_PATH,
   MOCK_CONTEXT,
-  noLoadingUrls: [ ], // 不想 mask 的接口 e.g. [ '/ctx/persons' ]
+  // @see https://www.npmjs.com/package/path-to-regexp
+  noLoadingUrls: [ ], // 不想 mask 的接口 e.g. [ '/ctx/persons', 'service?(.*)' ]
   mockUrls: [ ], // 需要 mock 的接口 e.g. [ '/ctx/persons' ]
   maxWaitingTime: 0, // global spin 最多等待的时间
   baseURL: process.env.NODE_ENV === 'development' ? CONTEXT_PATH : '', // 注意这里采用的是开发环境和生产环境的不同
