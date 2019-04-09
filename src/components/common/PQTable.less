@@ -13,32 +13,32 @@
         overflow: auto;
         border-top: 1px solid @border-color-base;
 
-        &.table-layout-fixed /deep/ table {
+        &.table-layout-fixed table {
             table-layout: fixed;
         }
 
         // 不然 不能换行
-        &.stick-header /deep/ table {
+        &.stick-header table {
             width: 100%;
         }
 
         // 给高度，不然 scroll: y 设置成相对的高度 不行
         &.stick-header {
-            /deep/ .ant-spin-nested-loading,
-            /deep/ .ant-spin-container,
-            /deep/ .ant-table,
-            /deep/ .ant-table-content,
-            /deep/ .ant-table-scroll {
+            .ant-spin-nested-loading,
+            .ant-spin-container,
+            .ant-table,
+            .ant-table-content,
+            .ant-table-scroll {
                 height: 100%;
             }
         }
 
-        /deep/ .ant-table-body > table > .ant-table-tbody > tr td,
-        /deep/ .ant-table-body > table > .ant-table-tbody > tr th {
+        .ant-table-body > table > .ant-table-tbody > tr td,
+        .ant-table-body > table > .ant-table-tbody > tr th {
             padding: 10px 8px;
         }
 
-        /deep/ .ant-table-body > table > .ant-table-tbody > tr td {
+        .ant-table-body > table > .ant-table-tbody > tr td {
             white-space: nowrap;
             overflow: hidden;
             text-overflow: ellipsis;
@@ -55,7 +55,7 @@
         }
     }
 
-    /deep/ .ant-table-row-expand-icon + .pq-table-tooltip {
+    .ant-table-row-expand-icon + .pq-table-tooltip {
         vertical-align: bottom;
     }
 
@@ -84,7 +84,7 @@
 }
 
 @media screen and (max-width: 1400px) {
-    .pq-table /deep/ table {
+    .pq-table table {
         font-size: 12px;
     }
 }

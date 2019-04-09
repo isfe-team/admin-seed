@@ -56,12 +56,15 @@ class AppLayout extends Vue {
       return Content
     }
 
+    // {this.collapsed ? null : <h1>Admin Seed</h1>}
     return (
       <Layout class={layoutClass} has-sider={true}>
         <Layout.Sider width='256' trigger={null} collapsible collapsed={this.collapsed} class='app-layout-sider'>
           <div class='app-layout-logo-wrapper'>
-            <img src={Logo} alt='logo' />
-            {this.collapsed ? null : <h1>Admin Seed</h1>}
+            <a href="/">
+              <img src={Logo} alt='logo' />
+              <h1>Admin Seed</h1>
+            </a>
           </div>
           {Menu}
         </Layout.Sider>

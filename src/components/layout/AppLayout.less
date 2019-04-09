@@ -8,13 +8,15 @@
   }
 
   &-logo-wrapper {
-    display: flex;
-    align-items: center;
-    justify-content: center;
+    // display: flex;
+    // align-items: center;
+    // justify-content: center;
     height: @app-header-height;
     line-height: @app-header-height;
-    white-space: nowrap;
+    padding-left: @padding-lg;
+    // white-space: nowrap;
     background-color: lighten(@layout-sider-background, 5%);
+    overflow: hidden;
 
     img {
       width: 32px;
@@ -22,8 +24,10 @@
     }
 
     h1 {
+      display: inline-block;
       margin-left: 12px;
       margin-bottom: 0;
+      vertical-align: middle;
       font-size: 20px;
       color: #FFF;
     }

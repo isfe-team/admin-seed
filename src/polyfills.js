@@ -24,7 +24,7 @@
 // babel-polyfill, if you want to do less things
 // if you import this, `promise` and the `core-js` import will be removed.
 // use `useBuiltIns: 'entry'`. @see https://cli.vuejs.org/guide/browser-compatibility.html#usebuiltins-usage
-// import '@babel/polyfill' // Run `npm i -S @babel/polyfill`
+// import '@babel/polyfill' // Run `npm i -S @babel/polyfill`.
 
 /** IE9, IE10 and IE11 requires all of the following polyfills. */
 // import 'core-js/es6/symbol'
