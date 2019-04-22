@@ -16,10 +16,10 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  background: rgba(255, 255, 255, 0.1);
-  filter: blur(0.5);
+  // @see https://caniuse.com/#search=rgba
+  // @see https://caniuse.com/#search=hsla
+  background: hsla(0, 0%, 100%, 0.1);
   overflow: hidden;
-
   cursor: progress;
 
   .ant-spin-dot {

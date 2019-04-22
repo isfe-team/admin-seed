@@ -70,97 +70,19 @@ Of course, I recommend a mock server to do this rather than native mock files.
 
 ## Optimizations
 
-The major bundle is the 3rd-party lib - `ant-design-vue`, you can see [this issue](https://github.com/vueComponent/ant-design-vue/issues/325) for more informations. Btw, the `admin-seed` use `src/components/registerServiceWorker.js` to centrally manage the `ant-design-vue` components.
+See [knownIssues](./docs/knownIssues.md).
 
 ## Directories
 
-```
-- src
-  - apis
-  - assets
-  - components
-    - common
-    - layout
-    - other_trans_components
-    - registerAntDesignVueComponents.js
-  - entries
-    - login
-    - index
-  - router
-  - store
-  - styles
-    - base.less
-    - vars.less
-    - antDesignVue.less
-    - icons
-    - index.less
-  - utils
-    - helpers
-    - constants
-  - menu.json
-  - polyfills.js
-  - registerServiceWorker.js
-  - vendors
-```
+See [designOverview](./docs/designOvewview.md).
 
 ## Roadmap
 
-### 0.1.0
-
-- [x] 完成初始版本
-- [x] 完成结构讨论和调整
-- [x] 完成 `vue-cli` 升级
-- [x] 采用 `preset-env`，去除 promise-polyfill/babel-polyfill 等直接引入
-
-### 0.2.0
-
-- [x] 按需引入，见[babel-plugin-import](https://github.com/ant-design/babel-plugin-import)
-- [x] 增加 `admin-seed-cli`，使用 `@isfe/admin-seed` 源
-
-### 0.3.0
-
-- [x] Compatibility 增加默认的 `polyfill` 模块占位
-- [x] release log
-- [x] [stylelint](https://github.com/stylelint/stylelint)
-- [x] 集成 ci 和 hooks
-
-### 0.4.0
-
-- [x] 迁移 api config
-- [x] 集成 Mock
-- [x] 优化内部所有内置脚本
-- [x] 优化 vsc 路径映射，参考 https://www.typescriptlang.org/docs/handbook/module-resolution.html 和 https://stackoverflow.com/questions/47181037/vscode-intellisense-does-not-work-with-webpack-alias
-- [x] 集成 [NProgress](https://github.com/rstacruz/nprogress)
-- [x] 拆分路由配置 + [code-split](https://webpack.js.org/guides/code-splitting/)
-
-### 0.5.0
-
-- [x] 优化内部所有内置组件
-- [x] 区分容器和展示组件
-
-### 1.0.0
-
-- [x] 增加基础库测试
-- [x] 内置组件使用类组件
-- [x] `admin-seed-cli` 增加配置，使用不同的 seed project 源，进一步支持大家 fork 这个项目，并使用自己的版本
-- [x] 支持导航模式配置（横向、纵向）以及 stickHeader（横向）
-
-### 1.1.0
-
-- [ ] 增加 theme 配置，主要是横向模式的 light，做到 App 里面配置 prop (使用Provide/Inject，开发 ConfigProvider 组件)
-- [ ] 优化 PQTable 在同步数据的自动更新
-- [ ] 暴露 PQTable list data
-- [ ] 增强 PQTable 增加已选择项
-
-### 2.0.0
-
-- [ ] 迁移到 `ts`
-- [ ] 集成 `rx`
-- [ ] 考虑按需遮罩
-- [ ] `admin-seed-cli` 增加配置，使用 `ts` or `js` 版本
-- [ ] 开发数据层，优化中心化存储 + `Resource` 资源利用，不使用 `vuex`，集成 `cache`
+See [roadmap](./docs/roadmap.md).
 
 ## NOTICE
+
+下面是一些自己需要配置的部分，其中部分可以在 `admin-seed-cli` 中完善，但是目前没时间。另外其它的参见[knownIssues](./docs/knownIssues.md)。
 
 ### favicon
 
@@ -174,6 +96,33 @@ The major bundle is the 3rd-party lib - `ant-design-vue`, you can see [this issu
 
 为了解决 vsc 的 `eslint` 报错，见[官网](https://vuejs.github.io/eslint-plugin-vue/user-guide/#editor-integrations)。
 
-### ant-design-vue 相关
+## 文档目录介绍
 
-`ant-design-vue@1.2.0` 菜单收起会有问题，see [this issue](https://github.com/vueComponent/ant-design-vue/issues/338)。 更新到 `1.2.4+` 即可。
+- 前端概要设计文档（docs/designOverview.md）
+  * 包括基础技术体系设计
+- 前端详细设计文档（docs/designDetails/*.md）
+  * 包括模块详细设计文档
+  * 前端项目复杂逻辑/流程/模块说明文档
+  * 前端项目复杂逻辑/流程/模块方案设计文档
+- 前端项目使用手册（README.md）
+  * 包括基础的项目信息
+  * 包括如何启动项目、构建项目等等
+  * 包括一些其它文档的引用
+- 前端项目代码评审记录（docs/codeReviews/*）
+- 前端项目方案评审/技术评审记录（docs/techReviews/*）
+- 前端项目更新日志（docs/releaseNotes.md）
+  * 包括发布版本的日志
+  * 包括主要版本升级前端的一些更新，比如 Fix/Feat
+
+> 下面的按需存在。
+
+- 前端项目部署手册（docs/deploy.md）
+  * 如果对部署有特别要求的话，需要存在
+- 前端项目FAQ文档（docs/FAQs.md）
+  * 包括一些常见问题集合，比如xxx失败，兼容性问题描述等
+- 自动化测试报告（docs/tests/*）
+  * 包括自动化测试输出的各种产物
+- 已知问题列表（docs/knownIssues.md）
+- 定制版本详细变更文档（docs/customized/*）
+- 前端开发计划文档（docs/roadmap.md）
+- 任何其它设计资源

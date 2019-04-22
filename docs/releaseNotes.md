@@ -1,4 +1,6 @@
-# RELEASE LOG
+# Release Notes
+
+> 采用倒序。
 
 ## 1.0.0
 
