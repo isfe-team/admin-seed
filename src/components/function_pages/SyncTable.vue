@@ -12,6 +12,7 @@
       :initialPagination="{ currentPage: +$route.query.p || 1 }"
       :columns="columns"
       :query="query"
+      @operation="handleOperation"
     />
   </div>
 </template>
@@ -54,6 +55,9 @@ export default {
     },
     getTableInfo (pageNo, pageSize) {
       return Promise.resolve(clone(this.resultData))
+    },
+    handleOperation ({ type, record, index }) {
+      this.$message.info(`type: ${type}, index: ${index}, record: ${JSON.stringify(record)}`)
     },
     changeTable () {
       if (this.resultData.message === 1) {

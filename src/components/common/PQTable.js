@@ -92,7 +92,6 @@ class PQTable extends Vue {
   @Prop({ type: [ String, Function ], default: 'id' }) rowKey
   // 是否支持可选择
   // @see https://vue.ant.design/components/table-cn/#rowSelection
-  // @notice 暂时还没集成
   @Prop({ type: [ Object, null ], default: null }) rowSelection
   // 固定表头，y 方向可滚动
   // 注意此时默认给的是 `100% - 46px`，但是这样导致表头高度最好是在一行，当然不止一行也没啥太大问题...
@@ -143,19 +142,22 @@ class PQTable extends Vue {
     this.pagination.totalRows = 0
   }
 
-  @Emit('operation')
-  emitOperation (operation, record) {
+  emitOperation (operation, record, index) {
     // 因为如果是 @click.native 的话，哪怕是 disabled，仍旧会触发
     // 所以在这里再判断一次
     // 也可以不用 AMenu 的形式，但是还要改样式
     const disabled = !!(typeof operation.disabled === 'function' ? operation.disabled(record) : operation.disabled)
 
-    if (disabled) { return }
+    if (disabled) {
+      return
+    }
 
-    return assign({ }, { record }, {
+    this.$emit('operation', assign({ }, {
       type: operation.type,
+      record,
+      index,
       listData: this.listData
-    })
+    }))
   }
 
   // 根据分页信息和query要求加载列表数据
@@ -164,10 +166,10 @@ class PQTable extends Vue {
     // this.listData = [ ]
     return this.loadDataApi(this.pagination.currentPage, this.pagination.pageSize)
       .then((data) => {
-        const totalCount = this.getDataTotalCount(data)
-        this.pagination.totalRows = totalCount
+        const totalRows = this.getDataTotalCount(data)
+        this.pagination.totalRows = totalRows
         // 解决删除最后一页的最后一条数据时，没有触发change事件重新load的问题
-        const maxPage = Math.ceil(totalCount / this.pagination.pageSize)
+        const maxPage = Math.ceil(totalRows / this.pagination.pageSize)
         if (maxPage > 0 && maxPage < this.pagination.currentPage) {
           return this.handleCurrentChange(maxPage)
         }
@@ -232,18 +234,18 @@ class PQTable extends Vue {
 
     // functional components, createElement is auto injected
     const OperationsRenderer = (/* createElement injected */context) => {
-      const { record, index } = context
+      const { record, index } = context.props
       const noCollapsedOperations = this.noCollapsedOperations.filter((x) => isFunction(x.exist) ? toBoolean(x.exist, record, index) : true)
-      const Buttons = noCollapsedOperations.map((operation, index) => {
+      const Buttons = noCollapsedOperations.map((operation, oIndex) => {
         const disabled = toBoolean(operation.disabled)
         const danger = toBoolean(operation.danger)
         return (
           <TextButton
-            key={index}
+            key={oIndex}
             class='pq-table-operation-item'
             disabled={disabled}
             danger={danger}
-            onClick={this.emitOperation.bind(this, operation, record)}
+            onClick={this.emitOperation.bind(this, operation, record, index)}
           >{operation.label}</TextButton>
         )
       })
@@ -253,10 +255,10 @@ class PQTable extends Vue {
       }
 
       const Overlay = this.collapsedOperations.filter((operation) => toBoolean(operation.exist))
-        .map((operation) => {
+        .map((operation, oIndex) => {
           const disabled = toBoolean(operation.disabled)
           return (
-            <Menu.MenuItem key={index} disabled={disabled} onClick={this.emitOperation.bind(this, operation, record)}>
+            <Menu.MenuItem key={oIndex} disabled={disabled} onClick={this.emitOperation.bind(this, operation, record, index)}>
               {operation.label}
             </Menu.MenuItem>
           )
@@ -306,6 +308,7 @@ class PQTable extends Vue {
           columns={this.columns}
           pagination={false}
           rowKey={this.rowKey}
+          rowSelection={this.rowSelection}
           size="middle"
           onChange={this.handleChangeTable}
           scroll={this.stickHeader ? { y: 'calc(100% - 46px)' } : { }}

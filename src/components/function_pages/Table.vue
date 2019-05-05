@@ -10,7 +10,9 @@
     :initialPagination="{ currentPage: +$route.query.p || 1 }"
     :columns="columns"
     :query="query"
+    :rowSelection="rowSelection"
     @operation="handleOperation"
+    @loadedData="handleLoadedData"
   />
 </template>
 
@@ -35,15 +37,26 @@ export default {
         { title: '状态', dataIndex: 'status', needTotal: true },
         { title: '更新时间', dataIndex: 'updatedAt' },
         { title: '操作', dataIndex: 'operation', scopedSlots: { customRender: 'operation' } }
-      ]
+      ],
+      rowSelection: {
+        selectedRowKeys: [],
+        onChange: (selectedRowKeys) => {
+          console.log('selected', selectedRowKeys)
+          this.rowSelection.selectedRowKeys = selectedRowKeys
+        }
+      }
     }
   },
   methods: {
     transformListData (xs) {
       return xs.result.data
     },
-    handleOperation ({ type }) {
-      this.$message.info(`type: ${type}`)
+    handleOperation ({ type, record, index }) {
+      this.$message.info(`type: ${type}, index: ${index}, record: ${JSON.stringify(record)}`)
+    },
+    handleLoadedData () {
+      // 注意如果需要预置一些 selectedRowKeys，可以需要判断是否是初次加载
+      this.rowSelection.selectedRowKeys = []
     }
   }
 }

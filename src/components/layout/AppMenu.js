@@ -1,7 +1,7 @@
 /*!
  * 暂时使用的是 childList 为空，就认定是 MenuItem，但是这样的判断是不够的（假如集成权限配置）
  * 可以参考 docs/FAQ.md 的做法
- * @todo 层级处理改成递归（目前只支持三层），现在是由于之前多次改动，导致直接平铺处理的...
+ * @todo 层级处理目前只支持三层（因为 openKeys 我只取了三层）
  */
 
 import Vue from 'vue'
@@ -12,6 +12,7 @@ import { Menu, Icon } from 'ant-design-vue'
 @Component()
 class AppMenu extends Vue {
   openKeys = [ ]
+  // 父级收起，折叠，然后再展开，所以需要 cachedOpenKeys
   cachedOpenKeys = [ ]
   selectedKeys = [ ]
 
