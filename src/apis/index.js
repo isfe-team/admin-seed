@@ -1,5 +1,6 @@
 /*!
  * 请求相关处理，基于 [axios](https://github.com/axios/axios) | bqliu
+ * 设置 Accept-Language 可以参见 `entries/index/index.js`
  */
 
 /* eslint prefer-promise-reject-errors: "off" */
@@ -19,7 +20,7 @@ const loadingReqs = [ ] // 当前所有正在发的请求，维护玩的
 
 // 独立的 zone，不污染，根据情况自定义默认配置
 // @see https://github.com/axios/axios#creating-an-instance
-const axiosInstance = axios.create({
+export const axiosInstance = window.y = axios.create({
   baseURL: apiConfig.baseURL,
   withCredentials: apiConfig.withCredentials,
   headers: apiConfig.headers,

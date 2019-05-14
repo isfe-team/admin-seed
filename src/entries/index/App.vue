@@ -1,58 +1,49 @@
 <script>
 import Vue from 'vue'
-import 'moment/locale/zh-cn'
-import { Action } from 'vuex-class'
-import { Component } from 'vue-property-decorator'
-import { LocaleProvider, Spin, Breadcrumb } from 'ant-design-vue'
-import zhCN from 'ant-design-vue/lib/locale-provider/zh_CN'
-import AppLayout from '@/components/layout/AppLayout'
-import { getUserInfo } from '@/apis/services/user'
+import { Component, Watch } from 'vue-property-decorator'
+import { State, Action } from 'vuex-class'
+import { LocaleProvider } from 'ant-design-vue'
+import { axiosInstance } from '@/apis'
 import { showErrorTip } from '@/utils/helpers'
-import menuResponseData from '@/menu.json'
 import './App.less'
-
-const menus = menuResponseData.data[0].childList
 
 @Component()
 class App extends Vue {
-  spinning = false
   inited = false
-  horizontal = false
-  stickHeader = false
 
-  get matchedRouteFragments () {
-    return this.$route.matched
-  }
+  @State locale
+  @State antdLocale
+  @Action loadAntdLocale
 
-  @Action setUserInfo
+  @Watch('locale', { immediate: true })
+  handleLocaleChange (locale) {
+    // If you need to set the `Accept-Language`, use following codes
+    const [first, second] = locale.split('_')
+    axiosInstance.defaults.headers.common['Accept-Language'] = `${first}-${second},${first};q=0.9`
 
-  beforeMount () {
-    getUserInfo().then((user) => {
-      this.setUserInfo(user)
+    this.load().then(() => {
       this.inited = true
+
+      document.title = this.$t('main.title')
     }, () => {
-      showErrorTip('获取用户信息失败')
+      showErrorTip(new Error(this.$t('error.GET_LOCALE_INFO_ERROR')))
     })
   }
 
+  load () {
+    return Promise.all([
+      this.loadAntdLocale(this.locale)
+    ])
+  }
+
   render () {
-    /* 加全局loading状态，暂时无用，因为这个遮不住所有的，注意这个注释不能放在 LocalProvider 和 Spin 中间，不然 LocalProvider 组件会报错 */
+    let Content = null
+    if (this.inited) {
+      Content = <router-view />
+    }
     return (
-      <LocaleProvider locale={zhCN}>
-        <Spin id="spin" spinning={this.spinning}>
-          {
-            !this.inited ? null : (<AppLayout id="app" horizontal={this.horizontal} stickHeader={this.stickHeader} menus={menus}>
-              <div class="app-content-wrapper">
-                <Breadcrumb class="app-breadcrumb">
-                  {
-                    this.matchedRouteFragments.map((route, index) => (<Breadcrumb.Item key={index}>{route.meta.label}</Breadcrumb.Item>))
-                  }
-                </Breadcrumb>
-                <router-view class="app-page" />
-              </div>
-            </AppLayout>)
-          }
-        </Spin>
+      <LocaleProvider locale={this.antdLocale}>
+        {Content}
       </LocaleProvider>
     )
   }

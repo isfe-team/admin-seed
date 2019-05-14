@@ -4,6 +4,8 @@
 
 import Vue from 'vue'
 import { Component, Prop, Emit } from 'vue-property-decorator'
+import { Icon } from 'ant-design-vue'
+import Locale from '@/components/common/Locale'
 import './AppHeader.less'
 
 @Component()
@@ -16,8 +18,9 @@ class AppHeader extends Vue {
   logout () {
     this.$confirm({
       title: '是否退出系统？',
-      onOk () {
-        window.location.href = './login.html'
+      onOk: () => {
+        // logout from backend server ...
+        this.$router.push({ name: 'login' })
       }
     })
   }
@@ -27,8 +30,9 @@ class AppHeader extends Vue {
       <div class='app-header'>
         {this.$slots.default}
         <div class='app-header-operations'>
-          { this.userInfo ? <span class='app-header-user-info'>Hi, {this.userInfo.name}</span> : null }
-          <AIcon type='logout' class='app-header-icon' onClick={this.logout} />
+          <Locale class='app-header-locale' />
+          { this.userInfo ? <span class='app-header-user-info' title={this.userInfo.name}>Hi, {this.userInfo.name}</span> : null }
+          <Icon type='logout' class='app-header-icon' onClick={this.logout} />
         </div>
       </div>
     )

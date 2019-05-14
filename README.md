@@ -68,6 +68,14 @@ Then you should use devServer to proxy all these requests to another mock server
 
 Of course, I recommend a mock server to do this rather than native mock files.
 
+## I18n
+
+This project support `I18n` via `vue-i18n`. We support a `withI18n` wrapper for component. You can use this to wrap your app component. And in store, the `locale` state will be updated. You can use `mapState` and watch this state.
+
+### Concerns
+
+We should consider many things, include `code-split`, `ant-design-vue locale` and `moment locale`. We use [`webpack.ContextReplacementPlugin`](https://webpack.js.org/plugins/context-replacement-plugin/) to bundle what we need, and require(use webpack dynamic import) when we need. Once locale changed, we import the core i18n settings/messages, load and set the antdLocale(the moment local will be set by antd). By the way, you may need to set the `Accept-Language` header. You can see `entries/index/index.js` for real codes.
+
 ## Optimizations
 
 See [knownIssues](./docs/knownIssues.md).

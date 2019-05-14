@@ -2,8 +2,19 @@
  * see https://cli.vuejs.org/guide/
  */
 
+const webpack = require('webpack')
 const path = require('path')
 const StyleLintPlugin = require('stylelint-webpack-plugin')
+
+const pages = {
+  app: {
+    entry: 'src/entries/index/index.js',
+    template: 'src/entries/index/index.html',
+    filename: 'index.html',
+    title: 'seed-project',
+    chunks: ['chunk-vendors', 'chunk-common', 'app']
+  }
+}
 
 module.exports = {
   devServer: {
@@ -22,22 +33,7 @@ module.exports = {
   // @see also https://github.com/vuejs/vue-cli/blob/dev/CHANGELOG.md#features-1
   publicPath: '/admin-seed/',
   lintOnSave: true,
-  pages: {
-    app: {
-      entry: 'src/entries/index/index.js',
-      template: 'src/entries/index/index.html',
-      filename: 'index.html',
-      title: 'seed-project',
-      chunks: ['chunk-vendors', 'chunk-common', 'app']
-    },
-    login: {
-      entry: 'src/entries/login/login.js',
-      template: 'src/entries/login/login.html',
-      filename: 'login.html',
-      title: 'login',
-      chunks: ['chunk-vendors', 'chunk-common', 'login']
-    }
-  },
+  pages,
   configureWebpack: {
     plugins: [
       // see https://github.com/webpack-contrib/stylelint-webpack-plugin
@@ -47,8 +43,23 @@ module.exports = {
         // for `.vue` support, see https://stylelint.io/CHANGELOG/#830
         files: [ '**/*.less', '**/*.css', '**/*.vue' ],
         failOnError: process.env.NODE_ENV === 'production'
-      })
+      }),
+      // https://webpack.js.org/plugins/context-replacement-plugin/
+      // https://github.com/moment/moment/issues/2373
+      // `moment.locale` 和 `ant-design-vue/lib/locale-provider` 打包过滤
+      new webpack.ContextReplacementPlugin(/moment[/\\]locale$/, /zh-cn|ja/), // en-us default imported
+      new webpack.ContextReplacementPlugin(/ant-design-vue[/\\]lib[/\\]locale-provider$/, /zh_CN|en_US|ja_JP/) // en-US default
     ]
+  },
+  chainWebpack: (config) => {
+    // disable prefetch for i18n-like concern
+    // @see @vue\cli-service\lib\config\app.js
+    // @see https://github.com/vuejs/vue-cli/issues/3116
+    Object.keys(pages).forEach((name) =>
+      ['preload', 'prefetch'].forEach((type) =>
+        config.plugins.delete(`${type}-${name}`)
+      )
+    )
   },
   pwa: {
     // 配置 favico

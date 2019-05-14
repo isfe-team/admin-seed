@@ -1,0 +1,101 @@
+{
+  "message": "Operating Success",
+  "status": true,
+  "data": [
+    {
+      "id": "0",
+      "name": "Admin Seed",
+      "url": "",
+      "sort": null,
+      "childList": [
+        {
+          "id": "0-1",
+          "name": "JP_Overview",
+          "icon": "setting",
+          "url": "overview",
+          "childList": []
+        },
+        {
+          "id": "0-2",
+          "name": "JP_FunctionPages",
+          "icon": "switcher",
+          "url": "function-pages",
+          "childList": [
+            {
+              "id": "0-2-1",
+              "name": "JP_Table",
+              "url": "table",
+              "sort": 1,
+              "childList": []
+            },
+            {
+              "id": "0-2-1",
+              "name": "JP_SyncTable",
+              "url": "sync-table",
+              "sort": 4,
+              "childList": []
+            },
+            {
+              "id": "0-2-2",
+              "name": "JP_Function2",
+              "url": "corn",
+              "sort": 2,
+              "childList": []
+            },
+            {
+              "id": "0-2-3",
+              "name": "JP_Function3",
+              "url": "eggsplant",
+              "sort": 3,
+              "childList": [
+                {
+                  "id": "0-2-3-1",
+                  "name": "JP_Function3.1",
+                  "url": "use",
+                  "childList": [],
+                  "sort": 1
+                },
+                {
+                  "id": "0-2-3-2",
+                  "name": "JP_Function3.2",
+                  "url": "detail",
+                  "childList": [],
+                  "sort": 2
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "0-3",
+          "name": "JP_Exception",
+          "icon": "dashboard",
+          "url": "abnormal-pages",
+          "childList": [
+            {
+              "id": "0-3-1",
+              "name": "JP_403",
+              "url": "no-auth",
+              "sort": 1,
+              "childList": []
+            },
+            {
+              "id": "0-3-2",
+              "name": "JP_404",
+              "url": "not-found",
+              "sort": 2,
+              "childList": []
+            },
+            {
+              "id": "0-3-3",
+              "name": "JP_500",
+              "url": "serve-error",
+              "sort": 3,
+              "childList": []
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

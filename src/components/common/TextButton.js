@@ -3,7 +3,7 @@
  */
 
 import Vue from 'vue'
-import { Component, Emit, Prop } from 'vue-property-decorator'
+import { Component, Prop } from 'vue-property-decorator'
 import './TextButton.less'
 
 @Component()
@@ -11,9 +11,11 @@ class TextButton extends Vue {
   @Prop({ type: Boolean, default: false }) disabled
   @Prop({ type: Boolean, default: false }) danger
 
-  @Emit('click')
   handleClick (evt) {
-    return evt
+    if (this.disabled) {
+      return
+    }
+    this.$emit('click', evt)
   }
 
   render () {
