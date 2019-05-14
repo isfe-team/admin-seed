@@ -26,18 +26,6 @@ export default {
     return {
       query: '',
       getTableInfo,
-      operations: [
-        { type: 'edit', label: '编辑' },
-        { type: 'delete', label: '删除' }
-      ],
-      columns: [
-        { title: '规则编号', dataIndex: 'no', scopedSlots: { customRender: 'ellipsis-with-tooltip' } },
-        { title: '描述', dataIndex: 'description' },
-        { title: '服务调用次数', dataIndex: 'callNo', needTotal: true, customRender: (text) => text + ' 次' },
-        { title: '状态', dataIndex: 'status', needTotal: true },
-        { title: '更新时间', dataIndex: 'updatedAt' },
-        { title: '操作', dataIndex: 'operation', scopedSlots: { customRender: 'operation' } }
-      ],
       rowSelection: {
         selectedRowKeys: [],
         onChange: (selectedRowKeys) => {
@@ -45,6 +33,14 @@ export default {
           this.rowSelection.selectedRowKeys = selectedRowKeys
         }
       }
+    }
+  },
+  computed: {
+    columns () {
+      return this.$t('table.columns')
+    },
+    operations () {
+      return this.$t('table.operations')
     }
   },
   methods: {

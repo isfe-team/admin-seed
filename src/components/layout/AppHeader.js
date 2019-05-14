@@ -5,6 +5,7 @@
 import Vue from 'vue'
 import { Component, Prop, Emit } from 'vue-property-decorator'
 import { Icon } from 'ant-design-vue'
+import { logout } from '@/apis/services/user'
 import Locale from '@/components/common/Locale'
 import './AppHeader.less'
 
@@ -19,8 +20,9 @@ class AppHeader extends Vue {
     this.$confirm({
       title: '是否退出系统？',
       onOk: () => {
-        // logout from backend server ...
-        this.$router.push({ name: 'login' })
+        logout().then(() => {
+          this.$router.push({ name: 'login' })
+        })
       }
     })
   }
