@@ -237,8 +237,8 @@ class PQTable extends Vue {
       const { record, index } = context.props
       const noCollapsedOperations = this.noCollapsedOperations.filter((x) => isFunction(x.exist) ? toBoolean(x.exist, record, index) : true)
       const Buttons = noCollapsedOperations.map((operation, oIndex) => {
-        const disabled = toBoolean(operation.disabled)
-        const danger = toBoolean(operation.danger)
+        const disabled = toBoolean(operation.disabled, record, index)
+        const danger = toBoolean(operation.danger, record, index)
         return (
           <TextButton
             key={oIndex}
@@ -254,9 +254,9 @@ class PQTable extends Vue {
         return Buttons
       }
 
-      const Overlay = this.collapsedOperations.filter((operation) => toBoolean(operation.exist))
+      const Overlay = this.collapsedOperations.filter((operation) => toBoolean(operation.exist, record, index))
         .map((operation, oIndex) => {
-          const disabled = toBoolean(operation.disabled)
+          const disabled = toBoolean(operation.disabled, record, index)
           return (
             <Menu.MenuItem key={oIndex} disabled={disabled} onClick={this.emitOperation.bind(this, operation, record, index)}>
               {operation.label}
