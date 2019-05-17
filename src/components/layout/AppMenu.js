@@ -61,6 +61,10 @@ class AppMenu extends Vue {
     }
     const routes = this.$route.name.split('::')
     this.selectedKeys = [ routes[routes.length - 1] ]
+    if (this.mode === 'horizontal') {
+      this.openKeys = []
+      return
+    }
     const [ firstRoute, secondRoute ] = routes
     const openKeys = secondRoute ? [ secondRoute, firstRoute ] : [ firstRoute ]
 
@@ -72,6 +76,7 @@ class AppMenu extends Vue {
   }
 
   render () {
+    window.x = this
     function getSubMenuFragment (menus) {
       function getMenuIcon (menu) {
         return menu.icon ? <Icon type={menu.icon} /> : null

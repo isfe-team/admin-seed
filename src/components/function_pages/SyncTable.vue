@@ -39,8 +39,8 @@ export default {
       query: { },
       resultData: MOCK_LIST_DATA,
       operations: [
-        { type: 'edit', label: '编辑' },
-        { type: 'delete', label: '删除' }
+        { type: 'edit', label: '编辑', exist (record, index) { console.log('EXIST', record, index) } },
+        { type: 'delete', label: '删除', disabled (record, index) { console.log('DISABLED', record, index) } }
       ],
       columns: [
         { title: '规则编号', dataIndex: 'no' },
