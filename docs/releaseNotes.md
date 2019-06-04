@@ -8,6 +8,7 @@
 
 Fix:
 - 菜单水平模式下刷新会打开子菜单的问题
+- 修正 PQTable 中的 Tooltip 的位置（迁移到 TopLeft）
 - PQTable 中 exist 和 disabled 参数遗失问题
 
 ## 1.0.0
