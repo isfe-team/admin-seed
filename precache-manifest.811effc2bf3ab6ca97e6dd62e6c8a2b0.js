@@ -32,8 +32,8 @@ self.__precacheManifest = [
     "url": "/admin-seed/js/login.8845cc84.js"
   },
   {
-    "revision": "ed735c37629a25bde96a",
-    "url": "/admin-seed/js/app.e65bd304.js"
+    "revision": "f03c94a06df81f0ac74e",
+    "url": "/admin-seed/js/app.e15b4a27.js"
   },
   {
     "revision": "a32fd2177e6e615d054d",
@@ -56,7 +56,7 @@ self.__precacheManifest = [
     "url": "/admin-seed/img/logo.82b9c7a5.png"
   },
   {
-    "revision": "9c360a015441dafe36270520b01872cc",
+    "revision": "92abc09c618fd70ecb6c53a7a79a2089",
     "url": "/admin-seed/index.html"
   },
   {
@@ -64,7 +64,7 @@ self.__precacheManifest = [
     "url": "/admin-seed/login.html"
   },
   {
-    "revision": "ed735c37629a25bde96a",
-    "url": "/admin-seed/css/app.9e489940.css"
+    "revision": "f03c94a06df81f0ac74e",
+    "url": "/admin-seed/css/app.c6f72e02.css"
   }
 ];
