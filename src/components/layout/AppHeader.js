@@ -17,9 +17,25 @@ class AppHeader extends Vue {
     this.$confirm({
       title: '是否退出系统？',
       onOk () {
-        window.location.href = './login.html'
+        this.logoutCore()
       }
     })
+  }
+
+  logoutCore () {
+    window.location.href = './login.html'
+  }
+
+  dispatcher (x) {
+    console.log('x', x)
+  }
+
+  mounted () {
+    window.addEventListener('message', this.dispatcher)
+  }
+
+  beforeDestroy () {
+    window.removeEventListeer('message', this.dispatcher)
   }
 
   render () {

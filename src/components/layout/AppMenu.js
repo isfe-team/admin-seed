@@ -40,9 +40,9 @@ class AppMenu extends Vue {
   }
 
   handleSelect (data) {
-    const keypath = reverse(data.keyPath).join('::')
+    const keyPath = reverse(data.keyPath).join('::')
     this.$router.push({
-      name: keypath
+      name: keyPath
     })
   }
 
@@ -76,7 +76,6 @@ class AppMenu extends Vue {
   }
 
   render () {
-    window.x = this
     function getSubMenuFragment (menus) {
       function getMenuIcon (menu) {
         return menu.icon ? <Icon type={menu.icon} /> : null
