@@ -1,3 +1,38 @@
+<!--text button | bqliu-->
+<template>
+  <button
+    class="x-text-button"
+    :class="{ disabled, danger }"
+    :disabled="disabled"
+    @click="handleClick"
+  >
+    <slot />
+  </button>
+</template>
+
+<script>
+export default {
+  props: {
+    // 是否禁用
+    disabled: {
+      type: Boolean,
+      default: false
+    },
+    // 是否是 danger 状态
+    danger: {
+      type: Boolean,
+      default: false
+    }
+  },
+  methods: {
+    handleClick (evt) {
+      this.$emit('click', evt)
+    }
+  }
+}
+</script>
+
+<style lang="less" scoped>
 @import "~@/styles/vars.less";
 
 .x-text-button {
@@ -51,3 +86,4 @@
     }
   }
 }
+</style>

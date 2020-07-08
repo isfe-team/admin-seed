@@ -2,6 +2,7 @@ import SimpleRouterWrapper from '@/components/common/SimpleRouterWrapper'
 import NotFound from '@/components/abnormal_pages/NotFound'
 import NoAuth from '@/components/abnormal_pages/NoAuth'
 import ServerError from '@/components/abnormal_pages/ServerError'
+import Overview from '@/components/Overview'
 
 export default {
   routes: [
@@ -9,7 +10,7 @@ export default {
       path: '/overview',
       name: 'overview',
       meta: { label: '概览' },
-      component: () => import(/* webpackChunkName: 'overview' */ '@/components/Overview')
+      component: Overview
     },
     {
       path: '/function-pages',

@@ -16,5 +16,8 @@ export default new Vuex.Store({
     setUserInfo ({ commit }, o) {
       commit('SET_USER_INFO', o)
     }
+  },
+  getters: {
+    userInfo: (state) => state.userInfo
   }
 })
