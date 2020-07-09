@@ -4,10 +4,13 @@
 
 const path = require('path')
 const StyleLintPlugin = require('stylelint-webpack-plugin')
+const { getLocalIP4 } = require('quick-local-ip')
+
+const ipv4 = getLocalIP4()
 
 module.exports = {
   devServer: {
-    host: 'localhost',
+    host: ipv4,
     port: 8081,
     proxy: {
       '/api': {
