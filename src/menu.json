@@ -13,6 +13,7 @@
           "name": "概览",
           "icon": "setting",
           "url": "overview",
+          "namekeyi18n": "overview.overview",
           "childList": []
         },
         {
@@ -20,12 +21,14 @@
           "name": "功能页",
           "icon": "switcher",
           "url": "function-pages",
+          "namekeyi18n": "function.functions",
           "childList": [
             {
               "id": "0-2-1",
               "name": "表格",
               "url": "table",
               "sort": 1,
+              "namekeyi18n": "function.table",
               "childList": []
             },
             {
@@ -33,6 +36,7 @@
               "name": "固定数据表格",
               "url": "sync-table",
               "sort": 4,
+              "namekeyi18n": "function.syncTable",
               "childList": []
             },
             {
@@ -40,6 +44,7 @@
               "name": "功能2",
               "url": "corn",
               "sort": 2,
+              "namekeyi18n": "function.function2",
               "childList": []
             },
             {
@@ -47,11 +52,13 @@
               "name": "功能3",
               "url": "eggsplant",
               "sort": 3,
+              "namekeyi18n": "function.function3",
               "childList": [
                 {
                   "id": "0-2-3-1",
                   "name": "功能3.1",
                   "url": "use",
+                  "namekeyi18n": "function.function31",
                   "childList": [],
                   "sort": 1
                 },
@@ -59,6 +66,7 @@
                   "id": "0-2-3-2",
                   "name": "功能3.2",
                   "url": "detail",
+                  "namekeyi18n": "function.function32",
                   "childList": [],
                   "sort": 2
                 }
@@ -70,6 +78,7 @@
           "id": "0-3",
           "name": "异常页",
           "icon": "dashboard",
+          "namekeyi18n": "abnormal.abnormal",
           "url": "abnormal-pages",
           "childList": [
             {
@@ -77,6 +86,7 @@
               "name": "403",
               "url": "no-auth",
               "sort": 1,
+              "namekeyi18n": "abnormal.403",
               "childList": []
             },
             {
@@ -84,12 +94,14 @@
               "name": "404",
               "url": "not-found",
               "sort": 2,
+              "namekeyi18n": "abnormal.404",
               "childList": []
             },
             {
               "id": "0-3-3",
               "name": "500",
               "url": "serve-error",
+              "namekeyi18n": "abnormal.500",
               "sort": 3,
               "childList": []
             }

@@ -4,19 +4,25 @@ import NoAuth from '@/components/abnormal_pages/NoAuth'
 import ServerError from '@/components/abnormal_pages/ServerError'
 import Overview from '@/components/Overview'
 
+import Table from '@/components/function_pages/Table'
+import SyncTable from '@/components/function_pages/SyncTable'
+import Corn from '@/components/function_pages/Corn'
+import Eggsplant from '@/components/function_pages/Eggsplant'
+import EggsplantDetail from '@/components/function_pages/EggsplantDetail'
+
 export default {
   routes: [
     {
       path: '/overview',
       name: 'overview',
-      meta: { label: '概览' },
+      meta: { label: '概览', labelI18nKey: 'overview.overview' },
       component: Overview
     },
     {
       path: '/function-pages',
       name: '',
       component: SimpleRouterWrapper,
-      meta: { label: '功能页' },
+      meta: { label: '功能页', labelI18nKey: 'function.functions' },
       children: [
         {
           path: '',
@@ -25,38 +31,38 @@ export default {
         {
           path: 'table',
           name: 'function-pages::table',
-          component: () => import(/* webpackChunkName: 'function_components' */ '@/components/function_pages/Table'),
-          meta: { label: '表格' }
+          component: Table,
+          meta: { label: '表格', labelI18nKey: 'function.table' }
         },
         {
           path: 'sync-table',
           name: 'function-pages::sync-table',
-          component: () => import(/* webpackChunkName: 'function_components' */ '@/components/function_pages/SyncTable'),
-          meta: { label: '固定数据表格' }
+          component: SyncTable,
+          meta: { label: '固定数据表格', labelI18nKey: 'function.syncTable' }
         },
         {
           path: 'corn',
           name: 'function-pages::corn',
-          component: () => import(/* webpackChunkName: 'function_components' */ '@/components/function_pages/Corn'),
-          meta: { label: '功能2' }
+          component: Corn,
+          meta: { label: '功能2', labelI18nKey: 'function.function2' }
         },
         {
           path: 'eggsplant',
           name: 'function-pages::eggsplant',
           component: SimpleRouterWrapper,
-          meta: { label: '功能3' },
+          meta: { label: '功能3', labelI18nKey: 'function.function3' },
           children: [
             {
               path: 'use',
               name: 'function-pages::eggsplant::use',
-              component: () => import(/* webpackChunkName: 'function_components' */ '@/components/function_pages/Eggsplant'),
-              meta: { label: '功能3.1' }
+              component: Eggsplant,
+              meta: { label: '功能3.1', labelI18nKey: 'function.function31' }
             },
             {
               path: 'detail',
               name: 'function-pages::eggsplant::detail',
-              component: () => import(/* webpackChunkName: 'function_components' */ '@/components/function_pages/EggsplantDetail'),
-              meta: { label: '功能3.2' }
+              component: EggsplantDetail,
+              meta: { label: '功能3.2', labelI18nKey: 'function.function32' }
             }
           ]
         },
@@ -70,31 +76,31 @@ export default {
       path: '/abnormal-pages',
       name: '',
       component: SimpleRouterWrapper,
-      meta: { label: '异常页' },
+      meta: { label: '异常页', labelI18nKey: 'abnormal.abnormal' },
       children: [
         {
           path: '403',
           name: 'abnormal-pages::no-auth',
           component: NoAuth,
-          meta: { label: '403' }
+          meta: { label: '403', labelI18nKey: 'abnormal.403' }
         },
         {
           path: '404',
           name: 'abnormal-pages::not-found',
           component: NotFound,
-          meta: { label: '404' }
+          meta: { label: '404', labelI18nKey: 'abnormal.404' }
         },
         {
           path: '500',
           name: 'abnormal-pages::serve-error',
           component: ServerError,
-          meta: { label: '500' }
+          meta: { label: '500', labelI18nKey: 'abnormal.500' }
         }
       ]
     },
     {
       path: '*',
-      redirect: 'overview' // { name: 'abnormal-pages::not-found' }
+      redirect: 'overview'
     }
   ]
 }
