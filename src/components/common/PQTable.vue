@@ -36,10 +36,10 @@
       @change="handelChangeTable"
       @expand="expand"
       v-bind="$attrs"
-      :scroll="stickHeader ? { y: 'calc(100% - 46px)' } : {}"
+      :customRow="customRow"
+      :scroll="scroll"
     >
       <!-- text: 当前行的值， record当前行数据 -->
-      <template slot-scope="text, record, index" slot="component"></template>
       <template slot-scope="text" slot="time-without-hms">
         <ATooltip placement="topLeft" class="pq-table-tooltip" :title="text">{{ text | removeHMS }}</ATooltip>
       </template>
@@ -67,6 +67,7 @@
           </TextButton>
         </div>
       </template>
+      <!-- 用户可以直接在自己的组件定义slot,例子见SyncTable组件 -->
       <template v-for="slot in Object.keys($scopedSlots)" :slot="slot" slot-scope="text, record"><slot :name="slot"
       v-bind="{ text, record }" /></template>
     </ATable>
@@ -111,7 +112,15 @@ export default {
     return {
       pagination,
       loadedInitialData: false,
-      listData: [ ]
+      listData: [ ],
+      // 支持表格点击每行做的事情
+      customRow: (record) => ({
+        on: {
+          click: () => {
+            this.tableClickRow(record)
+          }
+        }
+      })
     }
   },
   props: {
@@ -156,14 +165,31 @@ export default {
     // 固定表头，y 方向可滚动
     // 注意此时默认给的是 `100% - 46px`，但是这样导致表头高度最好是在一行，当然不止一行也没啥太大问题...
     stickHeader: { type: Boolean, default: true },
+    // 固定列
+    stickHeaderX: { type: Boolean, default: false },
+    // 固定列的宽度
+    stickHeaderXWidth: { type: Number, default: 1300 },
     isSetSourceEmopty: { type: Boolean, default: true },
     getDataPageData: { type: Function, default (data) { return data } },
     getTotalSize: { type: Function, default (data) { return data.result.totalCount } },
     isShowErrorMessage: { type: Boolean, default: true }
+
   },
   computed: {
     noCollapsedOperations () {
       return this.operations.filter((x) => !x.collapsed)
+    },
+    scroll () {
+      if (this.stickHeader && !this.stickHeaderX) {
+        return { y: 'calc(100% - 46px)' }
+      }
+      if (this.stickHeaderX && !this.stickHeader) {
+        return { x: this.stickHeaderXWidth }
+      }
+      if (this.stickHeader && this.stickHeaderX) {
+        return { y: 'calc(100% - 46px)', x: this.stickHeaderXWidth }
+      }
+      return {}
     }
   },
   components: { Pagination, TextButton },
@@ -191,6 +217,9 @@ export default {
     }
   },
   methods: {
+    tableClickRow (record) {
+      this.$emit('table-click-row', record)
+    },
     getListData () {
       return this.listData
     },
@@ -291,14 +320,26 @@ export default {
     flex-direction: column;
 
     .pq-table {
-      flex: 1 1 auto;
+      /* flex: 1 1 auto; */
       /* 最简单的办法，不然子级高度 100% 失效 */
-      height: 100%;
+      max-height: 100%;
+      flex: 1;
       overflow: auto;
       border-top: 1px solid @border-color-base;
 
       &.table-layout-fixed /deep/ table {
         table-layout: fixed;
+      }
+
+      // & /deep/ .ant-table .ant-table-fixed-left .ant-table-body-inner > table > .ant-table-thead > tr th {
+      //   font-weight: 700;
+      // }
+      & /deep/ .ant-table .ant-table-fixed-left .ant-table-body-inner > table > .ant-table-tbody > tr td {
+        max-width: 84px;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        padding: 10px 8px;
       }
 
       // 不然 不能换行

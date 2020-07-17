@@ -7,12 +7,21 @@ import '@/components/registerAntDesignVueComponents'
 import App from './App'
 import router from '@/router'
 import store from '@/store'
+import { i18n, defaultLocale } from '@/components/common/i18n/setup'
+import withI18n from '@/components/common//i18n/withI18n'
 import '@/registerServiceWorker'
 
 Vue.config.productionTip = false
+const config = window.config
+const lang = config.lang ? config.lang : defaultLocale
+
+const I18nApp = withI18n(App)
 
 new Vue({
   router,
   store,
-  render: h => h(App)
+  i18n,
+  render () {
+    return <I18nApp lang={lang} />
+  }
 }).$mount('#app')

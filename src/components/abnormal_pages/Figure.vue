@@ -4,7 +4,7 @@
     <div class="figure-message-wrapper">
       <div class="message">{{message}}</div>
       <div class="description">{{description}}</div>
-      <Button type="primary" @click="toMain">回到首页</Button>
+      <Button type="primary" @click="toMain">{{$t('abnormal.turnBack')}}</Button>
     </div>
   </div>
 </template>

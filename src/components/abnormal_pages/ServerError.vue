@@ -1,5 +1,5 @@
 <template>
-  <Figure class="serve-error" message="500" description="抱歉，服务异常了">
+  <Figure class="serve-error" message="500" :description="$t('abnormal.servicesAbnormal')">
     <i class="icon icon-exception icon-exception-500"></i>
   </Figure>
 </template>

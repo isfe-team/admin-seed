@@ -1,5 +1,5 @@
 <template>
-  <div>类组件（Class Based）</div>
+  <div>{{$t('function.function31')}}（Class Based）</div>
 </template>
 
 <script>

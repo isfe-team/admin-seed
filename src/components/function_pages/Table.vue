@@ -1,8 +1,7 @@
-<!-- 仍然可以采用 jsx 模式 -->
 <template>
   <PQTable
     ref="table"
-    class="resource-management-table"
+    class="common-table"
     rowKey="key"
     :loadDataApi="getTableInfo"
     :operations="operations"
@@ -13,12 +12,16 @@
     :rowSelection="rowSelection"
     @operation="handleOperation"
     @loadedData="handleLoadedData"
+    :stickHeaderX="true"
+    :stickHeaderXWidth="1300"
   />
 </template>
 
 <script>
 import { getTableInfo } from '@/apis/services/table'
 import PQTable from '@/components/common/PQTable'
+import { transformTo } from '@/components/common/i18n/setup'
+
 export default {
   name: 'Table',
   components: { PQTable: PQTable },
@@ -27,16 +30,16 @@ export default {
       query: '',
       getTableInfo,
       operations: [
-        { type: 'edit', label: '编辑' },
-        { type: 'delete', label: '删除' }
+        { type: 'edit', label: transformTo('common.edit') },
+        { type: 'delete', label: transformTo('common.delete') }
       ],
       columns: [
-        { title: '规则编号', dataIndex: 'no', scopedSlots: { customRender: 'ellipsis-with-tooltip' } },
-        { title: '描述', dataIndex: 'description' },
-        { title: '服务调用次数', dataIndex: 'callNo', needTotal: true, customRender: (text) => text + ' 次' },
-        { title: '状态', dataIndex: 'status', needTotal: true },
-        { title: '更新时间', dataIndex: 'updatedAt' },
-        { title: '操作', dataIndex: 'operation', scopedSlots: { customRender: 'operation' } }
+        { title: transformTo('function.ruleNumber'), dataIndex: 'no', scopedSlots: { customRender: 'ellipsis-with-tooltip' }, fixed: 'left', width: 200 },
+        { title: transformTo('function.discription'), dataIndex: 'description', width: 200 },
+        { title: transformTo('function.count'), dataIndex: 'callNo', needTotal: true, customRender: (text) => text + ' 次', width: 200 },
+        { title: transformTo('function.status'), dataIndex: 'status', width: 200 },
+        { title: transformTo('function.updatetime'), dataIndex: 'updatedAt', width: 200 },
+        { title: transformTo('common.operation'), dataIndex: 'operation', scopedSlots: { customRender: 'operation' } }
       ],
       rowSelection: {
         selectedRowKeys: [],
@@ -63,5 +66,27 @@ export default {
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
-<style scoped>
+<style scoped lang="less">
+.common-table {
+  /deep/ .pq-table {
+    overflow: initial;
+    flex: none;
+
+    &.stick-header /deep/ table {
+      width: auto;
+    }
+
+    // 解决固定表格列时固定部分的滚动条无法拖动
+    .ant-table-fixed-left {
+      height: calc(~"100% - 4px") !important;
+
+      .ant-table-body-outer {
+        height: calc(~"100% - 42px") !important;
+        .ant-table-body-inner {
+          max-height: initial !important;
+        }
+      }
+    }
+  }
+}
 </style>

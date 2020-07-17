@@ -12,8 +12,8 @@
     <ALayoutSider
       v-if="!horizontal"
       width="256"
-      trigger="null"
       class="app-layout-sider"
+      :trigger="null"
       collapsible
       :collapsed="collapsed"
     >

@@ -1,5 +1,5 @@
 <template>
-  <div>配置形式组件（Options Based）</div>
+  <div>{{$t('function.function32')}}（Options Based）</div>
 </template>
 
 <script>

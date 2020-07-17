@@ -25,7 +25,7 @@ export default {
     logout () {
       this.$confirm({
         title: '是否退出系统？',
-        onOk () {
+        onOk: () => {
           this.logoutCore()
         }
       })
@@ -55,6 +55,11 @@ export default {
     width: 100%;
     height: 100%;
     padding: 0 20px;
+
+    .change-lang {
+      width: 100px;
+      margin-right: 10px;
+    }
 
     &-icon {
       text-align: center;

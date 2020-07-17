@@ -2,12 +2,12 @@
   <ASubMenu :key="menu.url" v-bind="$props" v-on="$listeners">
     <span slot="title" class="menu-title-wrapper">
       <AIcon :type="menu.icon" v-if="menu.icon" />
-      <span class="menu-title">{{ menu.name }}</span>
+      <span class="menu-title">{{ $t(menu.namekeyi18n) }}</span>
     </span>
     <template v-for="subMenu in menu.childList">
       <AMenuItem class="menu-title-wrapper" v-if="subMenu.childList.length === 0" :key="subMenu.url">
         <AIcon :type="subMenu.icon" v-if="subMenu.icon" />
-        <span class="menu-title">{{ subMenu.name }}</span>
+        <span class="menu-title">{{ $t(subMenu.namekeyi18n) }}</span>
       </AMenuItem>
       <SubMenu v-else :key="subMenu.url" :menu="subMenu"></SubMenu>
     </template>

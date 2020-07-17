@@ -1,12 +1,12 @@
 
 <template>
   <div class="overview-wrapper">
-    <ACard title="页面整体布局">
-      <p>总体左右布局</p>
-      <p>左边上下布局，上为logo，下为menu</p>
-      <p>右边上下布局，上为header，下为content</p>
+    <ACard :title="$t('overview.layoutTitle')">
+      <p>{{$t('overview.layoutDescriptionTotal')}}</p>
+      <p>{{$t('overview.layoutDescriptionLeft')}}</p>
+      <p>{{$t('overview.layoutDescriptionRight')}}</p>
     </ACard>
-    <ACard title="主要使用的技术">
+    <ACard :title="$t('overview.techTitle')">
       <a href="http://doc.vue-js.com/v2/guide/">Vue2.0</a>
       <a href="https://cli.vuejs.org/">@vue/cli</a>
       <a href="https://vuecomponent.github.io/ant-design-vue/docs/vue/introduce/">ant-design-vue</a>
@@ -14,9 +14,10 @@
       <a href="https://github.com/axios/axios">axios</a>
       <a href="https://www.lodashjs.com/docs/4.17.5.html">lodash</a>
     </ACard>
-    <ACard title="满足的大致需求">
-      <p>从登录到具体业务开发到退出</p>
-      <p>基于路由进行页面跳转</p>
+    <ACard :title="$t('overview.demandTitle')">
+      <p>{{$t('overview.demandDescription1')}}</p>
+      <p>{{$t('overview.demandDescription2')}}</p>
+      <p>{{$t('overview.demandDescription3')}}</p>
     </ACard>
   </div>
 </template>

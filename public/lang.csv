@@ -1,0 +1,54 @@
+key,zh_CN,en_US,remark
+
+common
+delete,删除,delete
+edit,编辑,edit
+operation,操作,operation
+
+login
+title,登录,Login
+userNameLabel,用户名,user name
+userNameTip,请输入用户名,Please input your name
+passwordLabel,密码,password
+passwordTip,请输入密码,Please input your password
+loginLabel,登录,Login
+loginErrorTip,你错啦！,You are wrong!
+
+overview
+overview,概览,overview
+layoutTitle,页面整体布局,Main layout
+techTitle,主要使用的技术,Main techs
+layoutDescriptionTotal,总体左右布局,Left-Right
+layoutDescriptionLeft,左边上下布局，上为logo，下为men,Left-Top-Bottom
+layoutDescriptionRight,右边上下布局，上为header，下为content,Right-Header-Content
+demandDescription1,从登录到具体业务开发到退出,From Login to logout
+demandDescription2,路由、状态集成,Router and store integration
+demandDescription3,i18n集成,i18n integration
+demandTitle,满足的大致需求,Met demands
+
+function
+functions,功能页,functions
+table,表格,table
+syncTable,固定数据表格,syncTable
+changeRable,切换表格,changeRable
+ruleNumber,规则编号,ruleNumber
+discription,描述,discription
+count,调用次数,count
+status,操作,status
+updatetime,更新时间,updatetime
+
+function2,功能2,function2
+function3,功能3,function3
+function31,功能31,function31
+function32,功能32,function32
+
+
+abnormal
+abnormal,异常页,abnormal
+403,403,403
+404,404,404
+500,500,500
+turnBack,回到首页,turn back
+servicesAbnormal,抱歉，服务异常了,sorry， services abnormal
+pageNotExist,抱歉，你访问的页面不存在或正在开发,sorry，the page is notExist
+pageForbiddenm,抱歉，没有访问权限,sorry，forbiddren

@@ -1,5 +1,5 @@
 <template>
-  <Figure message="404" description="抱歉，你访问的页面不存在或正在开发">
+  <Figure message="404" :description="$t('abnormal.pageNotExist')">
     <i class="icon icon-exception icon-exception-404"></i>
   </Figure>
 </template>

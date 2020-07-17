@@ -16,7 +16,7 @@
     <template v-for="menu in menus">
       <AMenuItem class="menu-title-wrapper" v-if="menu.childList.length === 0" :key="menu.url">
         <AIcon :type="menu.icon" v-if="menu.icon" />
-        <span class="menu-title">{{ menu.name }}</span>
+        <span class="menu-title">{{ $t(menu.namekeyi18n) }}</span>
       </AMenuItem>
       <SubMenu v-else :menu="menu" :key="menu.url"></SubMenu>
     </template>
@@ -52,8 +52,11 @@ export default {
     }
   },
   watch: {
-    $route () {
-      this.calcMenuRoute()
+    $route: {
+      handler () {
+        this.calcMenuRoute()
+      },
+      immediate: true
     },
     collapsed (val) {
       if (val) {
