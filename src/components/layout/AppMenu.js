@@ -11,12 +11,12 @@ import { Menu, Icon } from 'ant-design-vue'
 
 @Component()
 class AppMenu extends Vue {
-  openKeys = [ ]
+  openKeys = []
   // 父级收起，折叠，然后再展开，所以需要 cachedOpenKeys
-  cachedOpenKeys = [ ]
-  selectedKeys = [ ]
+  cachedOpenKeys = []
+  selectedKeys = []
 
-  @Prop({ type: Array, default: [ ] }) menus
+  @Prop({ type: Array, default: [] }) menus
   @Prop({ type: String, default: 'inline' }) mode
   @Prop(Boolean) collapsed
 
@@ -33,7 +33,7 @@ class AppMenu extends Vue {
   handleCollapsedChange (val) {
     if (val) {
       this.cachedOpenKeys = this.openKeys
-      this.openKeys = [ ]
+      this.openKeys = []
       return
     }
     this.openKeys = this.cachedOpenKeys
@@ -51,7 +51,7 @@ class AppMenu extends Vue {
     if (this.rootSubmenuKeys.indexOf(latestOpenKey) === -1) {
       this.openKeys = openKeys
     } else {
-      this.openKeys = latestOpenKey ? [ latestOpenKey ] : [ ]
+      this.openKeys = latestOpenKey ? [latestOpenKey] : []
     }
   }
 
@@ -60,13 +60,13 @@ class AppMenu extends Vue {
       return
     }
     const routes = this.$route.name.split('::')
-    this.selectedKeys = [ routes[routes.length - 1] ]
+    this.selectedKeys = [routes[routes.length - 1]]
     if (this.mode === 'horizontal') {
       this.openKeys = []
       return
     }
-    const [ firstRoute, secondRoute ] = routes
-    const openKeys = secondRoute ? [ secondRoute, firstRoute ] : [ firstRoute ]
+    const [firstRoute, secondRoute] = routes
+    const openKeys = secondRoute ? [secondRoute, firstRoute] : [firstRoute]
 
     if (this.collapsed) {
       this.cachedOpenKeys = openKeys
@@ -77,23 +77,33 @@ class AppMenu extends Vue {
 
   render () {
     function getSubMenuFragment (menus) {
+      if (!menus) {
+        return false
+      }
       function getMenuIcon (menu) {
         return menu.icon ? <Icon type={menu.icon} /> : null
       }
-      return menus.map((menu) => {
-        if (menu.childList.length === 0) {
-          return <Menu.Item key={menu.url}>{getMenuIcon(menu)}<span class="menu-title">{menu.name}</span></Menu.Item>
+      const menusList = menus.map((menu) => {
+        if (menu.meta) {
+          if (!menu.children) {
+            const path = menu.name.replace(/::/g, '/')
+            return <Menu.Item key={menu.path}><a href={`#/${path}`}><span class="menu-title">{menu.meta.label}</span></a></Menu.Item>
+          }
+          console.log(menu.meta.label)
+
+          return (
+            <Menu.SubMenu key={menu.path}>
+              <span slot="title" class="menu-title-wrapper">
+                {getMenuIcon(menu)}
+                <span class="menu-title">{menu.meta.label}</span>
+              </span>
+              {getSubMenuFragment(menu.children)}
+            </Menu.SubMenu>
+          )
         }
-        return (
-          <Menu.SubMenu key={menu.url}>
-            <span slot="title" class="menu-title-wrapper">
-              {getMenuIcon(menu)}
-              <span class="menu-title">{ menu.name }</span>
-            </span>
-            {getSubMenuFragment(menu.childList)}
-          </Menu.SubMenu>
-        )
       })
+      console.log(menusList)
+      return menusList
     }
 
     const SubMenu = getSubMenuFragment(this.menus)

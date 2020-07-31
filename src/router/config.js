@@ -11,6 +11,7 @@ export default {
       meta: { label: '概览' },
       component: () => import(/* webpackChunkName: 'overview' */ '@/components/Overview')
     },
+
     {
       path: '/function-pages',
       name: '',
@@ -58,6 +59,63 @@ export default {
               meta: { label: '功能3.2' }
             }
           ]
+        },
+        {
+          path: '/btns',
+          name: 'function-pages::btns',
+          meta: { label: 'btns' },
+          component: () => import('@/views/btns.vue')
+        },
+        {
+          path: '/steps',
+          name: 'function-pages::steps',
+          meta: { label: 'steps' },
+          component: () => import('@/views/steps.vue')
+        },
+        {
+          path: '/dropmenu',
+          name: 'function-pages::dropmenu',
+          meta: { label: 'dropmenu' },
+          component: () => import('@/views/dropmenu.vue')
+        },
+        {
+          path: 'checkbox',
+          name: 'function-pages::checkbox',
+          meta: { label: 'checkbox' },
+          component: () => import('@/views/checkbox.vue')
+        },
+        {
+          path: 'datePicker',
+          name: 'function-pages::datePicker',
+          meta: { label: 'datePicker' },
+          component: () => import('@/views/datePicker.vue')
+        },
+
+        {
+          path: 'form',
+          name: 'function-pages::form',
+          meta: { label: 'form' },
+          component: () => import('@/views/form.vue')
+        },
+
+        {
+          path: 'cascader',
+          name: 'function-pages::cascader',
+          meta: { label: 'cascader' },
+          component: () => import('@/views/cascader.vue')
+        },
+        {
+          path: 'pagination',
+          name: 'function-pages::pagination',
+          meta: { label: 'pagination' },
+          component: () => import('@/views/pagination.vue')
+        },
+
+        {
+          path: 'menu',
+          name: 'function-pages::menu',
+          meta: { label: 'menu' },
+          component: () => import('@/views/menu.vue')
         },
         {
           path: '*',

@@ -22,22 +22,22 @@ module.exports = {
   // @see also https://github.com/vuejs/vue-cli/blob/dev/CHANGELOG.md#features-1
   publicPath: '/admin-seed/',
   lintOnSave: true,
-  pages: {
-    app: {
-      entry: 'src/entries/index/index.js',
-      template: 'src/entries/index/index.html',
-      filename: 'index.html',
-      title: 'seed-project',
-      chunks: ['chunk-vendors', 'chunk-common', 'app']
-    },
-    login: {
-      entry: 'src/entries/login/login.js',
-      template: 'src/entries/login/login.html',
-      filename: 'login.html',
-      title: 'login',
-      chunks: ['chunk-vendors', 'chunk-common', 'login']
-    }
-  },
+  // pages: {
+  //   app: {
+  //     entry: 'src/entries/index/index.js',
+  //     template: 'src/entries/index/index.html',
+  //     filename: 'index.html',
+  //     title: 'seed-project',
+  //     chunks: ['chunk-vendors', 'chunk-common', 'app']
+  //   },
+  //   login: {
+  //     entry: 'src/entries/login/login.js',
+  //     template: 'src/entries/login/login.html',
+  //     filename: 'login.html',
+  //     title: 'login',
+  //     chunks: ['chunk-vendors', 'chunk-common', 'login']
+  //   }
+  // },
   configureWebpack: {
     plugins: [
       // see https://github.com/webpack-contrib/stylelint-webpack-plugin
