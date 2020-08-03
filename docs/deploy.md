@@ -157,3 +157,42 @@ http {
     #}
 }
 ```
+
+README
+====================
+
+# 内嵌模式
+
+1. url query参数加上  __inject=true，比如http://localhost:8082/?__inject=true#/overview
+2．默认被嵌入的时候，如果session过期，是不会自己跳到登录的，会发一条消息（parent.postMessage({ type: 'LOGOUT', url: url }, '*')），此时父页面需要自己监听该事件，然后自行跳转。url为要跳转的地址
+3．接上一条，简析在uap里面配置的应用地址应该是 父页面的首页地址，不然会跳转错误(如果超时)
+4. 如果是通过uap跳转，跳转的地址要加上 __inject=true 的query参数
+
+如果是要嵌的是需要跳到具体地址，需要做的两点，首先在需要被嵌的项目上在路由切换时发消息给父级，例如
+```
+parent.postMessage({
+    type: 'ROUTER_BEFORE_EACH',
+    payload: {
+      // 需要Pick，不然有函数会出现问题
+      to: pickUsefulRouteInfo(to),
+      from: pickUsefulRouteInfo(from)
+    }
+  }, '*')
+```
+在嵌入该系统模块监听这个信息
+```
+messageHandler (evt) {
+      if (evt.data && evt.data.type === 'ROUTER_AFTER_EACH') {
+        const { payload } = evt.data
+        const toName = payload.to.name
+        // @TODO 不太好，但是比较简单
+        console.log(payload, 'payload')
+        const firstName = toName.split('::')[0]
+        if (this.$refs.iframe.src.indexOf(firstName) === -1) {
+          console.log('FORCE REDIRECT FROM', this.$refs.iframe.src)
+          console.log('FORCE REDIRECT TO', this.iframeSrc)
+          this.$refs.iframe.src = this.iframeSrc
+        }
+      }
+    }
+```

@@ -10,7 +10,7 @@
     :class="{'app-layout-horizontal': horizontal, 'app-layout-vertical': !this.horizontal, 'app-layout-header-stick': useStickHeaderMode }"
   >
     <ALayoutSider
-      v-if="!horizontal"
+      v-if="!horizontal && !injected"
       width="256"
       class="app-layout-sider"
       :trigger="null"
@@ -26,7 +26,7 @@
       <AppMenu :menus="menus" :mode="horizontal ? 'horizontal' : 'inline'" class='app-layout-menu' :collapsed="collapsed" />
     </ALayoutSider>
     <ALayout :class="{'app-layout': horizontal, 'app-layout-horizontal': horizontal, 'app-layout-header-stick': useStickHeaderMode}">
-      <ALayoutHeader class='app-layout-header' :class="{'use-stick-header-mode': useStickHeaderMode }">
+      <ALayoutHeader v-if="!injected" class='app-layout-header' :class="{'use-stick-header-mode': useStickHeaderMode }">
         <AppHeader class='app-layout-header-core'>
           <template v-if="horizontal">
             <h2 class='app-layout-title'><img class='app-layout-horizontal-logo' :src="Logo" alt='logo' />Admin Seed</h2>
@@ -48,6 +48,7 @@
 import AppHeader from './AppHeaderContainer'
 import AppMenu from './AppMenu'
 import Logo from '@/assets/logo.png'
+import { mapGetters } from 'vuex'
 export default {
   data () {
     return {
@@ -73,6 +74,7 @@ export default {
     }
   },
   computed: {
+    ...mapGetters(['injected']),
     // 目前水平模式可以 stick，垂直的话其实没必要
     useStickHeaderMode () {
       return this.horizontal && this.stickHeader

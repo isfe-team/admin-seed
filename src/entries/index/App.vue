@@ -16,25 +16,22 @@
 
 <script>
 import 'moment/locale/zh-cn'
-import menuResponseData from '@/menu.json'
 import { mapGetters, mapActions } from 'vuex'
 import AppLayout from '@/components/layout/AppLayout'
 import { getUserInfo } from '@/apis/services/user'
 import { showErrorTip } from '@/utils/helpers'
-const menus = menuResponseData.data[0].childList
 export default {
   data () {
     return {
       spinning: false,
       inited: false,
       horizontal: false,
-      stickHeader: false,
-      menus
+      stickHeader: false
     }
   },
   components: { AppLayout },
   computed: {
-    ...mapGetters(['userInfo', 'locale', 'antLocale']),
+    ...mapGetters(['userInfo', 'locale', 'antLocale', 'menus']),
     matchedRouteFragments () {
       return this.$route.matched
     }
@@ -47,9 +44,10 @@ export default {
       showErrorTip('获取用户信息失败')
     })
     this.setAntLocaleInfo(this.locale)
+    this.loadMenus()
   },
   methods: {
-    ...mapActions(['setUserInfo', 'setAntLocaleInfo'])
+    ...mapActions(['setUserInfo', 'setAntLocaleInfo', 'loadMenus'])
   }
 }
 </script>
@@ -72,6 +70,7 @@ export default {
       background: #F5F5F5;
 
       .app-breadcrumb {
+        height: @breadcrumb-height;
         line-height: @breadcrumb-height;
       }
 

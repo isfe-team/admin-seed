@@ -10,6 +10,8 @@ import Corn from '@/components/function_pages/Corn'
 import Eggsplant from '@/components/function_pages/Eggsplant'
 import EggsplantDetail from '@/components/function_pages/EggsplantDetail'
 
+import Vendor from '@/components/common/Vendor'
+
 export default {
   routes: [
     {
@@ -45,6 +47,11 @@ export default {
           name: 'function-pages::corn',
           component: Corn,
           meta: { label: '功能2', labelI18nKey: 'function.function2' }
+        },
+        {
+          path: 'vendor-baidu',
+          name: 'function-pages::vendor-baidu',
+          component: Vendor
         },
         {
           path: 'eggsplant',

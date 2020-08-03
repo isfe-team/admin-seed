@@ -117,6 +117,12 @@ export function handleUnauth (url) {
       }, 5 * 1000)
     })
   }
+  const { __inject } = qs.parse(location.search.slice(1))
+
+  if (__inject === 'true') {
+    parent.postMessage({ type: 'LOGOUT', url: url }, '*')
+    return fin()
+  }
 
   location.href = url || './login.html'
   return fin()

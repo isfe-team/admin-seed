@@ -9,7 +9,7 @@ import store from '@/store'
 
 Vue.config.productionTip = false
 const config = window.config
-const lang = config.langs && config.langs.length || defaultLocale
+const lang = config.lang ? config.lang : defaultLocale
 
 const I18nApp = withI18n(Login)
 

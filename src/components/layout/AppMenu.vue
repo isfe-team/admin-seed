@@ -26,6 +26,24 @@
 <script>
 import reverse from 'lodash/reverse'
 import SubMenu from './ASubMenu'
+import { mapGetters } from 'vuex'
+import { showErrorTip } from '@/utils/helpers'
+
+function getItemByMenus (menus, url) {
+  let item = null
+  function findItem (menus, url) {
+    menus.forEach((x) => {
+      if (x.url === url) {
+        item = x
+      }
+      if (x.childList.length) {
+        findItem(x.childList, url)
+      }
+    })
+    return item
+  }
+  return findItem(menus, url)
+}
 export default {
   data () {
     return {
@@ -36,12 +54,6 @@ export default {
   },
   components: { SubMenu },
   props: {
-    menus: {
-      type: Array,
-      default () {
-        return []
-      }
-    },
     mode: {
       type: String,
       default: 'inline'
@@ -68,13 +80,28 @@ export default {
     }
   },
   computed: {
+    ...mapGetters(['menus']),
     rootSubmenuKeys () {
       return this.menus.map((x) => x.url)
     }
   },
   methods: {
     handleSelect (data) {
+      // 在所有菜单里面找到该项
+      const selectItem = getItemByMenus(this.menus, data.key)
+      if (!selectItem) {
+        showErrorTip(null, '菜单配置有误')
+        return
+      }
+      this.$route.params.selectItem = selectItem
       const keyPath = reverse(data.keyPath).join('::')
+      if (selectItem.vendorUrl) {
+        this.$router.push({
+          name: keyPath,
+          params: { selectItem: selectItem.vendorUrl }
+        })
+        return
+      }
       this.$router.push({
         name: keyPath
       })
@@ -91,8 +118,19 @@ export default {
       if (!this.$route.name) {
         return
       }
+      // 找到该项
       const routes = this.$route.name.split('::')
       this.selectedKeys = [ routes[routes.length - 1] ]
+      const selectItem = getItemByMenus(this.menus, this.selectedKeys[0])
+      // 判断是不是内嵌的
+      // if (selectItem.vendorUrl) {
+      //   this.$router.push({
+      //     name: keyPath,
+      //     params: { selectItem: selectItem.vendorUrl }
+      //   })
+      //   return
+      // }
+      this.$route.params.selectItem = selectItem.vendorUrl
       if (this.mode === 'horizontal') {
         this.openKeys = []
         return

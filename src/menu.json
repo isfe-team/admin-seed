@@ -40,6 +40,14 @@
               "childList": []
             },
             {
+              "id": "0-1",
+              "name": "内嵌百度",
+              "url": "vendor-baidu~",
+              "type": "baidu",
+              "namekeyi18n": "common.vendor",
+              "childList": []
+            },
+            {
               "id": "0-2-2",
               "name": "功能2",
               "url": "corn",

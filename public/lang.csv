@@ -4,6 +4,7 @@ common
 delete,删除,delete
 edit,编辑,edit
 operation,操作,operation
+vendor,内嵌百度,vendor
 
 login
 title,登录,Login

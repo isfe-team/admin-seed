@@ -18,9 +18,6 @@ export default {
       }
     }
   },
-  mounted () {
-    window.addEventListener('message', this.dispatcher)
-  },
   methods: {
     logout () {
       this.$confirm({
@@ -32,13 +29,7 @@ export default {
     },
     logoutCore () {
       window.location.href = './login.html'
-    },
-    dispatcher (x) {
-      console.log('x', x)
     }
-  },
-  beforeDestroy () {
-    window.removeEventListeer('message', this.dispatcher)
   }
 }
 </script>
