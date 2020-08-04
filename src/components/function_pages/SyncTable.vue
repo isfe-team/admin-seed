@@ -10,6 +10,7 @@
       :getDataTotalCount="getDataTotalCount"
       :initialPagination="{ currentPage: +$route.query.p || 1 }"
       :columns="columns"
+      :showTextButton="false"
       :query="query"
       @operation="handleOperation"
     >
@@ -48,7 +49,7 @@ export default {
       resultData: MOCK_LIST_DATA,
       operations: [
         { type: 'edit', label: transformTo('common.edit'), exist (record, index) { return true } },
-        { type: 'delete', label: transformTo('common.delete'), disabled (record, index) { console.log('DISABLED', record, index) } }
+        { type: 'delete', label: transformTo('common.delete'), disabled (record, index) { return false }, danger () { return true } }
       ],
       columns: [
         { title: transformTo('function.ruleNumber'), dataIndex: 'no', scopedSlots: { customRender: 'user-defined' } },

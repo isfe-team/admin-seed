@@ -18,8 +18,6 @@
   - @emits {pagination-update} pagination 相关参数变化后触发（size-change 和 current-change），返回当前分页信息
   - @emits {operation} 某个操作点击时触发，返回操作类型和当前 record
   -
-  - @todo
-  - 增加 TextButton 和 AButton 控制
 -->
 <template>
   <div class="pq-table-wrapper">
@@ -54,7 +52,7 @@
         <AProgress :percent="Number(text)" size="small" />
       </template>
       <template slot-scope="text, record" slot="operation">
-        <div class="button-wrapper">
+        <div class="button-wrapper" v-if="showTextButton">
           <TextButton
             v-for="(operation, index) in noCollapsedOperations"
             v-if="typeof operation.exist === 'function' ? !!operation.exist(record) : true"
@@ -66,6 +64,18 @@
             {{ operation.label }}
           </TextButton>
         </div>
+        <div class="button-wrapper" v-else>
+        <AButton
+          v-for="(operation, index) in noCollapsedOperations"
+          v-if="typeof operation.exist === 'function' ? !!operation.exist(record) : true"
+          :disabled="typeof operation.disabled === 'function' ? !!operation.disabled(record) : !!operation.disabled"
+          :type="(typeof operation.danger === 'function' && !!operation.danger(record) || !!operation.danger) ? 'danger' : 'primary'"
+          :key="index"
+          class="pq-operation-item"
+          @click="emitOperation(operation, record)">
+          {{ operation.label }}
+        </AButton>
+      </div>
       </template>
       <!-- 用户可以直接在自己的组件定义slot,例子见SyncTable组件 -->
       <template v-for="slot in Object.keys($scopedSlots)" :slot="slot" slot-scope="text, record"><slot :name="slot"
@@ -169,16 +179,24 @@ export default {
     stickHeaderX: { type: Boolean, default: false },
     // 固定列的宽度
     stickHeaderXWidth: { type: Number, default: 1300 },
+    // 每一次加载前是否需要将表格数据先置空
     isSetSourceEmopty: { type: Boolean, default: true },
+    // 解决不同情况下接口返回得格式不对问题做的转换函数
+    // 转换获取得datasource
     getDataPageData: { type: Function, default (data) { return data } },
+    // 转换分页得总数字段
     getTotalSize: { type: Function, default (data) { return data.result.totalCount } },
-    isShowErrorMessage: { type: Boolean, default: true }
+    // 是否展示请求错误信息
+    isShowErrorMessage: { type: Boolean, default: true },
+    // 操作栏是否是展示textbutton,否则就展示AButton
+    showTextButton: { type: Boolean, default: true }
 
   },
   computed: {
     noCollapsedOperations () {
       return this.operations.filter((x) => !x.collapsed)
     },
+    // 计算固定行和列的时候scroll的x值和y值
     scroll () {
       if (this.stickHeader && !this.stickHeaderX) {
         return { y: 'calc(100% - 46px)' }
@@ -277,9 +295,11 @@ export default {
           }
         })
     },
+    // 表格展开时传参/有子表格的时候
     expand (expanded, record) {
       this.$emit('expand', { expanded, record })
     },
+    // 加载第一页的数据/很多时候会有需求希望能返回第一页的数据
     resetReload () {
       this.resetPagination()
       return this.loadData()
