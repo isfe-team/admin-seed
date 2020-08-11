@@ -85,14 +85,12 @@ class AppMenu extends Vue {
       }
       const menusList = menus.map((menu) => {
         if (menu.meta) {
+          const path = menu.path.replace(/\//g, '')
           if (!menu.children) {
-            const path = menu.name.replace(/::/g, '/')
-            return <Menu.Item key={menu.path}><a href={`#/${path}`}><span class="menu-title">{menu.meta.label}</span></a></Menu.Item>
+            return <Menu.Item key={path}><span class="menu-title">{menu.meta.label}</span></Menu.Item>
           }
-          console.log(menu.meta.label)
-
           return (
-            <Menu.SubMenu key={menu.path}>
+            <Menu.SubMenu key={path}>
               <span slot="title" class="menu-title-wrapper">
                 {getMenuIcon(menu)}
                 <span class="menu-title">{menu.meta.label}</span>
@@ -102,7 +100,6 @@ class AppMenu extends Vue {
           )
         }
       })
-      console.log(menusList)
       return menusList
     }
 

@@ -27,7 +27,6 @@ class App extends Vue {
 
   beforeMount () {
     this.menus = this.$router.options.routes
-    console.log(this.menus)
     getUserInfo().then((user) => {
       this.setUserInfo(user)
       this.inited = true
@@ -46,10 +45,10 @@ class App extends Vue {
               <div class="app-content-wrapper">
                 <Breadcrumb class="app-breadcrumb">
                   {
-                    this.matchedRouteFragments.map((route, index) => (<Breadcrumb.Item key={index}>{route.meta.label}</Breadcrumb.Item>))
+                    this.matchedRouteFragments.map((route, index) => (<Breadcrumb.Item key={index}><router-link to={route.path}>{route.meta.label}</router-link></Breadcrumb.Item>))
                   }
                 </Breadcrumb>
-                <router-view class="app-page" />
+                <transition name='slide-fade'><div class="app-page"><router-view class="app-page-container" /></div></transition>
               </div>
             </AppLayout>)
           }
@@ -67,5 +66,15 @@ export default App
         display:block;
     }
 }
-
+.slide-fade-enter-active {
+  transition: all .3s ease;
+}
+.slide-fade-leave-active {
+  transition: all .8s cubic-bezier(1.0, 0.5, 0.8, 1.0);
+}
+.slide-fade-enter, .slide-fade-leave-to
+{
+  transform: translateX(10px);
+  opacity: 0;
+}
 </style>

@@ -6,6 +6,9 @@ const path = require('path')
 const StyleLintPlugin = require('stylelint-webpack-plugin')
 
 module.exports = {
+  css: {
+    sourceMap: true
+  },
   devServer: {
     host: 'localhost',
     port: 8081,

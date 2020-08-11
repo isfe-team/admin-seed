@@ -29,34 +29,34 @@
               "childList": []
             },
             {
-              "id": "0-2-1",
+              "id": "0-2-2",
               "name": "固定数据表格",
               "url": "sync-table",
               "sort": 4,
               "childList": []
             },
             {
-              "id": "0-2-2",
+              "id": "0-2-3",
               "name": "功能2",
               "url": "corn",
               "sort": 2,
               "childList": []
             },
             {
-              "id": "0-2-3",
+              "id": "0-2-4",
               "name": "功能3",
               "url": "eggsplant",
               "sort": 3,
               "childList": [
                 {
-                  "id": "0-2-3-1",
+                  "id": "0-2-4-1",
                   "name": "功能3.1",
                   "url": "use",
                   "childList": [],
                   "sort": 1
                 },
                 {
-                  "id": "0-2-3-2",
+                  "id": "0-2-4-2",
                   "name": "功能3.2",
                   "url": "detail",
                   "childList": [],

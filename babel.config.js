@@ -1,6 +1,6 @@
 module.exports = {
-  presets: [ [ '@vue/app', { loose: true } ] ],
+  presets: [['@vue/app', { loose: true }]],
   // https://github.com/ant-design/babel-plugin-import
   // `style: true` 可以引入 `less`，但是直接采用引入所有样式
-  plugins: [ [ 'import', { libraryName: 'Antd', libraryDirectory: 'lib' } ] ]
+  plugins: [['import', { libraryName: 'Antd', libraryDirectory: 'lib' }]]
 }
