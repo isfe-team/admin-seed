@@ -5,7 +5,6 @@
 import Vue from 'vue'
 import { Component, Prop, Emit } from 'vue-property-decorator'
 import './AppHeader.less'
-
 @Component()
 class AppHeader extends Vue {
   @Prop([ Object, null ]) userInfo
@@ -16,13 +15,14 @@ class AppHeader extends Vue {
   logout () {
     this.$confirm({
       title: '是否退出系统？',
-      onOk () {
+      onOk: () => {
         this.logoutCore()
       }
     })
   }
 
   logoutCore () {
+    sessionStorage.setItem('token', '')
     window.location.href = './login.html'
   }
 

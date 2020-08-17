@@ -9,7 +9,13 @@ const router = new Router(routerConfig)
 
 router.beforeEach((to, from, next) => {
   NProgress.start()
-  next()
+  if (!sessionStorage.getItem('token') && to.name !== 'login') {
+    next({
+      path: '/login'
+    })
+  } else {
+    next()
+  }
 })
 router.afterEach(() => {
   NProgress.done(true)

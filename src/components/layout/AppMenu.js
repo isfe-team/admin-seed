@@ -38,8 +38,12 @@ class AppMenu extends Vue {
     }
     this.openKeys = this.cachedOpenKeys
   }
+  handleClick (value) {
+    console.log(value)
+  }
 
   handleSelect (data) {
+    console.log(data)
     const keyPath = reverse(data.keyPath).join('::')
     this.$router.push({
       name: keyPath
@@ -47,6 +51,11 @@ class AppMenu extends Vue {
   }
 
   handleMenuOpenChange (openKeys) {
+    if (openKeys.includes('overview')) {
+      this.$router.push({
+        path: '/overview/main'
+      })
+    }
     const latestOpenKey = openKeys.find((key) => this.openKeys.indexOf(key) === -1)
     if (this.rootSubmenuKeys.indexOf(latestOpenKey) === -1) {
       this.openKeys = openKeys
@@ -84,15 +93,16 @@ class AppMenu extends Vue {
         return menu.icon ? <Icon type={menu.icon} /> : null
       }
       const menusList = menus.map((menu) => {
-        if (menu.meta) {
+        if (menu.meta && !menu.hidden) {
           const path = menu.path.replace(/\//g, '')
           if (!menu.children) {
-            return <Menu.Item key={path}><span class="menu-title">{menu.meta.label}</span></Menu.Item>
+            return <Menu.Item key={path}> {menu.meta.icon && <a-icon type={menu.meta.icon} />}<span class="menu-title">{menu.meta.label}</span></Menu.Item>
           }
           return (
             <Menu.SubMenu key={path}>
               <span slot="title" class="menu-title-wrapper">
                 {getMenuIcon(menu)}
+                {menu.meta.icon && <a-icon type={menu.meta.icon} />}
                 <span class="menu-title">{menu.meta.label}</span>
               </span>
               {getSubMenuFragment(menu.children)}

@@ -48,18 +48,18 @@
 </template>
 <script>
 export default {
-  data() {
-    return {};
+  data () {
+    return {}
   },
   methods: {
-    onChange(link) {
-      console.log("Anchor:OnChange", link);
+    onChange (link) {
+      console.log('Anchor:OnChange', link)
     },
-    getCurrentAnchor() {
-      return "#components-anchor-demo-static";
-    },
-  },
-};
+    getCurrentAnchor () {
+      return '#components-anchor-demo-static'
+    }
+  }
+}
 </script>
 <style lang="less">
 .anchor {

@@ -63,7 +63,7 @@ class AppLayout extends Vue {
           <div class='app-layout-logo-wrapper'>
             <a href="/">
               <img src={Logo} alt='logo' />
-              <h1>Admin Seed</h1>
+              <h1>管理系统</h1>
             </a>
           </div>
           {Menu}

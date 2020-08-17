@@ -9,6 +9,18 @@
 }
 
 #app {
+  .ant-menu-root{
+    li:first-of-type{
+      .ant-menu-submenu-arrow{
+        display: none;
+      }
+    }
+  }
+  [aria-owns='overview$Menu']{
+    .ant-menu-submenu-arrow{
+      display: none;
+    }
+  }
   .app-content-wrapper {
     height: 100%;
     padding: 0 @padding-sm @padding-sm;
@@ -17,6 +29,7 @@
 
     .app-breadcrumb {
       line-height: @breadcrumb-height;
+      padding-left: 20px;
       
     }
 
