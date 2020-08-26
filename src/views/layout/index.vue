@@ -18,7 +18,7 @@ class App extends Vue {
   horizontal = false
   stickHeader = false
   menus=[]
-  transitionName='bounce'
+  transitionName='slide-fade'
 
   get matchedRouteFragments () {
     return this.$route.matched

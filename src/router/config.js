@@ -14,23 +14,14 @@ export default {
     },
     {
       path: '/overview',
-      name: '',
+      name: 'overview',
       meta: { label: '概览', icon: 'bank' },
-      component: mainConponent,
-      redirect: '/overview/main',
-      children: [
-        {
-          path: 'main',
-          name: 'overview::main',
-          hidden: true,
-          component: () => import(/* webpackChunkName: 'overview' */ '@/components/Overview')
-        }
-      ]
+      component: () => import('@/components/Overview')
     },
     {
       path: '/comp-layout',
       name: '',
-      meta: { label: '布局类组件', icon: 'appstore' },
+      meta: { label: '常用组件', icon: 'appstore' },
       component: mainConponent,
       redirect: '/comp-layout/btns',
       children: [
@@ -47,21 +38,6 @@ export default {
           meta: { label: '分页器组件' },
           component: () => import('@/views/pagination.vue')
         },
-
-        {
-          path: 'rate',
-          name: 'comp-layout::rate',
-          meta: { label: '评分组件' },
-          component: () => import('@/views/rate.vue')
-        },
-
-        {
-          path: 'transfer',
-          name: 'comp-layout::transfer',
-          meta: { label: '穿梭框组件' },
-          component: () => import('@/views/transfer.vue')
-        },
-
         {
           path: 'badge',
           name: 'comp-layout::badge',
@@ -75,13 +51,6 @@ export default {
           meta: { label: '标签页组件' },
           component: () => import('@/views/tags.vue')
         },
-
-        {
-          path: 'skeleton',
-          name: 'comp-layout::skeleton',
-          meta: { label: '加载占位图' },
-          component: () => import('@/views/skeleton.vue')
-        },
         {
           path: 'card',
           name: 'comp-layout::card',
@@ -94,31 +63,7 @@ export default {
           meta: { label: '列表组件' },
           component: () => import('@/views/list.vue')
         },
-        {
-          path: 'avatar',
-          name: 'comp-layout::avatar',
-          meta: { label: '头像组件' },
-          component: () => import('@/views/avatar.vue')
-        },
-        {
-          path: 'divider',
-          name: 'comp-layout::divider',
-          meta: { label: '分割线组件' },
-          component: () => import('@/views/divider.vue')
-        },
-        {
-          path: 'collapse',
-          name: 'comp-layout::collapse',
-          meta: { label: '折叠面板' },
-          component: () => import('@/views/collapse.vue')
-        },
 
-        {
-          path: 'anchor',
-          name: 'comp-layout::anchor',
-          meta: { label: '锚点组件' },
-          component: () => import('@/views/anchor.vue')
-        },
         {
           path: 'modal',
           name: 'comp-layout::modal',
@@ -321,6 +266,7 @@ export default {
           meta: { label: '不同风格表格' },
           component: () => import('@/views/table-select.vue')
         }
+
       ]
     },
     {
@@ -360,6 +306,70 @@ export default {
           meta: { label: '加载中组件' },
           component: () => import('@/views/spin.vue')
         }
+      ]
+    },
+    {
+      path: 'other',
+      name: '',
+      component: mainConponent,
+      meta: { label: '其它组件', icon: 'user' },
+      redirect: '/other',
+      children: [
+        {
+          path: 'skeleton',
+          name: 'other::skeleton',
+          meta: { label: '加载占位图' },
+          component: () => import('@/views/skeleton.vue')
+        },
+        {
+          path: 'collapse',
+          name: 'other::collapse',
+          meta: { label: '折叠面板' },
+          component: () => import('@/views/collapse.vue')
+        },
+        {
+          path: 'anchor',
+          name: 'other::anchor',
+          meta: { label: '锚点组件' },
+          component: () => import('@/views/anchor.vue')
+        },
+        {
+          path: 'avatar',
+          name: 'other::avatar',
+          meta: { label: '头像组件' },
+          component: () => import('@/views/avatar.vue')
+        },
+        {
+          path: 'avatar-list',
+          name: 'other::avatar-list',
+          meta: { label: '头像列表' },
+          component: () => import('@/views/avatar-list.vue')
+        },
+        {
+          path: 'rate',
+          name: 'other::rate',
+          meta: { label: '评分组件' },
+          component: () => import('@/views/rate.vue')
+        },
+        {
+          path: 'transfer',
+          name: 'other::transfer',
+          meta: { label: '穿梭框组件' },
+          component: () => import('@/views/transfer.vue')
+        },
+        {
+          path: 'step',
+          name: 'other::step',
+          meta: { label: '步骤条' },
+          component: () => import('@/views/step.vue')
+        },
+        {
+          path: 'divider',
+          name: 'other::divider',
+          meta: { label: '分割线组件' },
+          component: () => import('@/views/divider.vue')
+        }
+
       ]
     },
     {

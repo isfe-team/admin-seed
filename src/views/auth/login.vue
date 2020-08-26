@@ -2,20 +2,16 @@
   <div class="login-page">
     <div class="login-page-form">
       <div class="mask"></div>
-      <div class="title">
-        <div class="logo">
+      <div class="logo">
           <img src="../../assets/imgs/ifly-login-logo.png" alt />
         </div>
-        <a-divider class="user-tit">用户登录</a-divider>
-      </div>
-
+       <div class="title">
+         <a-divider class="user-tit">用户登录</a-divider>
+       </div>
       <a-form :form="form" @submit="handleSubmit">
         <a-form-item
           :validate-status="userNameError() ? 'error' : ''"
           :help="userNameError() || ''"
-          :label-col="formItemLayout.labelCol"
-          :wrapper-col="formItemLayout.wrapperCol"
-          label="用户名"
         >
           <a-input
 
@@ -32,9 +28,6 @@
 
           :validate-status="passwordError() ? 'error' : ''"
           :help="passwordError() || ''"
-          :label-col="formItemLayout.labelCol"
-          :wrapper-col="formItemLayout.wrapperCol"
-          label="密码"
         >
           <a-input
             v-decorator="[
@@ -53,14 +46,6 @@
   </div>
 </template>
 <script>
-const formItemLayout = {
-  labelCol: { span: 6 },
-  wrapperCol: { span: 18 }
-}
-const formTailLayout = {
-  labelCol: { span: 6 },
-  wrapperCol: { span: 12, offset: 6 }
-}
 function hasErrors (fieldsError) {
   return Object.keys(fieldsError).some((field) => fieldsError[field])
 }
@@ -68,8 +53,6 @@ export default {
   data () {
     return {
       hasErrors,
-      formItemLayout,
-      formTailLayout,
       form: this.$form.createForm(this, { name: 'horizontal_login' })
     }
   },
@@ -120,25 +103,35 @@ export default {
     flex-direction: column;
     justify-content: center;
     align-items: center;
+    .logo{
+      position: fixed;
+      right: 0;
+      top: 200px;
+      width: 400px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
     .mask {
       width: 400px;
       height: 100%;
       background: url("../../assets/imgs/bg.jpg");
-      background:rgba(0,0,0,.2);
+      background:rgba(0,0,0,.25);
       background-size:cover;
-      -webkit-filter: blur(2px);
-      -moz-filter: blur(2px);
-      -o-filter: blur(2px);
-      -ms-filter: blur(2px);
-      filter: blur(2px);
+      -webkit-filter: blur(1px);
+      -moz-filter: blur(1px);
+      -o-filter: blur(1px);
+      -ms-filter: blur(1px);
+      filter: blur(1px);
       position: fixed;
       right: 0;
       top: 0;
     }
     .title {
       padding-bottom: 20px;
+      width:100%;
       .user-tit {
-        color: #fff;
+        color: rgba(255,255,255,.7);
       }
     }
     form {
