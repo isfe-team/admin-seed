@@ -63,7 +63,7 @@ export default {
     return {
       size: 'large',
       loading: false,
-      iconLoading: false,
+      iconLoading: false
     }
   },
   methods: {
