@@ -5,6 +5,7 @@ import { State, Action } from 'vuex-class'
 import { LocaleProvider } from 'ant-design-vue'
 import { axiosInstance } from '@/apis'
 import { showErrorTip } from '@/utils/helpers'
+import { transformTo } from '@/i18n/setup'
 import './App.less'
 
 @Component()
@@ -14,6 +15,22 @@ class App extends Vue {
   @State locale
   @State antdLocale
   @Action loadAntdLocale
+  @Action loadLangs
+
+  beforeMount () {
+    function walk (xs) {
+      xs.forEach((x) => {
+        if (x.meta && x.meta.labelKeyI18n) {
+          x.meta.label = transformTo(x.meta.labelKeyI18n)
+        }
+
+        if (x.children) {
+          walk(x.children)
+        }
+      })
+    }
+    walk(this.$router.options.routes)
+  }
 
   @Watch('locale', { immediate: true })
   handleLocaleChange (locale) {
@@ -24,7 +41,7 @@ class App extends Vue {
     this.load().then(() => {
       this.inited = true
 
-      document.title = this.$t('main.title')
+      document.title = this.$t('common.title')
     }, () => {
       showErrorTip(new Error(this.$t('error.GET_LOCALE_INFO_ERROR')))
     })
@@ -32,7 +49,8 @@ class App extends Vue {
 
   load () {
     return Promise.all([
-      this.loadAntdLocale(this.locale)
+      this.loadAntdLocale(this.locale),
+      this.loadLangs()
     ])
   }
 

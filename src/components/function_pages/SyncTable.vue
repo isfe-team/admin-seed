@@ -1,10 +1,11 @@
 <template>
   <div>
-    <AButton type="primary" @click="changeTable">切换数据</AButton>
+    <AButton type="primary" @click="changeTable">{{$t('function.changeRable')}}</AButton>
     <PQTable
       ref="table"
       class="resource-management-table"
       rowKey="key"
+      :bordered="true"
       :loadDataApi="getTableInfo"
       :operations="operations"
       :transformListData="transformListData"
@@ -12,6 +13,7 @@
       :initialPagination="{ currentPage: +$route.query.p || 1 }"
       :columns="columns"
       :query="query"
+      :components="components"
       @operation="handleOperation"
     />
   </div>
@@ -20,6 +22,8 @@
 <script>
 import clone from 'lodash/clone'
 import PQTable from '@/components/common/PQTable'
+import { transformTo } from '@/i18n/setup'
+import { draggableTable } from './draggableTable'
 
 const MOCK_LIST_DATA = {
   message: 1,
@@ -34,18 +38,19 @@ const MOCK_LIST_DATA = {
 export default {
   name: 'SyncTable',
   components: { PQTable: PQTable },
+  mixins: [draggableTable],
   data () {
     return {
       query: { },
       resultData: MOCK_LIST_DATA,
       operations: [
-        { type: 'edit', label: '编辑', exist (record, index) { console.log('EXIST', record, index) } },
-        { type: 'delete', label: '删除', disabled (record, index) { console.log('DISABLED', record, index) } }
+        { type: 'edit', label: transformTo('common.edit'), exist (record, index) { console.log('EXIST', record, index) } },
+        { type: 'delete', label: transformTo('common.delete'), disabled (record, index) { console.log('DISABLED', record, index) } }
       ],
       columns: [
-        { title: '规则编号', dataIndex: 'no' },
-        { title: '描述', dataIndex: 'description' },
-        { title: '操作', dataIndex: 'operation', scopedSlots: { customRender: 'operation' } }
+        { title: transformTo('function.ruleNumber'), dataIndex: 'no', scopedSlots: { customRender: 'ellipsis-with-tooltip' }, width: 100 },
+        { title: transformTo('function.discription'), dataIndex: 'description', width: 100 },
+        { title: transformTo('common.operation'), dataIndex: 'operation', scopedSlots: { customRender: 'operation' }, width: 100 }
       ]
     }
   },
@@ -87,8 +92,27 @@ export default {
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
-<style scoped>
+<style scoped lang="less">
   .resource-management-table {
     margin-top: 20px;
+
+    /deep/ .ant-table {
+      .ant-table-thead > tr > th.resize-table-th {
+        position: relative;
+      }
+
+      .table-draggable-handle {
+        position: absolute;
+        /* width: 10px !important; */
+        height: 42px !important;
+        top: 0px;
+        left: auto !important;
+        right: -5px;
+        cursor: col-resize;
+        touch-action: none;
+        border: none;
+        transform: none !important;
+      }
+    }
   }
 </style>

@@ -10,7 +10,11 @@ import findIndex from 'lodash/findIndex'
 import cloneDeep from 'lodash/cloneDeep'
 import pathToRegExp from 'path-to-regexp'
 import { inArray, generateUID, fullScreenLoading, removeFullScreenLoading } from '@/utils/helpers'
-import apiConfig from './config'
+import apiConfig, { genErrorMap } from './config'
+import { transformTo } from '@/i18n/setup'
+
+export const UNAUTH_TYPE = 'unath'
+export const FORBIDDEN_TYPE = 'forbidden'
 
 const noLoadingUrlRegs = apiConfig.noLoadingUrls.map((url) => pathToRegExp(url))
 
@@ -69,26 +73,62 @@ const finalize = function () {
   }
 }
 
+export function handleUnauth (url) {
+  function fin () {
+    return new Promise((resolve, reject) => {
+      // 5s 之后 reject，一般 5s 都能跳转到 uap 登录页面，所以来不及 reject
+      // 算是个 hack 的做法（不展示 error tip）
+      setTimeout(() => {
+        reject({
+          type: UNAUTH_TYPE,
+          message: transformTo('tip.notLogin')
+        })
+      }, 5 * 1000)
+    })
+  }
+
+  location.href = url || './login.html'
+  return fin()
+}
+
 // 响应处理
 axiosInstance.interceptors.response.use(function (response) {
   removeLoadingReq(response.config)
   finalize()
   if (!response.data) {
-    return Promise.reject(new Error('服务异常'))
+    return Promise.reject(new Error(transformTo('tip.serviceException')))
+  }
+  try {
+    switch (response.data.code) {
+      case 302: {
+        return handleUnauth(response.data.redirectUrl)
+      }
+      case 401: {
+        return handleUnauth()
+      }
+      case 403: {
+        return Promise.reject({
+          type: FORBIDDEN_TYPE,
+          message: transformTo('tip.notAllow')
+        })
+      }
+    }
+  } catch (e) { /* Ignore */ }
+  if (response.data.code !== 0) { // 请求成功的标志，和后端商量好再定
+    return Promise.reject({
+      message: response.data.msg,
+      data: response.data.data,
+      code: response.data.code
+    })
   }
   return response.data
 }, function (error) {
   removeLoadingReq(error.config)
   finalize()
-
-  let e = apiConfig.errorMap.request[error.request.status]
-  // 如果 timeout 或者其它可能，`request.status` 可能为0
-  if (!e && error.response) {
-    e = apiConfig.errorMap.response[error.response.status]
-  }
-  if (!e) {
-    e = apiConfig.errorMap.common
-  }
+  const errorMap = genErrorMap()
+  const e = errorMap.request[error.request.status] ||
+            errorMap.response[error.response.status] ||
+            errorMap.common
 
   return Promise.reject(cloneDeep(e))
 })

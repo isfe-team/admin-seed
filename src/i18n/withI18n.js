@@ -11,6 +11,7 @@ export default function withI18n (Component, LoadingComponent, ErrorComponent) {
     props: ['lang'],
     data () {
       const lang = isSupportedLang(this.lang) ? this.lang : defaultLocale
+      console.log(lang, this.lang, '00')
       this.SET_LOCALE(lang)
 
       return {

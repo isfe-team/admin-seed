@@ -78,7 +78,7 @@ class PQTable extends Vue {
   // 如何获取 totalCount
   @Prop({ type: Function, default (data) { return data.result.totalCount } }) getDataTotalCount
   // 操作栏的名字，默认 "操作"
-  @Prop({ type: String, default: '操作' }) operationLabel
+  @Prop({ type: String, default () { return this.$t('common.operation') } }) operationLabel
   // 操作列表，可以指定 collapsed 让这个操作在 "更多" 里面
   @Prop({ type: Array, default () { return [ ] } }) operations
   // 是否显示 "更多" 操作列表
@@ -96,6 +96,7 @@ class PQTable extends Vue {
   // 固定表头，y 方向可滚动
   // 注意此时默认给的是 `100% - 46px`，但是这样导致表头高度最好是在一行，当然不止一行也没啥太大问题...
   @Prop({ type: Boolean, default: true }) stickHeader
+  @Prop({ type: Boolean, default: false }) bordered
 
   // 过滤列表的操作项
   get collapsedOperations () {
@@ -179,7 +180,7 @@ class PQTable extends Vue {
       }, (error) => {
         this.listData = [ ]
         this.resetPagination()
-        showErrorTip(error, '查询列表数据失败')
+        showErrorTip(error, this.$t('tip.getListDataError'))
         return Promise.reject(error)
       })
   }
@@ -266,7 +267,7 @@ class PQTable extends Vue {
 
       const Dropdown = (
         <Dropdown class='pq-table-operation-item pq-table-operations-more pointer' trigger={['click']}>
-          <span>更多&nbsp;<AIcon type="down" /></span>
+          <span>{this.$t('common.more')}&nbsp;<AIcon type="down" /></span>
           <Menu slot='overlay'>{Overlay}</Menu>
         </Dropdown>
       )
@@ -305,6 +306,7 @@ class PQTable extends Vue {
         <Table
           class={tableClass}
           dataSource={this.listData}
+          bordered={this.bordered}
           columns={this.columns}
           pagination={false}
           rowKey={this.rowKey}

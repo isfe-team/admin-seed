@@ -8,15 +8,17 @@ import FullscreenSpin from '@/components/common/FullscreenSpin'
 import { i18n, defaultLocale } from '@/i18n/setup'
 import withI18n from '@/i18n/withI18n'
 import '@/components/registerAntDesignVueComponents'
+import VueDraggableResizable from 'vue-draggable-resizable'
 import router from '@/router'
 import store from '@/store'
 import '@/registerServiceWorker'
 import App from './App'
 
 Vue.config.productionTip = false
+Vue.component('vue-draggable-resizable', VueDraggableResizable)
 
 const urlConfig = qs.parse(location.search.slice(1))
-const lang = urlConfig.lang || defaultLocale
+const lang = urlConfig.locale || defaultLocale
 
 const I18nApp = withI18n(App, FullscreenSpin)
 const app = window.x = new Vue({

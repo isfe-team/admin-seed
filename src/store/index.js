@@ -1,6 +1,7 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
-import { getUserInfo, getMenu } from '@/apis/services/user'
+import { getUserInfo, getMenu, getLangs } from '@/apis/services/user'
+import { transformTo } from '@/i18n/setup'
 
 Vue.use(Vuex)
 
@@ -9,7 +10,8 @@ export default new Vuex.Store({
     userInfo: null,
     menus: [],
     locale: null,
-    antdLocale: null
+    antdLocale: null,
+    languages: []
   },
   mutations: {
     SET_USER_INFO (state, o) {
@@ -23,6 +25,9 @@ export default new Vuex.Store({
     },
     SET_ANTD_LOCALE (state, o) {
       state.antdLocale = o
+    },
+    SET_LANGS_OPTIONS (state, o) {
+      state.languages = o
     }
   },
   actions: {
@@ -34,9 +39,25 @@ export default new Vuex.Store({
     },
     loadMenuData ({ commit }, lang) {
       return getMenu(lang).then((menuResponseData) => {
-        const menus = menuResponseData.data[0].childList
+        let menus = menuResponseData.data[0].childList
+        function transformMenus (menus) {
+          return menus.map((x) => {
+            x.name = transformTo(x.labelI18nKey)
+            if (x.childList && x.childList.length) {
+              x.childList = transformMenus(x.childList)
+            }
+            return x
+          })
+        }
+        menus = transformMenus(menus)
         commit('SET_MENU', menus)
         return menus
+      })
+    },
+    loadLangs ({ commit }) {
+      return getLangs().then((data) => {
+        commit('SET_LANGS_OPTIONS', data)
+        return data
       })
     },
     loadAntdLocale ({ commit }, lang) {

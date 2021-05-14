@@ -1,8 +1,7 @@
-<!-- 仍然可以采用 jsx 模式 -->
 <template>
   <PQTable
     ref="table"
-    class="resource-management-table"
+    class="common-table"
     rowKey="key"
     :loadDataApi="getTableInfo"
     :operations="operations"
@@ -13,12 +12,16 @@
     :rowSelection="rowSelection"
     @operation="handleOperation"
     @loadedData="handleLoadedData"
+    :stickHeaderX="true"
+    :stickHeaderXWidth="1300"
   />
 </template>
 
 <script>
 import { getTableInfo } from '@/apis/services/table'
 import PQTable from '@/components/common/PQTable'
+import { transformTo } from '@/i18n/setup'
+
 export default {
   name: 'Table',
   components: { PQTable: PQTable },
@@ -26,21 +29,24 @@ export default {
     return {
       query: '',
       getTableInfo,
+      operations: [
+        { type: 'edit', label: transformTo('common.edit') },
+        { type: 'delete', label: transformTo('common.delete') }
+      ],
+      columns: [
+        { title: transformTo('function.ruleNumber'), dataIndex: 'no', scopedSlots: { customRender: 'ellipsis-with-tooltip' } },
+        { title: transformTo('function.discription'), dataIndex: 'description' },
+        { title: transformTo('function.count'), dataIndex: 'callNo', needTotal: true, customRender: (text) => text + ' 次' },
+        { title: transformTo('function.status'), dataIndex: 'status' },
+        { title: transformTo('function.updatetime'), dataIndex: 'updatedAt' },
+        { title: transformTo('common.operation'), dataIndex: 'operation', scopedSlots: { customRender: 'operation' } }
+      ],
       rowSelection: {
         selectedRowKeys: [],
         onChange: (selectedRowKeys) => {
-          console.log('selected', selectedRowKeys)
           this.rowSelection.selectedRowKeys = selectedRowKeys
         }
       }
-    }
-  },
-  computed: {
-    columns () {
-      return this.$t('table.columns')
-    },
-    operations () {
-      return this.$t('table.operations')
     }
   },
   methods: {
@@ -59,5 +65,27 @@ export default {
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
-<style scoped>
+<style scoped lang="less">
+.common-table {
+  /deep/ .pq-table {
+    overflow: initial;
+    flex: none;
+
+    &.stick-header /deep/ table {
+      width: auto;
+    }
+
+    // 解决固定表格列时固定部分的滚动条无法拖动
+    .ant-table-fixed-left {
+      height: calc(~"100% - 4px") !important;
+
+      .ant-table-body-outer {
+        height: calc(~"100% - 42px") !important;
+        .ant-table-body-inner {
+          max-height: initial !important;
+        }
+      }
+    }
+  }
+}
 </style>

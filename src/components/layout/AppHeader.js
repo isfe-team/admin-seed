@@ -18,7 +18,7 @@ class AppHeader extends Vue {
 
   logout () {
     this.$confirm({
-      title: '是否退出系统？',
+      title: this.$t('tip.logoutTip') + '?',
       onOk: () => {
         logout().then(() => {
           this.$router.push({ name: 'login' })

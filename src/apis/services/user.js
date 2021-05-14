@@ -1,4 +1,7 @@
 import { i18n } from '@/i18n/setup'
+import axios from 'axios'
+
+const languages = window.$$CONFIG.supportedLocaleConfigs
 
 export const login = () => {
   if (Math.random() > 0.8) {
@@ -15,4 +18,8 @@ export const logout = () => {
 
 export const getUserInfo = (pageNo, pageSize) => Promise.resolve({ name: 'admin' })
 
-export const getMenu = (lang) => import(/* webpackChunkName: "menu-[request]" */`@/menus/menu-${lang}.json`)
+export const getMenu = () => axios.get('/menu.json').then(({ data }) => {
+  return Promise.resolve(data)
+})
+
+export const getLangs = () => Promise.resolve(languages)

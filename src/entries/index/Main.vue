@@ -21,6 +21,7 @@ class Main extends Vue {
   @State locale
   @Action loadUserInfo
   @Action loadMenuData
+  @Action loadLangs
 
   @Watch('locale', { immediate: true })
   handleLocaleChange (locale) {
@@ -30,7 +31,8 @@ class Main extends Vue {
   load (locale) {
     return Promise.all([
       this.loadUserInfo(),
-      this.loadMenuData(locale)
+      this.loadMenuData(locale),
+      this.loadLangs()
     ]).then(() => {
       this.inited = true
     }, (err) => {
@@ -46,7 +48,7 @@ class Main extends Vue {
           <div class="app-content-wrapper">
             <Breadcrumb class="app-breadcrumb">
               {
-                this.matchedRouteFragments.slice(1).map((route, index) => (<Breadcrumb.Item key={index}>{this.$t('route.' + (route.meta.labelId || route.name))}</Breadcrumb.Item>))
+                this.matchedRouteFragments.slice(1).map((route, index) => (<Breadcrumb.Item key={index}>{this.$t((route.meta.labelI18nKey || route.name))}</Breadcrumb.Item>))
               }
             </Breadcrumb>
             <router-view class="app-page" />

@@ -5,7 +5,7 @@ import { DatePicker } from 'ant-design-vue'
 @Component()
 class Eggsplant extends Vue {
   render () {
-    return <div>类组件（Class Based）<DatePicker.RangePicker showTime format='llll' /></div>
+    return <div>{this.$t('function.classBased')}（Class Based）<DatePicker.RangePicker showTime format='llll' /></div>
   }
 }
 

@@ -19,7 +19,7 @@ class Figure extends Vue {
         <div class="figure-message-wrapper">
           <div class="message">{this.message}</div>
           <div class="description">{this.description}</div>
-          <Button type="primary" onClick={this.toMain}>{this.$t('figure.toMain')}</Button>
+          <Button type="primary" onClick={this.toMain}>{this.$t('common.toMain')}</Button>
         </div>
       </div>
     )
