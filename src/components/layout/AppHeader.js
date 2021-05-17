@@ -5,7 +5,7 @@
 import Vue from 'vue'
 import { Component, Prop, Emit } from 'vue-property-decorator'
 import { Icon } from 'ant-design-vue'
-import { logout } from '@/apis/services/user'
+// import { logout } from '@/apis/services/user'
 import Locale from '@/components/common/Locale'
 import './AppHeader.less'
 
@@ -19,12 +19,26 @@ class AppHeader extends Vue {
   logout () {
     this.$confirm({
       title: this.$t('tip.logoutTip') + '?',
-      onOk: () => {
-        logout().then(() => {
-          this.$router.push({ name: 'login' })
-        })
+      onOk () {
+        this.logoutCore()
       }
     })
+  }
+
+  logoutCore () {
+    window.location.href = './login.html'
+  }
+
+  dispatcher (x) {
+    console.log('x', x)
+  }
+
+  mounted () {
+    window.addEventListener('message', this.dispatcher)
+  }
+
+  beforeDestroy () {
+    window.removeEventListeer('message', this.dispatcher)
   }
 
   render () {

@@ -40,9 +40,9 @@ class AppMenu extends Vue {
   }
 
   handleSelect (data) {
-    const keypath = reverse(data.keyPath).join('::')
+    const keyPath = reverse(data.keyPath).join('::')
     this.$router.push({
-      name: keypath
+      name: keyPath
     })
   }
 

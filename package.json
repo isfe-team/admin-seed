@@ -1,6 +1,6 @@
 {
   "name": "admin-seed",
-  "version": "1.0.1",
+  "version": "1.0.4",
   "private": true,
   "scripts": {
     "serve": "vue-cli-service serve",
@@ -24,6 +24,7 @@
     "ant-design-vue": "^1.5.2",
     "axios": "^0.18.0",
     "lodash": "^4.17.11",
+    "moment": "^2.24.0",
     "normalize.css": "^8.0.1",
     "nprogress": "^0.2.0",
     "path-to-regexp": "^3.0.0",

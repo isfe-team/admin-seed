@@ -294,10 +294,11 @@ class PQTable extends Vue {
       // default is useless
       default: () => null,
       component: (text, record, index) => null,
-      // 非 top 情况下，比如 topLeft 会在数据比较少时出现错位
-      'time-without-hms': (text) => <Tooltip placement='top' class='pq-table-tooltip' title={text}>{removeHMS(text)}</Tooltip>,
+      // top 可能出现位置错误的问题，可以考虑使用 topLeft 或者 `display: inline-block;`
+      // 使用 topLeft 可能会在数据比较少时出现错位
+      'time-without-hms': (text) => <Tooltip placement='topLeft' class='pq-table-tooltip' title={text}>{removeHMS(text)}</Tooltip>,
       'ellipsis-with-title': (text) => <span title={text}>{text}</span>,
-      'ellipsis-with-tooltip': (text) => <Tooltip placement='top' class='pq-table-tooltip' title={text}>{text}</Tooltip>,
+      'ellipsis-with-tooltip': (text) => <Tooltip placement='topLeft' class='pq-table-tooltip' title={text}>{text}</Tooltip>,
       'operation': (text, record, index) => <OperationsRenderer text={text} record={record} index={index} />
     }, this.$scopedSlots)
     return (

@@ -43,8 +43,11 @@
 
 ## 1.1.0
 
+- [ ] moment 注入 dependencies 中，避免不可预测的情况，可以参考 ant-design-pro 和 ant-design
+- [ ] menus 置于 store 中，去除 额外的 actions
+- [ ] 动态注入权限路由，去除冗余的路由
 - [ ] 集成文档模板
-- [ ] 增加 i18n 支持
+- [x] 增加 i18n 支持
 
 ## 1.2.0
 
