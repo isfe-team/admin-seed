@@ -1,0 +1,72 @@
+key,zh_CN,en_US,ja_JP,remark
+
+common
+title,种子项目,Seed project,フィードアイテム
+delete,删除,delete,削除
+edit,编辑,edit,編集
+operation,操作,operation,操作
+more,更多,more,詳細
+toMain,回到首页,back to the home page,トップページに戻る
+
+login
+title,登录,Login,ログイン
+userNameLabel,用户名,user name,ユーザ名
+userNameTip,请输入用户名,Please input your name,ユーザ名を入力してください
+passwordLabel,密码,password,パスワード
+passwordTip,请输入密码,Please input your password,パスワードを入力してください
+loginLabel,登录,Login,ログイン
+loginErrorTip,你错啦！,You are wrong!,間違えました
+
+tip
+serviceException,服务异常,Service exception,サービス異常
+interfaceNotExist,接口服务不存在,the interface service does not exist,インターフェースサービスは存在しません
+serverTimeout,网络超时,network Timeout,ネットワークタイムアウト
+notLogin,未登录,not logged in,ログインしていません
+notAllow,您无权限访问该资源,you do not have permission to access this resource,このリソースにアクセスする権限がありません
+getLocaleError,获取初始数据失败,failed to get initial data,初期データの取得に失敗しました
+logoutTip,是否退出系统,exit the system,システムを終了するかどうか
+logoutError,退出失败,exit failed,ログアウトに失敗しました
+dataError,数据异常,abnormal data,データ異常
+getListDataError,查询列表数据失败,failed to query list data,クエリーリストデータに失敗しました
+
+overview
+overview,概览,overview,概要
+layoutTitle,页面整体布局,Main layout,ページ全体のレイアウト
+techTitle,主要使用的技术,Main techs,主に使う技術
+layoutDescriptionTotal,总体左右布局,Left-Right,全体の左右の配置
+layoutDescriptionLeft,左边上下布局，上为logo，下为men,Left-Top-Bottom,左上のレイアウト、上はlogo、下はmenです
+layoutDescriptionRight,右边上下布局，上为header，下为content,Right-Header-Content,右の上下のレイアウトは、上はheader、下はcontentです
+demandDescription1,从登录到具体业务开发到退出,From Login to logout,登録から具体的な業務開発から退出まで
+demandDescription2,路由、状态集成,Router and store integration,ルート、ステータス統合
+demandDescription3,i18n集成,i18n integration,i 18 nインテグレーション
+demandTitle,满足的大致需求,Met demands,満足する大体の需
+
+function
+functions,功能页,functions,J機能ページ
+table,表格,table,テーブル
+syncTable,固定数据表格,syncTable,固定データテーブル
+changeRable,切换表格,changeRable,テーブルの切り替え
+ruleNumber,规则编号,ruleNumber,ルール番号
+discription,描述,discription,説明
+count,调用次数,count,呼び出し回数
+status,操作,status,操作
+updatetime,更新时间,updatetime,更新日時
+nestedComponent,内嵌组件,nestedComponent,埋め込みコンポーネント
+classBased,类组件,classBased,クラスコンポーネント
+optionsBased,配置形式组件,optionsBased,コンフィギュレーション
+
+function2,功能2,function2,機能2
+function3,功能3,function3,機能3
+function31,功能31,function31,機能31
+function32,功能32,function32,機能32
+
+
+abnormal
+abnormal,异常页,abnormal,異常ページ
+403,403,403,403
+404,404,404,404
+500,500,500,500
+turnBack,回到首页,turn back,トップページに戻る
+servicesAbnormal,抱歉，服务异常了,sorry， services abnormal,すみません、サービスが異常です
+pageNotExist,抱歉，你访问的页面不存在或正在开发,sorry，the page is notExist,すみません、あなたが訪問したページは存在しませんか
+pageForbiddenm,抱歉，没有访问权限,sorry，forbiddren,すみません、アクセス権限がありません
