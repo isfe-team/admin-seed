@@ -23,7 +23,7 @@
   "dependencies": {
     "ant-design-vue": "^1.5.2",
     "axios": "^0.18.0",
-    "lodash": "^4.17.11",
+    "lodash": "^4.17.21",
     "moment": "^2.24.0",
     "normalize.css": "^8.0.1",
     "nprogress": "^0.2.0",
