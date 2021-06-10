@@ -16,8 +16,8 @@ self.__precacheManifest = [
     "url": "/admin-seed/js/antd-locale-zh_CN.df4d795a.js"
   },
   {
-    "revision": "529092ee105a5ddd8436",
-    "url": "/admin-seed/js/app.7ede2c99.js"
+    "revision": "55396def71f41f689afb",
+    "url": "/admin-seed/js/app.c5d1c729.js"
   },
   {
     "revision": "57fb70d4850cfb84fd5bb2c07bb55f58",
@@ -56,7 +56,7 @@ self.__precacheManifest = [
     "url": "/admin-seed/js/antd-locale-ja_JP.380d97cf.js"
   },
   {
-    "revision": "cfa7edf088a2c18da488c3b7681e8fc5",
+    "revision": "f45da1b55f0740d1836f56abfa38b28b",
     "url": "/admin-seed/index.html"
   },
   {
@@ -88,7 +88,7 @@ self.__precacheManifest = [
     "url": "/admin-seed/css/chunk-vendors.233bad45.css"
   },
   {
-    "revision": "529092ee105a5ddd8436",
+    "revision": "55396def71f41f689afb",
     "url": "/admin-seed/css/app.9e7cc112.css"
   },
   {
