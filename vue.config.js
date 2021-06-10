@@ -31,7 +31,7 @@ module.exports = {
   // baseUrl: '/admin-seed/',
   // `baseUrl` deprecated, use `publicPath` instead
   // @see also https://github.com/vuejs/vue-cli/blob/dev/CHANGELOG.md#features-1
-  publicPath: '/admin-seed/',
+  publicPath: process.env.NODE_ENV === 'development' ? '/' : '/admin-seed/',
   lintOnSave: true,
   pages,
   configureWebpack: {

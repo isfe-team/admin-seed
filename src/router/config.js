@@ -127,13 +127,13 @@ export default {
         // 可以选择留这个还是留下面的
         {
           path: '*',
-          redirect: '/abnormal-pages/404'
+          redirect: '/overview'
         }
       ]
     },
     {
       path: '*',
-      redirect: '/404'
+      redirect: '/overview'
     }
   ]
 }

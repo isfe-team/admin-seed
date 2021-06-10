@@ -18,7 +18,7 @@ export const logout = () => {
 
 export const getUserInfo = (pageNo, pageSize) => Promise.resolve({ name: 'admin' })
 
-export const getMenu = () => axios.get('/admin-seed/menu.json').then(({ data }) => {
+export const getMenu = () => axios.get(`${process.env.BASE_URL}menu.json`).then(({ data }) => {
   return Promise.resolve(data)
 })
 

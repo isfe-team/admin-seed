@@ -80,7 +80,7 @@ export function loadLanguageAsync (lang, setLang = true) {
 let messages = null
 
 export function loadAndSetMessages () {
-  return axios.get('/admin-seed/lang.csv')
+  return axios.get(`${process.env.BASE_URL}lang.csv`)
     .then(({ data }) => {
       messages = csvToTable(data)
 
